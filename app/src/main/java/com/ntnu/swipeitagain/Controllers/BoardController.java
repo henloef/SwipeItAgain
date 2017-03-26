@@ -2,8 +2,18 @@ package com.ntnu.swipeitagain.Controllers;
 
 import android.app.Activity;
 
+import com.ntnu.swipeitagain.Models.Direction;
+import com.ntnu.swipeitagain.Models.GameModel;
 import com.ntnu.swipeitagain.States.GameState;
+import com.ntnu.swipeitagain.States.MultiPlayerState;
 import com.ntnu.swipeitagain.States.SinglePlayerState;
+import com.ntnu.swipeitagain.Views.GameOver;
+import com.ntnu.swipeitagain.Views.MainMenu;
+
+import java.util.ArrayList;
+
+import sheep.game.State;
+import sheep.math.Vector2;
 
 /**
  * Created by Henrik on 26.03.2017.
@@ -13,13 +23,20 @@ public class BoardController {
         private GameModel gameModel;
         private GameState gameState;
         private boolean isMultiPlayer;
-        private Activity activity;
+        private ArrayList<State> states;
 
 
         public BoardController(){
-            this.activity = new MainMenuScreen();
+            pushState(new MainMenu());
         }
 
+        public void pushState(State state){
+            states.add(0,state);
+        }
+
+        public State popState(){
+            return states.remove(0);
+        }
 
         private void createGameState(Boolean isMultiPlayer, Boolean generateKey) {
             if (isMultiPlayer){ gameState = new MultiPlayerState(this, generateKey);
@@ -54,15 +71,16 @@ public class BoardController {
             while (gameModel.timeLeft()){
                 playCard();
             }
+            pushState(new GameOver(this));
         }
         public void playCard(){
             gameModel.nextCard();
             //tryDirection()
         }
 
-        private Direction decideDirection(float startX, float endX, float startY, float endY){
-            float deltaX = endX - startX;
-            float deltaY = endY - startY;
+        private Direction decideDirection(Vector2 start, Vector2 end){
+            float deltaX = end.getX() - start.getX();
+            float deltaY = end.getY() - start.getY();
             if(Math.abs(deltaX) > Math.abs(deltaY)){
                 if(deltaX > 0){
                     return Direction.RIGHT;

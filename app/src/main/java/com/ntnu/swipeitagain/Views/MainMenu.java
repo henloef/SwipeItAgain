@@ -67,7 +67,8 @@ public final class MainMenu extends State implements WidgetListener {
     @Override
     public void actionPerformed(WidgetAction widgetAction) {
         if (widgetAction.getSource() == singleplayer){
-            //TODO What happens when singleplayer is touched
+            //TODO What happens when singleplayer is touched;
+            boardController.createGameState(false, false);
             Log.d(TAG, "actionPerformed: singleplayer");
         }
         else if (widgetAction.getSource() == multiplayer){

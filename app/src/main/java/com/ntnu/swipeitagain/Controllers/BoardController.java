@@ -9,6 +9,7 @@ import com.ntnu.swipeitagain.States.GameState;
 import com.ntnu.swipeitagain.States.MultiPlayerState;
 import com.ntnu.swipeitagain.States.SinglePlayerState;
 import com.ntnu.swipeitagain.Views.GameOver;
+import com.ntnu.swipeitagain.Views.GameView;
 import com.ntnu.swipeitagain.Views.Main;
 import com.ntnu.swipeitagain.Views.MainMenu;
 
@@ -47,12 +48,14 @@ public class BoardController {
             return states.remove(0);
         }
 
-        private void createGameState(Boolean isMultiPlayer, Boolean generateKey) {
+        public void createGameState(Boolean isMultiPlayer, Boolean generateKey) {
             if (isMultiPlayer){ gameState = new MultiPlayerState(this, generateKey);
                 this.isMultiPlayer = isMultiPlayer;
                 // Få fra input om man venter på motstander eller generer gamekey
             }
-            else{ gameState = new SinglePlayerState(this);}
+            else{ gameState = new SinglePlayerState(this);
+                pushState(new GameView(this, screenWidth, screenHeight));
+            }
         }
 
         public GameModel getGameModel(){

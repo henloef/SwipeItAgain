@@ -9,9 +9,10 @@ import com.ntnu.swipeitagain.States.GameState;
 import com.ntnu.swipeitagain.States.MultiPlayerState;
 import com.ntnu.swipeitagain.States.SinglePlayerState;
 import com.ntnu.swipeitagain.Views.GameOver;
-import com.ntnu.swipeitagain.Views.GameView;
+import com.ntnu.swipeitagain.Views.SinglePlayerGameView;
 import com.ntnu.swipeitagain.Views.Main;
 import com.ntnu.swipeitagain.Views.MainMenu;
+import com.ntnu.swipeitagain.Views.SinglePlayerGameView;
 
 import java.util.ArrayList;
 
@@ -37,6 +38,7 @@ public class BoardController {
             this.game = game;
             this.screenWidth = screenWidth;
             this.screenHeight = screenHeight;
+            states = new ArrayList<State>();
         }
 
         public void pushState(State state){
@@ -54,7 +56,7 @@ public class BoardController {
                 // Få fra input om man venter på motstander eller generer gamekey
             }
             else{ gameState = new SinglePlayerState(this);
-                pushState(new GameView(this, screenWidth, screenHeight));
+                pushState(new SinglePlayerGameView(this, screenWidth, screenHeight));
             }
         }
 

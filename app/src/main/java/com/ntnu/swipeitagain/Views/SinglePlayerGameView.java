@@ -15,9 +15,13 @@ import sheep.gui.WidgetListener;
 public class SinglePlayerGameView extends State implements WidgetListener{
 
     BoardController boardController;
+    private int screenWidth, screenHeigth;
 
-    public void GameView(BoardController boardController, int screenWidth, int screenHeight){
+    public SinglePlayerGameView(BoardController boardController, int screenWidth, int screenHeight){
         this.boardController = boardController;
+        this.screenWidth = screenWidth;
+        this.screenHeigth = screenHeight;
+
     }
 
     @Override

@@ -1,7 +1,11 @@
 package com.ntnu.swipeitagain.States;
 
+import android.util.Log;
+
 import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Henrik on 26.03.2017.
@@ -16,46 +20,32 @@ public class MultiPlayerState extends GameState{
         super(boardController);
         serverCommunicator  = new ServerCommunicator();
         if(generateKey) {
-            getGameKey();
-            //set or get opponentPlayer trenger kanskje en while-loop for å vente på motspiller et sted
-            //Tror getOpponentPlayer blir best
+            getGameKeyFromServer();
         }else{
-            connectToOpponent();
+
         }
         serverCommunicator.connectSocket();
         startGame();
     }
 
 
-
-    //Ask server for opponent
-    private void getOpponentPlayer(){
-        /*
-        if(serverCommunicator.requestedGameKey == gameKey){
-            //What to do if it is the correct gameKey
-        }*/
-    }
-
     //Ask server for random gameKey
-    public void getGameKey(){
+    public void getGameKeyFromServer(){
         //TODO connect to server and get gameKey
-        gameKey = serverCommunicator.getGameKey();
+        gameKey = serverCommunicator.getGameKeyFromServer();
     }
 
-    public void connectToOpponent(){
-        boolean waitingForOpponentPlayer = true;
-        while(waitingForOpponentPlayer){
-            if(tryGameKey(boardController.getInputGameKey()))
-                waitingForOpponentPlayer = false;
-        }
+    public int showGameKey(){
+        return gameKey;
     }
+
+
     //try random gameKey to server
     public boolean tryGameKey(int gameKey){
         if(serverCommunicator.tryGameKey(gameKey) != 0){
-            //FÅR MAN I DET HELE TATT BOARDCONTROLLER FRA OPPONENT? setOpponentPlayer(gameKey, );
             return true;
         }else{
-            System.out.println("No active game with that key");
+            Log.d(TAG, "No active game with that key");
             return false;
         }
     }

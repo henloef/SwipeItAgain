@@ -14,16 +14,16 @@ import sheep.gui.WidgetAction;
 import sheep.gui.WidgetListener;
 
 /**
- * Created by Henrik on 26.03.2017.
+ * Created by Sigrid on 26.03.2017.
  */
 
-public class SinglePlayerGameView extends State implements WidgetListener{
+public class MultiPlayerGameView extends State implements WidgetListener {
 
     BoardController boardController;
     private int screenWidth, screenHeigth;
     private TextButton goDirectlyToGameOver;
 
-    public SinglePlayerGameView(BoardController boardController, int screenWidth, int screenHeight){
+    public MultiPlayerGameView(BoardController boardController, int screenWidth, int screenHeight){
         this.boardController = boardController;
         this.screenWidth = screenWidth;
         this.screenHeigth = screenHeight;
@@ -43,8 +43,6 @@ public class SinglePlayerGameView extends State implements WidgetListener{
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-
-
         canvas.drawColor(Color.BLUE);
         goDirectlyToGameOver.draw(canvas);
     }

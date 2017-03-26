@@ -75,6 +75,7 @@ public final class MainMenu extends State implements WidgetListener {
         else if (widgetAction.getSource() == multiplayer){
             //TODO what happens when multiplayer is touched
             Log.d(TAG, "actionPerformed: multiplayer");
+            boardController.pushState(new CreateMultiPlayer(boardController, screenWidth, screenHeight));
         }
         else if (widgetAction.getSource() == instructions){
             //Todo what happens when instructions is pushed

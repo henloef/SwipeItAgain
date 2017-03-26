@@ -1,6 +1,8 @@
 package com.ntnu.swipeitagain.Views;
 
 import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -23,9 +25,7 @@ public class GameOver extends State implements WidgetListener {
     private BoardController boardController;
     private TextButton retry, menu;
 
-
-
-    public GameOver(BoardController boardController, sheep.game.Game game, Resources resources, int screenWidth, int screenHeight){
+    public GameOver(BoardController boardController, int screenWidth, int screenHeight){
         this.boardController = boardController;
 
         Font buttonFont = new Font(255, 255, 255, 100, Typeface.SANS_SERIF, Typeface.NORMAL);
@@ -43,11 +43,23 @@ public class GameOver extends State implements WidgetListener {
     }
 
     @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        canvas.drawColor(Color.CYAN);
+        retry.draw(canvas);
+        menu.draw(canvas);
+    }
+
+    @Override
     public void actionPerformed(WidgetAction widgetAction) {
         if (widgetAction.getSource() == retry) {
             //TODO What happens when retry is touched
             Log.d(TAG, "actionPerformed: retry");
+            boardController.retry();
         } else if (widgetAction.getSource() == menu) {
+            //Do not work at moment, but worked before. What is changed??
+            Log.d(TAG, "actionPerformed: main menu");
+            boardController.goToMainMenu();
             //TODO what happens when menu is touched
         }
     }

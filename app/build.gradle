@@ -27,6 +27,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.0'
     testCompile 'junit:junit:4.12'
     compile files('libs/sheep.jar')
+    compile "io.socket:socket.io-client:0.7.0"
 }
 
 //Firebase

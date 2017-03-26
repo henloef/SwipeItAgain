@@ -8,6 +8,8 @@ import android.graphics.Typeface;
 import android.util.Log;
 
 
+import com.ntnu.swipeitagain.Controllers.BoardController;
+
 import sheep.game.*;
 import sheep.game.Game;
 import sheep.graphics.Font;
@@ -26,11 +28,13 @@ public final class MainMenu extends State implements WidgetListener {
     private TextButton singleplayer, multiplayer, instructions;
     private Game game;
     private int screenWidth, screenHeight;
+    private BoardController boardController;
 
-    public MainMenu(sheep.game.Game game, Resources resources, int screenWidth, int screenHeight) {
+    public MainMenu(BoardController boardController, sheep.game.Game game, Resources resources, int screenWidth, int screenHeight) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.game = game;
+        this.boardController = boardController;
 
         Font buttonFont = new Font(255, 255, 255, 130, Typeface.SANS_SERIF, Typeface.NORMAL);
         Paint[] buttonStyle = {buttonFont, buttonFont};

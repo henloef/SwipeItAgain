@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "597264028657",
+    "firebase_url": "https://swipeitagain-4a391.firebaseio.com",
+    "project_id": "swipeitagain-4a391",
+    "storage_bucket": "swipeitagain-4a391.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597264028657:android:264ea7d482da6e00",
+        "android_client_info": {
+          "package_name": "com.ntnu.swipeitagain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597264028657-50ql95cqpk4r0fgelohqjgpm4r8j7ggn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmqQpUN38OGbUwwUkUjpoX1FvVjCZ-NMM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

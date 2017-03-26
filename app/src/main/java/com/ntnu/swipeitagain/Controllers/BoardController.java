@@ -1,12 +1,15 @@
 package com.ntnu.swipeitagain.Controllers;
 
+import android.app.Activity;
+
+import com.ntnu.swipeitagain.States.GameState;
+import com.ntnu.swipeitagain.States.SinglePlayerState;
+
 /**
  * Created by Henrik on 26.03.2017.
  */
 
 public class BoardController {
-
-    public class BoardController {
         private GameModel gameModel;
         private GameState gameState;
         private boolean isMultiPlayer;

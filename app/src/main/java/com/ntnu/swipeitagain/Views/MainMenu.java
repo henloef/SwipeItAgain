@@ -35,9 +35,9 @@ public final class MainMenu extends State implements WidgetListener {
         Font buttonFont = new Font(255, 255, 255, 130, Typeface.SANS_SERIF, Typeface.NORMAL);
         Paint[] buttonStyle = {buttonFont, buttonFont};
 
-        singleplayer = new TextButton(100, 400, "Singleplayer", buttonStyle);
-        multiplayer = new TextButton(100, 800, "Multiplayer", buttonStyle);
-        instructions = new TextButton(100, 1200, "Instructions", buttonStyle);
+        singleplayer = new TextButton(100, (float)screenHeight*2/7, "Singleplayer", buttonStyle);
+        multiplayer = new TextButton(100, (float)screenHeight*4/7, "Multiplayer", buttonStyle);
+        instructions = new TextButton(100, (float)screenHeight*6/7, "Instructions", buttonStyle);
 
         singleplayer.addWidgetListener(this);
         multiplayer.addWidgetListener(this);
@@ -54,8 +54,8 @@ public final class MainMenu extends State implements WidgetListener {
         multiplayer.draw(canvas);
         instructions.draw(canvas);
 
-        Font font = new Font(255, 255, 255, 50, Typeface.SANS_SERIF, Typeface.NORMAL);
-        canvas.drawText("Main Menu", 100, 100, font);
+        Font font = new Font(255, 255, 255, 150, Typeface.SANS_SERIF, Typeface.NORMAL);
+        canvas.drawText("Main Menu", 100, 230, font);
     }
 
 

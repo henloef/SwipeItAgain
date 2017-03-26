@@ -1,6 +1,7 @@
 package com.ntnu.swipeitagain.Models;
 
 import sheep.game.Sprite;
+import sheep.graphics.Image;
 
 /**
  * Created by Lars on 26.03.2017.
@@ -8,25 +9,14 @@ import sheep.game.Sprite;
 
 public class CardModel extends Sprite{
     private Direction direction;
-//    private Texture arrowTexture;
-
-//    public Texture getTexture() {
-//        return arrowTexture;
-//    }
 
     public Direction getDirection() {
         return direction;
     }
 
-    public CardModel(Direction direction){
+    public CardModel(Image image, Direction direction){
+        super(image);
 
-        //Try-catch to be able to test without instanitating game
-        try {
-//            this.arrowTexture = new Texture("pil.gif");
-//          setTexture(arrowTexture);
-        }catch(NullPointerException e){
-            System.out.println("Error creating texture");
-        }
         this.direction = direction;
 //        scaleDirection(direction);
 

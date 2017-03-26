@@ -36,12 +36,12 @@ public final class MainMenu extends State implements WidgetListener {
         this.game = game;
         this.boardController = boardController;
 
-        Font buttonFont = new Font(255, 255, 255, 130, Typeface.SANS_SERIF, Typeface.NORMAL);
+        Font buttonFont = new Font(255, 255, 255, 100, Typeface.SANS_SERIF, Typeface.NORMAL);
         Paint[] buttonStyle = {buttonFont, buttonFont};
 
-        singleplayer = new TextButton(100, 400, "Singleplayer", buttonStyle);
-        multiplayer = new TextButton(100, 800, "Multiplayer", buttonStyle);
-        instructions = new TextButton(100, 1200, "Instructions", buttonStyle);
+        singleplayer = new TextButton(100, (float)screenHeight*2/7, "Singleplayer", buttonStyle);
+        multiplayer = new TextButton(100, (float)screenHeight*4/7, "Multiplayer", buttonStyle);
+        instructions = new TextButton(100, (float)screenHeight*6/7, "Instructions", buttonStyle);
 
         singleplayer.addWidgetListener(this);
         multiplayer.addWidgetListener(this);
@@ -58,8 +58,8 @@ public final class MainMenu extends State implements WidgetListener {
         multiplayer.draw(canvas);
         instructions.draw(canvas);
 
-        Font font = new Font(255, 255, 255, 50, Typeface.SANS_SERIF, Typeface.NORMAL);
-        canvas.drawText("Main Menu", 100, 100, font);
+        Font font = new Font(255, 255, 255, 130, Typeface.SANS_SERIF, Typeface.NORMAL);
+        canvas.drawText("Main Menu", 100, 230, font);
     }
 
 
@@ -73,9 +73,11 @@ public final class MainMenu extends State implements WidgetListener {
         }
         else if (widgetAction.getSource() == multiplayer){
             //TODO what happens when multiplayer is touched
+            Log.d(TAG, "actionPerformed: multiplayer");
         }
         else if (widgetAction.getSource() == instructions){
             //Todo what happens when instructions is pushed
+            Log.d(TAG, "actionPerformed: instructions");
         }
     }
 }

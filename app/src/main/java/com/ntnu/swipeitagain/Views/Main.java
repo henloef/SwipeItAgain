@@ -1,0 +1,30 @@
+package com.ntnu.swipeitagain.Views;
+
+/**
+ * Created by Henrik on 26.03.2017.
+ */
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+
+import sheep.game.Game;
+public class Main extends Activity{
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
+        int screenWidth = displayMetrics.widthPixels;
+        int screenHeight = displayMetrics.heightPixels;
+
+        Game game = new Game(this, null);
+        game.pushState(new MainMenu(game, game.getResources(), screenWidth, screenHeight));
+        setContentView(game);
+    }
+}

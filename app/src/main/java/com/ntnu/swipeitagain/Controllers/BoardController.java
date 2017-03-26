@@ -12,6 +12,7 @@ import com.ntnu.swipeitagain.Views.MainMenu;
 
 import java.util.ArrayList;
 
+import sheep.game.Game;
 import sheep.game.State;
 import sheep.math.Vector2;
 
@@ -24,14 +25,17 @@ public class BoardController {
         private GameState gameState;
         private boolean isMultiPlayer;
         private ArrayList<State> states;
+        private Game game;
 
 
-        public BoardController(){
-            pushState(new MainMenu());
+        public BoardController(Game game){
+            //pushState(new MainMenu());
+            this.game = game;
         }
 
         public void pushState(State state){
             states.add(0,state);
+            game.pushState(state);
         }
 
         public State popState(){

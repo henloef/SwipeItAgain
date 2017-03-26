@@ -10,8 +10,13 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.ntnu.swipeitagain.Controllers.BoardController;
+
 import sheep.game.Game;
 public class Main extends Activity{
+    private BoardController boardController;
+    public int SCREEN_WIDTH;
+    public int SCREEN_HEIGHT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -20,11 +25,12 @@ public class Main extends Activity{
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
+        SCREEN_WIDTH = displayMetrics.widthPixels;
+        SCREEN_HEIGHT = displayMetrics.heightPixels;
 
         Game game = new Game(this, null);
-        game.pushState(new MainMenu(game, game.getResources(), screenWidth, screenHeight));
+        this.boardController = new BoardController(game);
+        game.pushState(new MainMenu(game, game.getResources(), SCREEN_WIDTH, SCREEN_HEIGHT));
         setContentView(game);
     }
 }

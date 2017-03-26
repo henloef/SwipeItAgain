@@ -10,7 +10,7 @@ import sheep.gui.WidgetListener;
  * Created by Sigrid on 26.03.2017.
  */
 
-public class GameOver extends WidgetListener implements State {
+public class GameOver extends State implements WidgetListener {
     private BoardController boardController;
 
     public GameOver(BoardController boardController){
@@ -18,7 +18,8 @@ public class GameOver extends WidgetListener implements State {
 
     }
 
-    private void ActionPerformed(WidgetAction widgetAction){
+    @Override
+    public void actionPerformed(WidgetAction widgetAction) {
 
     }
 }

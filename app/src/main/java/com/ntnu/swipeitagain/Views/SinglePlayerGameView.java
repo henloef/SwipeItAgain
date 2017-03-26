@@ -1,6 +1,7 @@
 package com.ntnu.swipeitagain.Views;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
 
@@ -27,6 +28,7 @@ public class SinglePlayerGameView extends State implements WidgetListener{
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        canvas.drawColor(Color.BLUE);
 
     }
 

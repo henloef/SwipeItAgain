@@ -32,7 +32,7 @@ public final class MainMenu extends State implements WidgetListener {
         this.screenHeight = screenHeight;
         this.game = game;
 
-        Font buttonFont = new Font(255, 255, 255, 130, Typeface.SANS_SERIF, Typeface.NORMAL);
+        Font buttonFont = new Font(255, 255, 255, 100, Typeface.SANS_SERIF, Typeface.NORMAL);
         Paint[] buttonStyle = {buttonFont, buttonFont};
 
         singleplayer = new TextButton(100, (float)screenHeight*2/7, "Singleplayer", buttonStyle);
@@ -54,7 +54,7 @@ public final class MainMenu extends State implements WidgetListener {
         multiplayer.draw(canvas);
         instructions.draw(canvas);
 
-        Font font = new Font(255, 255, 255, 150, Typeface.SANS_SERIF, Typeface.NORMAL);
+        Font font = new Font(255, 255, 255, 130, Typeface.SANS_SERIF, Typeface.NORMAL);
         canvas.drawText("Main Menu", 100, 230, font);
     }
 

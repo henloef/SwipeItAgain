@@ -1,6 +1,7 @@
 package com.ntnu.swipeitagain.Controllers;
 
 import android.app.Activity;
+import android.content.res.Resources;
 
 import com.ntnu.swipeitagain.Models.Direction;
 import com.ntnu.swipeitagain.Models.GameModel;
@@ -8,6 +9,7 @@ import com.ntnu.swipeitagain.States.GameState;
 import com.ntnu.swipeitagain.States.MultiPlayerState;
 import com.ntnu.swipeitagain.States.SinglePlayerState;
 import com.ntnu.swipeitagain.Views.GameOver;
+import com.ntnu.swipeitagain.Views.Main;
 import com.ntnu.swipeitagain.Views.MainMenu;
 
 import java.util.ArrayList;
@@ -26,11 +28,14 @@ public class BoardController {
         private boolean isMultiPlayer;
         private ArrayList<State> states;
         private Game game;
+        private int screenWidth, screenHeight;
 
 
-        public BoardController(Game game){
+        public BoardController(Game game, int screenWidth, int screenHeight){
             //pushState(new MainMenu());
             this.game = game;
+            this.screenWidth = screenWidth;
+            this.screenHeight = screenHeight;
         }
 
         public void pushState(State state){
@@ -75,7 +80,7 @@ public class BoardController {
             while (gameModel.timeLeft()){
                 playCard();
             }
-            pushState(new GameOver(this));
+            pushState(new GameOver(this, game, game.getResources(), screenWidth, screenHeight));
         }
         public void playCard(){
             gameModel.nextCard();

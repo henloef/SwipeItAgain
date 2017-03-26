@@ -1,5 +1,7 @@
 package com.ntnu.swipeitagain.Views;
 
+import android.content.res.Resources;
+
 import com.ntnu.swipeitagain.Controllers.BoardController;
 
 import sheep.game.State;
@@ -13,7 +15,7 @@ import sheep.gui.WidgetListener;
 public class GameOver extends State implements WidgetListener {
     private BoardController boardController;
 
-    public GameOver(BoardController boardController){
+    public GameOver(BoardController boardController, sheep.game.Game game, Resources resources, int screenWidth, int screenHeight){
         this.boardController = boardController;
 
     }

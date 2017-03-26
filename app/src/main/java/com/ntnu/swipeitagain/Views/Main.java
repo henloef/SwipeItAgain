@@ -11,13 +11,13 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
-import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
 
 import sheep.game.Game;
 public class Main extends Activity{
     private BoardController boardController;
-    ServerCommunicator sc = new ServerCommunicator();
+
     public int screenWidth, screenHeight;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -33,6 +33,5 @@ public class Main extends Activity{
         this.boardController = new BoardController(game, screenWidth, screenHeight);
         game.pushState(new MainMenu(boardController, game, game.getResources(), screenWidth, screenHeight));
         setContentView(game);
-        sc.connectSocket();
     }
 }

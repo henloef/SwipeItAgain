@@ -9,10 +9,12 @@ import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
 
 public class MultiPlayerState extends GameState{
     private int gameKey;
-    private ServerCommunicator serverCommunicator;
+    private ServerCommunicator serverCommunicator ;
+
 
     public MultiPlayerState(BoardController boardController, Boolean generateKey){
         super(boardController);
+        serverCommunicator  = new ServerCommunicator();
         if(generateKey) {
             getGameKey();
             //set or get opponentPlayer trenger kanskje en while-loop for å vente på motspiller et sted
@@ -20,6 +22,7 @@ public class MultiPlayerState extends GameState{
         }else{
             connectToOpponent();
         }
+        serverCommunicator.connectSocket();
         startGame();
     }
 

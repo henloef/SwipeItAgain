@@ -39,15 +39,19 @@ public abstract class GameView extends State implements WidgetListener {
         canvas.drawColor(Color.BLUE);
         goDirectlyToGameOver.draw(canvas);
 
-        int time = 30;  //TODO boardController.getGameModel().getPlayer().getCurrentTime();
+        int time = 10;  //TODO boardController.getGameModel().getPlayer().getCurrentTime();
         double progress = (1.0 * time)/100;
         int barEnd = (int)(screenWidth * (progress * ((1.0 * screenWidth - 200) / screenWidth)));
         Rect rect = new Rect(100, screenHeight - 300, barEnd , screenHeight - 250);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        if(time > 66)       paint.setColor(Color.GREEN); //lots of time left
+        /*if(time > 66)       paint.setColor(Color.GREEN); //lots of time left
         else if (time > 33) paint.setColor(Color.YELLOW);//quite a bit of time left
-        else                paint.setColor(Color.RED);   //running low on time
+        else               paint.setColor(Color.RED);   //running low on time */
+
+        paint.setColor(Color.argb(255,255 - (int)(progress*255),(int) (progress *255),0)); //gradually from green to red
+
+
 
         canvas.drawRect(rect, paint);
     }

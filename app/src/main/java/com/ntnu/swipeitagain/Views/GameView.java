@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.widget.ProgressBar;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
+import com.ntnu.swipeitagain.Models.CardModel;
 
 import sheep.collision.Rectangle;
 import sheep.game.State;
@@ -26,6 +27,7 @@ public abstract class GameView extends State implements WidgetListener {
     protected int screenWidth, screenHeight;
     protected TextButton goDirectlyToGameOver;
     protected ProgressBar progressBar;
+    protected CardModel currentCard;
 
     public GameView(BoardController boardController, int screenWidth, int screenHeight) {
         this.boardController = boardController;
@@ -61,6 +63,12 @@ public abstract class GameView extends State implements WidgetListener {
         if (widgetAction.getSource() == goDirectlyToGameOver) {
             boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
         }
+    }
+
+    @Override
+    public void update(float dt) { //TODO må mest sannsynlig flyttes
+        super.update(dt);
+        // TODO boardController.doYourThing()
     }
 }
 

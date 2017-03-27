@@ -3,6 +3,7 @@ package com.ntnu.swipeitagain.Views;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.widget.ProgressBar;
 
@@ -37,6 +38,18 @@ public abstract class GameView extends State implements WidgetListener {
         super.draw(canvas);
         canvas.drawColor(Color.BLUE);
         goDirectlyToGameOver.draw(canvas);
+
+        int time = 30;  //TODO boardController.getGameModel().getPlayer().getCurrentTime();
+        double progress = (1.0 * time)/100;
+        int barEnd = (int)(screenWidth * (progress * ((1.0 * screenWidth - 200) / screenWidth)));
+        Rect rect = new Rect(100, screenHeight - 300, barEnd , screenHeight - 250);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        if(time > 66)       paint.setColor(Color.GREEN); //lots of time left
+        else if (time > 33) paint.setColor(Color.YELLOW);//quite a bit of time left
+        else                paint.setColor(Color.RED);   //running low on time
+
+        canvas.drawRect(rect, paint);
     }
 
     @Override

@@ -10,8 +10,6 @@ public abstract class GameState {
     protected BoardController boardController;
 
 
-    //OrthographicCamera cam = new OrthographicCamera();
-
     public GameState(BoardController boardController){
         this.boardController=boardController;
     }

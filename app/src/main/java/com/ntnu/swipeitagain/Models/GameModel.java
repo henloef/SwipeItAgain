@@ -22,6 +22,7 @@ public class GameModel {
     private CardModel currentCard;
     private PlayerModel player;
     private Image arrowImage;
+
     //Constructor
     public GameModel(){
         createCards();

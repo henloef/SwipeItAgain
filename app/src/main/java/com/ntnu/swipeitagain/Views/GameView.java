@@ -4,9 +4,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.widget.ProgressBar;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
 
+import sheep.collision.Rectangle;
 import sheep.game.State;
 import sheep.graphics.Font;
 import sheep.gui.TextButton;
@@ -17,13 +19,14 @@ import sheep.gui.WidgetListener;
  * Created by Lars on 27.03.2017.
  */
 
-public abstract class PlayerGameView extends State implements WidgetListener {
+public abstract class GameView extends State implements WidgetListener {
 
     BoardController boardController;
     protected int screenWidth, screenHeight;
     protected TextButton goDirectlyToGameOver;
+    protected ProgressBar progressBar;
 
-    public PlayerGameView(BoardController boardController, int screenWidth, int screenHeight) {
+    public GameView(BoardController boardController, int screenWidth, int screenHeight) {
         this.boardController = boardController;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
@@ -38,7 +41,7 @@ public abstract class PlayerGameView extends State implements WidgetListener {
 
     @Override
     public void actionPerformed(WidgetAction widgetAction) {
-        if(widgetAction.getSource() == goDirectlyToGameOver){
+        if (widgetAction.getSource() == goDirectlyToGameOver) {
             boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
         }
     }

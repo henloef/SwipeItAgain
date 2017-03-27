@@ -52,10 +52,9 @@ public abstract class GameView extends State implements WidgetListener {
         else               paint.setColor(Color.RED);   //running low on time */
 
         paint.setColor(Color.argb(255,255 - (int)(progress*255),(int) (progress *255),0)); //gradually from green to red
-
-
-
         canvas.drawRect(rect, paint);
+
+
     }
 
     @Override

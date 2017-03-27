@@ -7,6 +7,8 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.ntnu.swipeitagain.R;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -42,6 +44,8 @@ public class GameModel {
     //Makes card for each direction
     private void createCards(){
         cards = new ArrayList<CardModel>();
+        arrowImage = new Image(R.drawable.right_arrow);
+
         for(Direction dir : Direction.values()){
             cards.add(new CardModel(arrowImage,dir)); //TODO create arrowImage
         }

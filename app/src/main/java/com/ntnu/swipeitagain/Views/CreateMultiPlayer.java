@@ -39,7 +39,7 @@ public class CreateMultiPlayer extends AbstractMenuView{
     public void actionPerformed(WidgetAction widgetAction) {
         if (widgetAction.getSource() == mainMenu) {
             Log.d(TAG, "actionPerformed: go back to main menu");
-            boardController.goToMainMenu(1);
+            boardController.goToMainMenu();
         }else if (widgetAction.getSource() == createGame) {
             Log.d(TAG, "actionPerformed: createGame");
             boardController.createGameState(true, true);

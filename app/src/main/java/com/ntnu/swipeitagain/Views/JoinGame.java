@@ -84,7 +84,7 @@ public class JoinGame extends AbstractMenuView {
     public void actionPerformed(WidgetAction widgetAction) {
         if (widgetAction.getSource() == mainMenu) {
             Log.d(TAG, "actionPerformed: mainMenu");
-            boardController.goToMainMenu(2);
+            boardController.goToMainMenu();
         } else if (widgetAction.getSource() == enter){
             Log.d(TAG, "trying game key");
             boardController.tryEnteredGameKey(Integer.parseInt(enteredGameKey));

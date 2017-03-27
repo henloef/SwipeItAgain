@@ -33,7 +33,6 @@ public abstract class AbstractMenuView extends State implements WidgetListener  
         this.boardController = boardController;
 
         mainMenu = new TextButton(100, (float)screenHeight*7/8, "Main menu", buttonStyle);
-
         mainMenu.addWidgetListener(this);
         addTouchListener(mainMenu);
 

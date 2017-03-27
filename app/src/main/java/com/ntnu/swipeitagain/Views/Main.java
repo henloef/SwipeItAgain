@@ -30,7 +30,7 @@ public class Main extends Activity{
         screenHeight = displayMetrics.heightPixels;
 
         Game game = new Game(this, null);
-        this.boardController = new BoardController(game, screenWidth, screenHeight);
+        this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight);
         game.pushState(new MainMenu(boardController, game, game.getResources(), screenWidth, screenHeight));
         setContentView(game);
     }

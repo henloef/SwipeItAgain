@@ -1,6 +1,4 @@
 package com.ntnu.swipeitagain.Controllers;
-
-import android.app.Activity;
 import android.content.res.Resources;
 import android.util.Log;
 
@@ -11,11 +9,10 @@ import com.ntnu.swipeitagain.States.MultiPlayerState;
 import com.ntnu.swipeitagain.States.SinglePlayerState;
 import com.ntnu.swipeitagain.Views.GameOver;
 import com.ntnu.swipeitagain.Views.JoinGame;
+import com.ntnu.swipeitagain.Views.MainMenu;
 import com.ntnu.swipeitagain.Views.MultiPlayerGameView;
 import com.ntnu.swipeitagain.Views.SinglePlayerGameView;
-import com.ntnu.swipeitagain.Views.Main;
-import com.ntnu.swipeitagain.Views.MainMenu;
-import com.ntnu.swipeitagain.Views.SinglePlayerGameView;
+
 
 import java.util.ArrayList;
 
@@ -36,22 +33,25 @@ public class BoardController {
         private ArrayList<State> states;
         private Game game;
         private int screenWidth, screenHeight;
+        private Resources resources;
 
 
-        public BoardController(Game game, int screenWidth, int screenHeight){
+        public BoardController(Game game, Resources resources, int screenWidth, int screenHeight){
             //pushState(new MainMenu());
             this.game = game;
             this.screenWidth = screenWidth;
             this.screenHeight = screenHeight;
             states = new ArrayList<State>();
+            this.resources = resources;
         }
 
         public void pushState(State state){
             states.add(0,state);
             game.pushState(state);
+            Log.d(TAG, "pushed state. length now: "+ states.size());
         }
 
-        public State popState(){
+        public State popStates(){
             return states.remove(0);
         }
 
@@ -113,19 +113,10 @@ public class BoardController {
 
         }
 
-        public void goToMainMenu(int n){
-            //moves menu to the top of the stack
-            game.popState(n);
-            states.set(0, states.remove(states.size()-1));
-        }
 
     public void goToMainMenu(){
-        //moves menu to the top of the stack
-        if(isMultiPlayer){
-            goToMainMenu(4);
-        }else{
-            goToMainMenu(3);
-        }
+        game.pushState(new MainMenu(this, game, resources, screenWidth,screenHeight));
+        Log.d(TAG, "States left: "+ states.size());
     }
 
         public boolean tryDirection(Direction direction){

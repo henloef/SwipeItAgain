@@ -16,7 +16,7 @@ import static android.content.ContentValues.TAG;
 
 public class CreateNewGame extends AbstractMenuView {
 
-    protected TextButton mainMenu;
+
     private int gameKey;
 
     public CreateNewGame(BoardController boardController, int screenWidth, int screenHeight){
@@ -30,15 +30,13 @@ public class CreateNewGame extends AbstractMenuView {
         canvas.drawText("Game key:", 100, screenHeight*2/7, bigFont);
         canvas.drawText(Integer.toString(gameKey), screenWidth/2, screenHeight*3/7, gameKeyFont);
         canvas.drawText("Waiting for opponent", 100, screenHeight*5/7, bigFont);
-
-
     }
 
     @Override
     public void actionPerformed(WidgetAction widgetAction) {
         if (widgetAction.getSource() == mainMenu) {
             Log.d(TAG, "actionPerformed: go back to main menu");
-            boardController.goToMainMenu(2);
+            boardController.goToMainMenu();
         }
     }
 }

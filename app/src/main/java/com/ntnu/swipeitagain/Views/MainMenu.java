@@ -19,10 +19,14 @@ import static android.content.ContentValues.TAG;
 
 public final class MainMenu extends AbstractMenuView {
 
+    private Resources resources;
+
     private TextButton singleplayer, multiplayer, instructions;
 
     public MainMenu(BoardController boardController, sheep.game.Game game, Resources resources, int screenWidth, int screenHeight) {
         super(boardController, screenWidth,screenHeight);
+
+        this.resources = resources;
 
         singleplayer = new TextButton(100, (float)screenHeight*2/7, "Singleplayer", buttonStyle);
         multiplayer = new TextButton(100, (float)screenHeight*4/7, "Multiplayer", buttonStyle);
@@ -63,6 +67,7 @@ public final class MainMenu extends AbstractMenuView {
         else if (widgetAction.getSource() == instructions){
             //Todo what happens when instructions is pushed
             Log.d(TAG, "actionPerformed: instructions");
+            boardController.pushState(new InstructionsView(boardController, screenWidth, screenHeight, resources));
         }
     }
 }

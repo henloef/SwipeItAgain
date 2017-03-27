@@ -17,16 +17,10 @@ import sheep.gui.WidgetListener;
  * Created by Henrik on 26.03.2017.
  */
 
-public class SinglePlayerGameView extends State implements WidgetListener{
-
-    BoardController boardController;
-    private int screenWidth, screenHeigth;
-    private TextButton goDirectlyToGameOver;
+public class SinglePlayerGameView extends PlayerGameView implements WidgetListener{
 
     public SinglePlayerGameView(BoardController boardController, int screenWidth, int screenHeight){
-        this.boardController = boardController;
-        this.screenWidth = screenWidth;
-        this.screenHeigth = screenHeight;
+        super(boardController, screenWidth, screenHeight);
 
         Font buttonFont = new Font(255, 255, 255, 100, Typeface.SANS_SERIF, Typeface.NORMAL);
         Paint[] buttonStyle = {buttonFont, buttonFont};
@@ -37,22 +31,5 @@ public class SinglePlayerGameView extends State implements WidgetListener{
         goDirectlyToGameOver.addWidgetListener(this);
 
         addTouchListener(goDirectlyToGameOver);
-
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
-        super.draw(canvas);
-
-
-        canvas.drawColor(Color.BLUE);
-        goDirectlyToGameOver.draw(canvas);
-    }
-
-    @Override
-    public void actionPerformed(WidgetAction widgetAction) {
-        if(widgetAction.getSource() == goDirectlyToGameOver){
-            boardController.pushState(new GameOver(boardController, screenWidth, screenHeigth));
-        }
     }
 }

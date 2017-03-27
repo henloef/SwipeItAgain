@@ -106,8 +106,8 @@ public class BoardController {
 
         //START THE GAME called from
         public void startGame(){
-            createGameModel(); //assigns boardModel to this Boardcontroller
-            play();
+            //createGameModel(); //assigns boardModel to this Boardcontroller
+           // play();
 
         }
 
@@ -142,7 +142,7 @@ public class BoardController {
             pushState(new GameOver(this, screenWidth, screenHeight));
         }
         public void playCard(){
-            gameModel.nextCard();
+            //gameModel.nextCard();
             //tryDirection()
         }
 

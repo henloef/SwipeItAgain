@@ -27,7 +27,7 @@ public class GameModel {
 
     //Constructor
     public GameModel(){
-        createCards();
+        //createCards();
         player = new PlayerModel();
     }
 
@@ -44,7 +44,7 @@ public class GameModel {
     //Makes card for each direction
     private void createCards(){
         cards = new ArrayList<CardModel>();
-        arrowImage = new Image(R.drawable.right_arrow);
+        //arrowImage = new Image(R.drawable.right_arrow);
 
         for(Direction dir : Direction.values()){
             cards.add(new CardModel(arrowImage,dir)); //TODO create arrowImage

@@ -51,7 +51,7 @@ public class BoardController {
             Log.d(TAG, "pushed state. length now: "+ states.size());
         }
 
-        public State popStates(){
+        public State popState(){
             return states.remove(0);
         }
 
@@ -61,7 +61,7 @@ public class BoardController {
                 // Få fra input om man venter på motstander eller generer gamekey
             }
             else{ gameState = new SinglePlayerState(this);
-                pushState(new SinglePlayerGameView(this, screenWidth, screenHeight));
+                pushState(new SinglePlayerGameView(this, screenWidth, screenHeight));//TODO dette må endres, vi klarer jo ikke å kjøre en loop for å spille når denne pushes?
             }
             //createGameModel();
         }
@@ -104,8 +104,11 @@ public class BoardController {
             }
         }
 
+        //START THE GAME called from
         public void startGame(){
-            //   gameModel.startGame();
+            //createGameModel(); //assigns boardModel to this Boardcontroller
+           // play();
+
         }
 
         //when gameOver option retry is chosen
@@ -114,7 +117,9 @@ public class BoardController {
         }
 
 
-    public void goToMainMenu(){
+
+        public void goToMainMenu(){
+            //moves menu to the top of the stack
         game.pushState(new MainMenu(this, game, resources, screenWidth,screenHeight));
         Log.d(TAG, "States left: "+ states.size());
     }
@@ -123,14 +128,14 @@ public class BoardController {
             return gameModel.checkDirection(direction);
         }
 
-        public void play(){
+        public void play(){ //todo denne må gjøres på en anne måte, om update i view skal være tikkinga av tiden til denne funskjonen
             while (gameModel.timeLeft()){
                 playCard();
             }
             pushState(new GameOver(this, screenWidth, screenHeight));
         }
         public void playCard(){
-            gameModel.nextCard();
+            //gameModel.nextCard();
             //tryDirection()
         }
 

@@ -14,7 +14,7 @@ public class SinglePlayerState extends GameState{
         startGame();
     }
 
-    //Gets gamemodel from boardController
+    //Gets gameModel from boardController
 
 
     @Override

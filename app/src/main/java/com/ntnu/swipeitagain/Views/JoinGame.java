@@ -116,7 +116,12 @@ public class JoinGame extends State implements WidgetListener {
         }else if(widgetAction.getSource() == backSpace){
             enteredGameKey = enteredGameKey.substring(0, enteredGameKey.length()-1);
         }else if (buttons.contains(widgetAction.getSource()) ){
-            enteredGameKey = enteredGameKey + Integer.toString(buttons.indexOf(widgetAction.getSource()));
+            if(enteredGameKey.length() < 4){
+                enteredGameKey = enteredGameKey + Integer.toString(buttons.indexOf(widgetAction.getSource()));
+            }else{
+                Log.d(TAG, "Not room for more digit");
+            }
+
         }
 
     }

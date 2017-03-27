@@ -61,7 +61,7 @@ public class BoardController {
                 // Få fra input om man venter på motstander eller generer gamekey
             }
             else{ gameState = new SinglePlayerState(this);
-                pushState(new SinglePlayerGameView(this, screenWidth, screenHeight));
+                pushState(new SinglePlayerGameView(this, screenWidth, screenHeight));//TODO dette må endres, vi klarer jo ikke å kjøre en loop for å spille når denne pushes?
             }
             //createGameModel();
         }
@@ -104,8 +104,11 @@ public class BoardController {
             }
         }
 
+        //START THE GAME called from
         public void startGame(){
-            //   gameModel.startGame();
+            createGameModel(); //assigns boardModel to this Boardcontroller
+            play();
+
         }
 
         //when gameOver option retry is chosen
@@ -119,20 +122,20 @@ public class BoardController {
             states.set(0, states.remove(states.size()-1));
         }
 
-    public void goToMainMenu(){
-        //moves menu to the top of the stack
-        if(isMultiPlayer){
-            goToMainMenu(4);
-        }else{
-            goToMainMenu(3);
+        public void goToMainMenu(){
+            //moves menu to the top of the stack
+            if(isMultiPlayer){
+                goToMainMenu(4);
+            }else{
+                goToMainMenu(3);
+            }
         }
-    }
 
         public boolean tryDirection(Direction direction){
             return gameModel.checkDirection(direction);
         }
 
-        public void play(){
+        public void play(){ //todo denne må gjøres på en anne måte, om update i view skal være tikkinga av tiden til denne funskjonen
             while (gameModel.timeLeft()){
                 playCard();
             }

@@ -22,9 +22,9 @@ public class CardModel extends Sprite{
 
     }
 
-    // Scales the texture according to the direction
 
 
+    // Scales the image according to the direction
     private void scaleDirection(Direction direction){
         if(direction == Direction.LEFT){
             this.setScale(-1, 1);
@@ -39,7 +39,7 @@ public class CardModel extends Sprite{
 
 
 
-    //
+    //in case we wanted cards
 
     /*
     private int value;

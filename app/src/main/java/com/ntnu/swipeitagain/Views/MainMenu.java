@@ -3,19 +3,13 @@ package com.ntnu.swipeitagain.Views;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.util.Log;
 
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
 
-import sheep.game.*;
-import sheep.game.Game;
-import sheep.graphics.Font;
 import sheep.gui.TextButton;
 import sheep.gui.WidgetAction;
-import sheep.gui.WidgetListener;
 
 import static android.content.ContentValues.TAG;
 
@@ -23,21 +17,12 @@ import static android.content.ContentValues.TAG;
  * Created by Henrik on 26.03.2017.
  */
 
-public final class MainMenu extends State implements WidgetListener {
+public final class MainMenu extends AbstractMenuView {
 
     private TextButton singleplayer, multiplayer, instructions;
-    private Game game;
-    private int screenWidth, screenHeight;
-    private BoardController boardController;
 
     public MainMenu(BoardController boardController, sheep.game.Game game, Resources resources, int screenWidth, int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-        this.game = game;
-        this.boardController = boardController;
-
-        Font buttonFont = new Font(255, 255, 255, 100, Typeface.SANS_SERIF, Typeface.NORMAL);
-        Paint[] buttonStyle = {buttonFont, buttonFont};
+        super(boardController, screenWidth,screenHeight);
 
         singleplayer = new TextButton(100, (float)screenHeight*2/7, "Singleplayer", buttonStyle);
         multiplayer = new TextButton(100, (float)screenHeight*4/7, "Multiplayer", buttonStyle);
@@ -52,16 +37,15 @@ public final class MainMenu extends State implements WidgetListener {
         addTouchListener(instructions);
     }
 
+    //draws main menu. Overrides because it is the only one without main menu-button
+    @Override
     public void draw(Canvas canvas) {
         canvas.drawColor(Color.CYAN);
         singleplayer.draw(canvas);
         multiplayer.draw(canvas);
         instructions.draw(canvas);
-
-        Font font = new Font(255, 255, 255, 130, Typeface.SANS_SERIF, Typeface.NORMAL);
-        canvas.drawText("Main Menu", 100, 230, font);
+        canvas.drawText("Main Menu", 100, 230, bigFont);
     }
-
 
 
     @Override
@@ -70,7 +54,6 @@ public final class MainMenu extends State implements WidgetListener {
             //TODO What happens when singleplayer is touched;
             Log.d(TAG, "actionPerformed: singleplayer");
             boardController.createGameState(false, false);
-
         }
         else if (widgetAction.getSource() == multiplayer){
             //TODO what happens when multiplayer is touched

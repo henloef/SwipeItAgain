@@ -29,6 +29,10 @@ public class GameModel {
         player = new PlayerModel();
     }
 
+    public PlayerModel getPlayer(){
+        return player;
+    }
+
     //gets true if still time left
     public boolean timeLeft(){
         return player.timeLeft();

@@ -56,14 +56,15 @@ public class BoardController {
         }
 
         public void createGameState(Boolean isMultiPlayer, Boolean generateKey) {
+            createGameModel();
             if (isMultiPlayer){ gameState = new MultiPlayerState(this, generateKey);
                 this.isMultiPlayer = isMultiPlayer;
                 // Få fra input om man venter på motstander eller generer gamekey
             }
             else{ gameState = new SinglePlayerState(this);
-                pushState(new SinglePlayerGameView(this, screenWidth, screenHeight));//TODO dette må endres, vi klarer jo ikke å kjøre en loop for å spille når denne pushes?
+                pushState(new SinglePlayerGameView(this, screenWidth, screenHeight, gameModel));// dette må endres, vi klarer jo ikke å kjøre en loop for å spille når denne pushes?
             }
-            //createGameModel();
+
         }
 
         public GameModel getGameModel(){
@@ -93,7 +94,7 @@ public class BoardController {
             if(gameState instanceof MultiPlayerState){
                 if(((MultiPlayerState) gameState).tryGameKey(gameKey)){
                     Log.d(TAG, "joining game");
-                    pushState(new MultiPlayerGameView(this, screenWidth, screenHeight));
+                    pushState(new MultiPlayerGameView(this, screenWidth, screenHeight, gameModel));
                 }else{
                     if(states.get(0) instanceof JoinGame){
                         ((JoinGame) states.get(0)).tryNewGameKey();

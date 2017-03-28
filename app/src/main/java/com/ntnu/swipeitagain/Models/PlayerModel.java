@@ -1,24 +1,30 @@
 package com.ntnu.swipeitagain.Models;
 
+import android.util.Log;
+
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by Lars on 26.03.2017.
  */
 
 public class PlayerModel {
     private int maxTime, currentTime;
+
     public PlayerModel(){
         maxTime = 100;
-        currentTime = 95;
+        currentTime = 90;
+        Log.d(TAG, "Make new player model. Current time: "+currentTime);
     }
 
     public void timeTick() {
         currentTime--;
-
     }
 
-    private void addTime(){
+    public void addTime(){
         addTime(5);
     }
+
     public void addTime(int t){
         currentTime += t;
         if(currentTime > maxTime) currentTime = maxTime;
@@ -33,8 +39,8 @@ public class PlayerModel {
     }
 
     public void setCurrentTime(int currentTime) {
-        if (currentTime > 100){
-            this.currentTime = 100;
+        if (currentTime > maxTime){
+            this.currentTime = maxTime;
         } else if (currentTime < 0){
             this.currentTime = 0;
         } else{

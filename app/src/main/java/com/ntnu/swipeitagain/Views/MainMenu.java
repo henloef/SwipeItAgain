@@ -48,7 +48,7 @@ public final class MainMenu extends AbstractMenuView {
         singleplayer.draw(canvas);
         multiplayer.draw(canvas);
         instructions.draw(canvas);
-        canvas.drawText(Integer.toString(screenHeight), 100, 230, bigFont);
+        canvas.drawText("Main menu", 100, 230, bigFont);
     }
 
 

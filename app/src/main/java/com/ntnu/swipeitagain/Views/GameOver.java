@@ -36,7 +36,6 @@ public class GameOver extends AbstractMenuView {
     @Override
     public void actionPerformed(WidgetAction widgetAction) {
         if (widgetAction.getSource() == retry) {
-            //TODO What happens when retry is touched
             Log.d(TAG, "actionPerformed: retry");
             boardController.retry();
         } else if (widgetAction.getSource() == mainMenu) {

@@ -48,24 +48,21 @@ public final class MainMenu extends AbstractMenuView {
         singleplayer.draw(canvas);
         multiplayer.draw(canvas);
         instructions.draw(canvas);
-        canvas.drawText("Main Menu", 100, 230, bigFont);
+        canvas.drawText(Integer.toString(screenHeight), 100, 230, bigFont);
     }
 
 
     @Override
     public void actionPerformed(WidgetAction widgetAction) {
         if (widgetAction.getSource() == singleplayer){
-            //TODO What happens when singleplayer is touched;
             Log.d(TAG, "actionPerformed: singleplayer");
             boardController.createGameState(false, false);
         }
         else if (widgetAction.getSource() == multiplayer){
-            //TODO what happens when multiplayer is touched
             Log.d(TAG, "actionPerformed: multiplayer");
             boardController.pushState(new CreateMultiPlayer(boardController, screenWidth, screenHeight));
         }
         else if (widgetAction.getSource() == instructions){
-            //Todo what happens when instructions is pushed
             Log.d(TAG, "actionPerformed: instructions");
             boardController.pushState(new InstructionsView(boardController, screenWidth, screenHeight, resources));
         }

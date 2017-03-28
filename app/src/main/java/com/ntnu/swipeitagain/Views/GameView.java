@@ -51,6 +51,7 @@ public abstract class GameView extends State implements WidgetListener {
         this.gameModel = gameModel1;
         this.timer = new Timer();
 
+        /*fungerer ikke
         this.addTouchListener(new TouchListener() {
             @Override
             public boolean onTouchDown(MotionEvent motionEvent) {
@@ -64,12 +65,12 @@ public abstract class GameView extends State implements WidgetListener {
 
             @Override
             public boolean onTouchMove(MotionEvent motionEvent) {
-                if(gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())){
+                //if(gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())){
                     gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
-                }
+                //}
                 return false;
             }
-        });
+        });*/
 
     }
 
@@ -94,7 +95,6 @@ public abstract class GameView extends State implements WidgetListener {
         canvas.drawRect(rect, paint);
 
 
-        gameModel.getCurrentCard().setPosition(screenWidth/2, screenHeight/2);
         gameModel.getCurrentCard().draw(canvas);
 
 
@@ -110,6 +110,8 @@ public abstract class GameView extends State implements WidgetListener {
     @Override
     public void update(float dt) { //TODO må mest sannsynlig flyttes
         super.update(dt);
+
+        //Burde være via boardcontroller
         counter += timer.getDelta();
         if(counter >=1.0){
             gameModel.getPlayer().timeTick();

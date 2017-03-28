@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.util.Log;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
 
@@ -12,6 +13,8 @@ import sheep.graphics.Font;
 import sheep.gui.TextButton;
 import sheep.gui.WidgetAction;
 import sheep.gui.WidgetListener;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Sigrid on 27.03.2017.
@@ -28,6 +31,7 @@ public abstract class AbstractMenuView extends State implements WidgetListener  
     protected TextButton mainMenu;
 
     public AbstractMenuView(BoardController boardController, int screenWidth, int screenHeight) {
+        Log.d(TAG, "screenheight: " + screenHeight);
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.boardController = boardController;

@@ -89,7 +89,7 @@ public class JoinGame extends AbstractMenuView {
             Log.d(TAG, "trying game key");
             boardController.tryEnteredGameKey(Integer.parseInt(enteredGameKey));
         }else if(widgetAction.getSource() == backSpace){
-            enteredGameKey = enteredGameKey.substring(0, enteredGameKey.length()-1);
+            if(enteredGameKey.length() != 0) enteredGameKey = enteredGameKey.substring(0, enteredGameKey.length()-1);
         }else if (buttons.contains(widgetAction.getSource()) ){
             if(enteredGameKey.length() < 4){
                 enteredGameKey = enteredGameKey + Integer.toString(buttons.indexOf(widgetAction.getSource()));

@@ -114,7 +114,12 @@ public class BoardController {
 
         //when gameOver option retry is chosen
         public void retry(){
+        if(isMultiPlayer){
 
+        }else{
+            gameModel = new GameModel();
+            pushState(new SinglePlayerGameView(this, screenWidth, screenHeight, gameModel));
+        }
         }
 
 

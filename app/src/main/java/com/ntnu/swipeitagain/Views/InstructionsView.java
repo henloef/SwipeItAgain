@@ -17,8 +17,12 @@ import static android.content.ContentValues.TAG;
  */
 
 public class InstructionsView extends AbstractMenuView {
+
+    private Resources resources;
     public InstructionsView(BoardController boardController, int screenWidth, int screenHeight, Resources resources){
         super(boardController, screenWidth, screenHeight);
+        this.resources = resources;
+
         mainMenu =  new TextButton(100, (float)screenHeight*2/10, "Main menu", buttonStyle);
         mainMenu.addWidgetListener(this);
         addTouchListener(mainMenu);
@@ -26,7 +30,6 @@ public class InstructionsView extends AbstractMenuView {
 
     public void draw(Canvas canvas){
         super.draw(canvas);
-
     }
 
     @Override

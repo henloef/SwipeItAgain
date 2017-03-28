@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.ProgressBar;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
@@ -21,6 +22,8 @@ import sheep.graphics.Image;
 import sheep.gui.TextButton;
 import sheep.gui.WidgetAction;
 import sheep.gui.WidgetListener;
+import sheep.input.TouchListener;
+import sheep.util.Timer;
 
 import static android.content.ContentValues.TAG;
 
@@ -37,11 +40,36 @@ public abstract class GameView extends State implements WidgetListener {
     //protected CardModel currentCard; //View skal vel ikke ha direkte tilgang på denne?
     protected GameModel gameModel;
 
-    public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel) {
+    //Burde egentlig ikke være i view
+    protected Timer timer;
+    protected float counter;
+
+    public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
         this.boardController = boardController;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
-        this.gameModel = gameModel;
+        this.gameModel = gameModel1;
+        this.timer = new Timer();
+
+        this.addTouchListener(new TouchListener() {
+            @Override
+            public boolean onTouchDown(MotionEvent motionEvent) {
+                return false;
+            }
+
+            @Override
+            public boolean onTouchUp(MotionEvent motionEvent) {
+                return false;
+            }
+
+            @Override
+            public boolean onTouchMove(MotionEvent motionEvent) {
+                if(gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())){
+                    gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -82,6 +110,11 @@ public abstract class GameView extends State implements WidgetListener {
     @Override
     public void update(float dt) { //TODO må mest sannsynlig flyttes
         super.update(dt);
+        counter += timer.getDelta();
+        if(counter >=1.0){
+            gameModel.getPlayer().timeTick();
+            counter = 0.0f;
+        }
         // TODO boardController.doYourThing()
     }
 }

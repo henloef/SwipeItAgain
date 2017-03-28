@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import sheep.graphics.Image;
+import sheep.util.Timer;
 
 import static android.content.ContentValues.TAG;
 
@@ -75,6 +76,10 @@ public class GameModel {
     public CardModel getCurrentCard(){
         return cards.get(0);
         //return currentCard;
+    }
+
+    public void timeTick(){
+        player.timeTick();
     }
 
     public ArrayList<CardModel> getCards(){

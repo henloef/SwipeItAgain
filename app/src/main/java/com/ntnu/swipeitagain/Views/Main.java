@@ -1,5 +1,5 @@
 package com.ntnu.swipeitagain.Views;
-
+import com.google.firebase.*;
 /**
  * Created by Henrik on 26.03.2017.
  */
@@ -20,6 +20,8 @@ public class Main extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+
+        //Firebase.setAndroidContext(this);
         super.onCreate(savedInstanceState);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();

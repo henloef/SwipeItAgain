@@ -50,10 +50,12 @@ public class BoardController {
 
         public void updateGame(){
             counter += timer.getDelta();
-            if(counter >=0.3){
+            if(counter >=0.2){
                 gameModel.getPlayer().timeTick();
                 counter = 0.0f;
             }
+            if (!gameModel.getPlayer().timeLeft())
+            {pushState(new GameOver(this, screenWidth,screenHeight));}
         }
 
         public void pushState(State state){

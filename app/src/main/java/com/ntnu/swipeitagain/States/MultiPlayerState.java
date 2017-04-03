@@ -55,7 +55,6 @@ public class MultiPlayerState extends GameState{
     }
 
     public void startGame(){
-        boardController.startGame();
         serverCommunicator.sendStartSignal();
     }
 }

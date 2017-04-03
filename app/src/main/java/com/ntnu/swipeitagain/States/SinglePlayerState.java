@@ -19,6 +19,6 @@ public class SinglePlayerState extends GameState{
 
     @Override
     public void startGame() {
-        boardController.startGame();
+
     }
 }

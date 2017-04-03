@@ -40,16 +40,12 @@ public abstract class GameView extends State implements WidgetListener {
     //protected CardModel currentCard; //View skal vel ikke ha direkte tilgang på denne?
     protected GameModel gameModel;
 
-    //Burde egentlig ikke være i view
-    protected Timer timer;
-    protected float counter;
 
     public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
         this.boardController = boardController;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.gameModel = gameModel1;
-        this.timer = new Timer();
 
         //fungerer ikke
         this.addTouchListener(new TouchListener() {
@@ -94,10 +90,7 @@ public abstract class GameView extends State implements WidgetListener {
         paint.setColor(Color.argb(255,255 - (int)(progress*255),(int) (progress *255),0)); //gradually from green to red
         canvas.drawRect(rect, paint);
 
-
         gameModel.getCurrentCard().draw(canvas);
-
-
     }
 
     @Override
@@ -108,15 +101,9 @@ public abstract class GameView extends State implements WidgetListener {
     }
 
     @Override
-    public void update(float dt) { //TODO må mest sannsynlig flyttes
+    public void update(float dt) {
         super.update(dt);
-
-        //Burde være via boardcontroller
-        counter += timer.getDelta();
-        if(counter >=0.3){
-            gameModel.getPlayer().timeTick();
-            counter = 0.0f;
-        }
+        boardController.updateGame();
         // TODO boardController.doYourThing()
     }
 }

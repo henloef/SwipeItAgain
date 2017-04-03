@@ -17,8 +17,13 @@ public class PlayerModel {
         Log.d(TAG, "Make new player model. Current time: "+currentTime);
     }
 
-    public void timeTick() {
+    public boolean timeTick() {
+        if(currentTime <= 0){
+            currentTime = 0;
+            return false;
+        }
         currentTime--;
+        return true;
     }
 
     public void addTime(){

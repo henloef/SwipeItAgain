@@ -117,9 +117,11 @@ public class BoardController {
         }
 
         public void update(){
-            counter += timer.getDelta();
+            counter += timer.getDelta();//TODO fix game timer so that 0 stored is 0 displayed
             if(counter >=0.3){
-                gameModel.getPlayer().timeTick();
+                if(!gameModel.getPlayer().timeTick()){
+                    pushState(new GameOver(this, screenWidth, screenHeight));
+                }
                 counter = 0.0f;
             }
         }

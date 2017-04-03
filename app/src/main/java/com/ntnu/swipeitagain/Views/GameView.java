@@ -51,7 +51,7 @@ public abstract class GameView extends State implements WidgetListener {
         this.gameModel = gameModel1;
         this.timer = new Timer();
 
-        /*fungerer ikke
+        //fungerer ikke
         this.addTouchListener(new TouchListener() {
             @Override
             public boolean onTouchDown(MotionEvent motionEvent) {
@@ -70,7 +70,7 @@ public abstract class GameView extends State implements WidgetListener {
                 //}
                 return false;
             }
-        });*/
+        });
 
     }
 
@@ -113,7 +113,7 @@ public abstract class GameView extends State implements WidgetListener {
 
         //Burde være via boardcontroller
         counter += timer.getDelta();
-        if(counter >=1.0){
+        if(counter >=0.3){
             gameModel.getPlayer().timeTick();
             counter = 0.0f;
         }

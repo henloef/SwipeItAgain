@@ -83,7 +83,7 @@ public abstract class GameView extends State implements WidgetListener {
         int time = gameModel.getCurrentTime();
         Log.d(TAG, "current time: " + time);
         double progress = (1.0 * time)/100;
-        int barEnd = (int)(screenWidth * (progress * ((1.0 * screenWidth - 200) / screenWidth)));
+        int barEnd = (int)(100 + screenWidth * (progress * ((1.0 * screenWidth - 200) / screenWidth)));
         Rect rect = new Rect(100, screenHeight - 300, barEnd , screenHeight - 250);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 

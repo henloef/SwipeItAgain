@@ -3,13 +3,18 @@ package com.ntnu.swipeitagain.Controllers;
 
 //import io.socket.client.IO;
 
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
-
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -19,14 +24,37 @@ import io.socket.client.Socket;
 
 public class ServerCommunicator {
 
-    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com";
+    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
     private Socket socket = null;
     private String id;
-
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("message");
+    private DatabaseReference mDatabase;
 
-    //myRef.setValue("Hello, World!");
+    public void addToDatabase(String child, String id, String val){
+        Log.d(TAG, "Action; addToDatabase()");
+        DatabaseReference myRef = database.getReference(child);
+        //mDatabase = database.getReference();
+
+        myRef.setValue(val);
+        //mDatabase.child(child).child(id).setValue(val);
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+    }
 
     public void connectSocket(){
         try {

@@ -36,7 +36,7 @@ public class ServerCommunicator {
             System.out.println(e);
         }
     }
-    public int getGameKey(){
+    public int getGameKeyFromServer(){
         //TODO implement server connection
         return 0;
     }

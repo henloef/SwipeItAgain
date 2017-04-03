@@ -15,8 +15,9 @@ import com.ntnu.swipeitagain.Controllers.BoardController;
 import sheep.game.Game;
 public class Main extends Activity{
     private BoardController boardController;
-    public int SCREEN_WIDTH;
-    public int SCREEN_HEIGHT;
+
+    public int screenWidth, screenHeight;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -27,12 +28,12 @@ public class Main extends Activity{
         DisplayMetrics displayMetrics = new DisplayMetrics();
         WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        SCREEN_WIDTH = displayMetrics.widthPixels;
-        SCREEN_HEIGHT = displayMetrics.heightPixels;
+        screenWidth = displayMetrics.widthPixels;
+        screenHeight = displayMetrics.heightPixels;
 
         Game game = new Game(this, null);
-        this.boardController = new BoardController(game);
-        game.pushState(new MainMenu(game, game.getResources(), SCREEN_WIDTH, SCREEN_HEIGHT));
+        this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight);
+        game.pushState(new MainMenu(boardController, game, game.getResources(), screenWidth, screenHeight));
         setContentView(game);
     }
 }

@@ -6,11 +6,17 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import com.ntnu.swipeitagain.R;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import sheep.graphics.Image;
+import sheep.util.Timer;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Lars on 26.03.2017.
@@ -22,10 +28,16 @@ public class GameModel {
     private CardModel currentCard;
     private PlayerModel player;
     private Image arrowImage;
+
     //Constructor
     public GameModel(){
+        Log.d(TAG, "MAke new game model");
         createCards();
         player = new PlayerModel();
+    }
+
+    public PlayerModel getPlayer(){
+        return player;
     }
 
     //gets true if still time left
@@ -37,9 +49,12 @@ public class GameModel {
     //Makes card for each direction
     private void createCards(){
         cards = new ArrayList<CardModel>();
+        arrowImage = new Image(R.drawable.right_arrow);
+
         for(Direction dir : Direction.values()){
             cards.add(new CardModel(arrowImage,dir)); //TODO create arrowImage
         }
+        Log.d(TAG, "cards stack length now: "+ cards.size());
     }
 
     //compares direction from user with card-direction. if same, return true and go to next card
@@ -59,10 +74,19 @@ public class GameModel {
     }
 
     public CardModel getCurrentCard(){
-        return currentCard;
+        return cards.get(0);
+        //return currentCard;
+    }
+
+    public void timeTick(){
+        player.timeTick();
     }
 
     public ArrayList<CardModel> getCards(){
         return cards;
+    }
+
+    public int getCurrentTime(){
+        return getPlayer().getCurrentTime();
     }
 }

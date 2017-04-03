@@ -1,7 +1,11 @@
 package com.ntnu.swipeitagain.Models;
 
+import android.util.Log;
+
 import sheep.game.Sprite;
 import sheep.graphics.Image;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Lars on 26.03.2017.
@@ -16,32 +20,30 @@ public class CardModel extends Sprite{
 
     public CardModel(Image image, Direction direction){
         super(image);
-
+        Log.d(TAG, "MAke new card model");
         this.direction = direction;
-//        scaleDirection(direction);
+        scaleDirection(direction);
 
     }
 
-    // Scales the texture according to the direction
 
- /*
+
+    // Scales the image according to the direction
     private void scaleDirection(Direction direction){
         if(direction == Direction.LEFT){
             this.setScale(-1, 1);
         }else if (direction == Direction.DOWN){
-            this.rotate90(true);
+            this.rotate(90);
         }else if (direction == Direction.UP){
-            this.rotate90(false);
+            this.rotate(270);
         }
-
-    }*/
-    private void setTexture(){
 
     }
 
 
 
-    //
+
+    //in case we wanted cards
 
     /*
     private int value;

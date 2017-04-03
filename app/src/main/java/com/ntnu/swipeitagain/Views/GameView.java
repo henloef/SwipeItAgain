@@ -106,18 +106,19 @@ public abstract class GameView extends State implements WidgetListener {
             boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
         }
     }
-/*
+
     @Override
     public void update(float dt) { //TODO må mest sannsynlig flyttes
         super.update(dt);
-
+        boardController.update();
         //Burde være via boardcontroller
+        /*
         counter += timer.getDelta();
         if(counter >=1.0){
             gameModel.getPlayer().timeTick();
             counter = 0.0f;
-        }
+        }*/
         // TODO boardController.doYourThing()
-    }*/
+    }
 }
 

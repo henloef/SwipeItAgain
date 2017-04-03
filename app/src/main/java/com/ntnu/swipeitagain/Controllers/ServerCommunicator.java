@@ -9,13 +9,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
-
-
-
 /**
  * Created by Henrik on 26.03.2017.
  */
-
 
 public class ServerCommunicator {
 

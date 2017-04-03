@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import sheep.game.Game;
 import sheep.game.State;
 import sheep.math.Vector2;
+import sheep.util.Timer;
 
 import static android.content.ContentValues.TAG;
 
@@ -34,6 +35,8 @@ public class BoardController {
         private Game game;
         private int screenWidth, screenHeight;
         private Resources resources;
+        private Timer timer;
+        private float counter;
 
 
         public BoardController(Game game, Resources resources, int screenWidth, int screenHeight){
@@ -43,6 +46,7 @@ public class BoardController {
             this.screenHeight = screenHeight;
             states = new ArrayList<State>();
             this.resources = resources;
+            this.timer = new Timer();
         }
 
         public void pushState(State state){
@@ -110,6 +114,14 @@ public class BoardController {
             //createGameModel(); //assigns boardModel to this Boardcontroller
            // play();
 
+        }
+
+        public void update(){
+            counter += timer.getDelta();
+            if(counter >=0.3){
+                gameModel.getPlayer().timeTick();
+                counter = 0.0f;
+            }
         }
 
         //when gameOver option retry is chosen

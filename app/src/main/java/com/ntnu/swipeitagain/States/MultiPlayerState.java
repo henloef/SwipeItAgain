@@ -21,6 +21,8 @@ public class MultiPlayerState extends GameState{
         serverCommunicator  = new ServerCommunicator();
         serverCommunicator.connectSocket();
         serverCommunicator.addToDatabase("users", "user1", "Det er meg det");
+        serverCommunicator.addToDatabase("users", "user2", "Det er hans nå");
+
         if(generateKey) {
             getGameKeyFromServer();
         }else{

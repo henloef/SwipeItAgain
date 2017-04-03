@@ -3,6 +3,10 @@ package com.ntnu.swipeitagain.Controllers;
 
 //import io.socket.client.IO;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
@@ -12,6 +16,13 @@ import io.socket.client.Socket;
 
 
 public class ServerCommunicator {
+
+    // Write a message to the database
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("message");
+
+
+    //myRef.setValue("Hello, World!");
 
     public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com";
     private Socket socket = null;

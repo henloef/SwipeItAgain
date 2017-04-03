@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.ntnu.swipeitagain.Controllers.BoardController;
 
 import sheep.game.Game;
@@ -17,6 +18,8 @@ public class Main extends Activity{
     private BoardController boardController;
 
     public int screenWidth, screenHeight;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
 
 
     @Override
@@ -28,6 +31,9 @@ public class Main extends Activity{
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         screenHeight = displayMetrics.heightPixels;
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         Game game = new Game(this, null);
         this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight);

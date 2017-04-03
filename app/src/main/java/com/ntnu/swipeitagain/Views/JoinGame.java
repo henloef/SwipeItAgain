@@ -88,7 +88,9 @@ public class JoinGame extends AbstractMenuView {
         } else if (widgetAction.getSource() == enter){
             Log.d(TAG, "trying game key");
             //TODO fix crash
-            boardController.tryEnteredGameKey(Integer.parseInt(enteredGameKey));
+            if(enteredGameKey.length() > 0) {
+                boardController.tryEnteredGameKey(Integer.parseInt(enteredGameKey));
+            }
         }else if(widgetAction.getSource() == backSpace){
             if(enteredGameKey.length() != 0) enteredGameKey = enteredGameKey.substring(0, enteredGameKey.length()-1);
         }else if (buttons.contains(widgetAction.getSource()) ){

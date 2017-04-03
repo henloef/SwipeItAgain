@@ -40,12 +40,6 @@ public class GameModel {
         return player;
     }
 
-    //gets true if still time left
-    public boolean timeLeft(){
-        return player.timeLeft();
-    }
-
-
     //Makes card for each direction
     private void createCards(){
         cards = new ArrayList<CardModel>();

@@ -148,12 +148,6 @@ public class BoardController {
             return gameModel.checkDirection(direction);
         }
 
-        public void play(){ //todo denne må gjøres på en anne måte, om update i view skal være tikkinga av tiden til denne funskjonen
-            while (gameModel.timeLeft()){
-                playCard();
-            }
-            pushState(new GameOver(this, screenWidth, screenHeight));
-        }
         public void playCard(){
             //gameModel.nextCard();
             //tryDirection()

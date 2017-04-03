@@ -116,7 +116,7 @@ public class BoardController {
 
         }
 
-        public void update(){
+        public void updateGameState(){
             counter += timer.getDelta();//TODO fix game timer so that 0 stored is 0 displayed
             if(counter >=0.3){
                 if(!gameModel.getPlayer().timeTick()){

@@ -87,13 +87,8 @@ public abstract class GameView extends State implements WidgetListener {
         Rect rect = new Rect(100, screenHeight - 300, barEnd , screenHeight - 250);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        if(time > 66)       paint.setColor(Color.GREEN); //lots of time left
-        else if (time > 33) paint.setColor(Color.YELLOW);//quite a bit of time left
-        else paint.setColor(Color.RED);   //running low on time */
-
         paint.setColor(Color.argb(255,255 - (int)(progress*255),(int) (progress *255),0)); //gradually from green to red
         canvas.drawRect(rect, paint);
-
 
         gameModel.getCurrentCard().draw(canvas);
 
@@ -108,17 +103,9 @@ public abstract class GameView extends State implements WidgetListener {
     }
 
     @Override
-    public void update(float dt) { //TODO må mest sannsynlig flyttes
+    public void update(float dt) {
         super.update(dt);
-        boardController.update();
-        //Burde være via boardcontroller
-        /*
-        counter += timer.getDelta();
-        if(counter >=1.0){
-            gameModel.getPlayer().timeTick();
-            counter = 0.0f;
-        }*/
-        // TODO boardController.doYourThing()
+        boardController.updateGameState();
     }
 }
 

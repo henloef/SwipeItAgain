@@ -106,7 +106,7 @@ public abstract class GameView extends State implements WidgetListener {
             boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
         }
     }
-
+/*
     @Override
     public void update(float dt) { //TODO må mest sannsynlig flyttes
         super.update(dt);
@@ -118,6 +118,6 @@ public abstract class GameView extends State implements WidgetListener {
             counter = 0.0f;
         }
         // TODO boardController.doYourThing()
-    }
+    }*/
 }
 

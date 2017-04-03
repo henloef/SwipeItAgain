@@ -19,12 +19,14 @@ public class MultiPlayerState extends GameState{
     public MultiPlayerState(BoardController boardController, Boolean generateKey){
         super(boardController);
         serverCommunicator  = new ServerCommunicator();
+        serverCommunicator.connectSocket();
+        serverCommunicator.addToDatabase("users", "user1", "Det er meg det");
         if(generateKey) {
             getGameKeyFromServer();
         }else{
 
         }
-        serverCommunicator.connectSocket();
+
         startGame();
     }
 

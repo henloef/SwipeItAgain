@@ -11,6 +11,8 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ntnu.swipeitagain.Controllers.BoardController;
 
 import sheep.game.Game;
@@ -34,6 +36,12 @@ public class Main extends Activity{
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello Marie");
 
         Game game = new Game(this, null);
         this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight);

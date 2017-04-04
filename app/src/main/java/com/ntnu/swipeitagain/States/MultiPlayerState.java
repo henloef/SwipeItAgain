@@ -19,7 +19,6 @@ public class MultiPlayerState extends GameState{
     public MultiPlayerState(BoardController boardController, Boolean generateKey){
         super(boardController);
         serverCommunicator  = new ServerCommunicator();
-        serverCommunicator.connectSocket();
         serverCommunicator.addToDatabase("users", "user1", "Det er meg det");
         serverCommunicator.addToDatabase("users", "user2", "Det er hans nå");
 
@@ -57,4 +56,8 @@ public class MultiPlayerState extends GameState{
     public void startGame(){
         serverCommunicator.sendStartSignal();
     }
+
+//    -------------------------------------------------------------------------
+//    Hvis socket.io skal brukes
+    //serverCommunicator.connectSocket();
 }

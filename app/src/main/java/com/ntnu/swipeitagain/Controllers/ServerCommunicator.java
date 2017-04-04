@@ -1,9 +1,5 @@
 package com.ntnu.swipeitagain.Controllers;
 
-
-//import io.socket.client.IO;
-
-
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -11,10 +7,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-
-import io.socket.client.IO;
-import io.socket.client.Socket;
 
 import static android.content.ContentValues.TAG;
 
@@ -75,23 +67,28 @@ public class ServerCommunicator {
         //TODO implement
     }
 
-//    ----------------------------------------------------------------------------
-//
-//
+/*    ----------------------------------------------------------------------------
+
+
 // Hvis socket.io skal brukes
 
 
-//    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
+import io.socket.client.IO;
+import io.socket.client.Socket;
 
-//    private Socket socket = null;
 
-    /*public void connectSocket(){
+    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
+
+    private Socket socket = null;
+
+    public void connectSocket(){
         try {
             socket = IO.socket(SERVER_URL);
             socket.connect();
         }catch (Exception e){
             System.out.println(e);
         }
-    }*/
+    }/*
+
 
 }

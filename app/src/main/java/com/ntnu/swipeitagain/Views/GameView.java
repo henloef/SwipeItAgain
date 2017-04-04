@@ -47,27 +47,6 @@ public abstract class GameView extends State implements WidgetListener {
         this.screenHeight = screenHeight;
         this.gameModel = gameModel1;
 
-        //fungerer ikke
-        this.addTouchListener(new TouchListener() {
-            @Override
-            public boolean onTouchDown(MotionEvent motionEvent) {
-                return false;
-            }
-
-            @Override
-            public boolean onTouchUp(MotionEvent motionEvent) {
-                return false;
-            }
-
-            @Override
-            public boolean onTouchMove(MotionEvent motionEvent) {
-                //if(gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())){
-                    gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
-                //}
-                return false;
-            }
-        });
-
     }
 
     private MotionEvent startEvent;
@@ -104,7 +83,9 @@ public abstract class GameView extends State implements WidgetListener {
             gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
             //gameModel.getCurrentCard().setScale(1,1);
             gameModel.getCurrentCard().update(0.1f);
+            Log.d(TAG, "Swiped");
             return true;
+
         }
         return false;
     }

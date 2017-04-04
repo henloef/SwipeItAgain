@@ -1,6 +1,7 @@
 package com.ntnu.swipeitagain.Controllers;
 import android.content.res.Resources;
 import android.util.Log;
+import android.view.MotionEvent;
 
 import com.ntnu.swipeitagain.Models.Direction;
 import com.ntnu.swipeitagain.Models.GameModel;
@@ -140,23 +141,22 @@ public class BoardController {
             return gameModel.checkDirection(direction);
         }
 
-
-        private Direction decideDirection(Vector2 start, Vector2 end){
-            float deltaX = end.getX() - start.getX();
-            float deltaY = end.getY() - start.getY();
-            if(Math.abs(deltaX) > Math.abs(deltaY)){
-                if(deltaX > 0){
-                    return Direction.RIGHT;
-                }else{
-                    return Direction.LEFT;
-                }
+    public Direction decideDirection(MotionEvent start, MotionEvent end){ //Hvorfor var denne private?
+        float deltaX = end.getX() - start.getX();
+        float deltaY = end.getY() - start.getY();
+        if(Math.abs(deltaX) > Math.abs(deltaY)){
+            if(deltaX > 0){
+                return Direction.RIGHT;
             }else{
-                if(deltaY > 0){
-                    return Direction.DOWN;
-                }else{
-                    return Direction.UP;
-                }
+                return Direction.LEFT;
+            }
+        }else{
+            if(deltaY > 0){
+                return Direction.DOWN;
+            }else{
+                return Direction.UP;
             }
         }
+    }
 
 }

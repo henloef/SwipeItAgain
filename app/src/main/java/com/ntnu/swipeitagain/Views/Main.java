@@ -1,5 +1,5 @@
 package com.ntnu.swipeitagain.Views;
-
+import com.google.firebase.*;
 /**
  * Created by Henrik on 26.03.2017.
  */
@@ -14,6 +14,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ntnu.swipeitagain.Controllers.BoardController;
+import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
 
 import sheep.game.Game;
 public class Main extends Activity{
@@ -26,6 +27,8 @@ public class Main extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
+
+        //Firebase.setAndroidContext(this);
         super.onCreate(savedInstanceState);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -47,5 +50,6 @@ public class Main extends Activity{
         this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight);
         game.pushState(new MainMenu(boardController, game, game.getResources(), screenWidth, screenHeight));
         setContentView(game);
+
     }
 }

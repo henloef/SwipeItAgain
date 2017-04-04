@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+ext {
+    firebaseVersion = "10.2.0"
+    androidSupport = "25.3.1"
+    socketIOversion = "0.7.0"
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -25,10 +31,14 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile files('libs/sheep.jar')
-    compile 'com.android.support:appcompat-v7:25.3.0'
-    compile 'io.socket:socket.io-client:0.7.0'
-    compile 'com.google.firebase:firebase-messaging:10.0.1'
-    compile 'com.google.firebase:firebase-database:10.0.1'
+
+    compile "com.android.support:appcompat-v7:$androidSupport"
+    compile "io.socket:socket.io-client:$socketIOversion"
+    compile "com.google.firebase:firebase-core:$firebaseVersion"
+    compile "com.google.firebase:firebase-database:$firebaseVersion"
+    compile "com.google.firebase:firebase-auth:$firebaseVersion"
+    compile "com.google.firebase:firebase-messaging:$firebaseVersion"
+
     testCompile 'junit:junit:4.12'
 }
 

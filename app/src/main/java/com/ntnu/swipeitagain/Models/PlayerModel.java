@@ -18,7 +18,11 @@ public class PlayerModel {
     }
 
     public void timeTick() {
-        currentTime--;
+        if (currentTime <= 0) {
+            currentTime = 0;
+        } else {
+            currentTime--;
+        }
     }
 
     public void addTime(){

@@ -40,18 +40,14 @@ public abstract class GameView extends State implements WidgetListener {
     //protected CardModel currentCard; //View skal vel ikke ha direkte tilgang på denne?
     protected GameModel gameModel;
 
-    //Burde egentlig ikke være i view
-    protected Timer timer;
-    protected float counter;
 
     public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
         this.boardController = boardController;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.gameModel = gameModel1;
-        this.timer = new Timer();
 
-        /*fungerer ikke
+        //fungerer ikke
         this.addTouchListener(new TouchListener() {
             @Override
             public boolean onTouchDown(MotionEvent motionEvent) {
@@ -70,7 +66,7 @@ public abstract class GameView extends State implements WidgetListener {
                 //}
                 return false;
             }
-        });*/
+        });
 
     }
 
@@ -83,21 +79,14 @@ public abstract class GameView extends State implements WidgetListener {
         int time = gameModel.getCurrentTime();
         Log.d(TAG, "current time: " + time);
         double progress = (1.0 * time)/100;
-        int barEnd = (int)(screenWidth * (progress * ((1.0 * screenWidth - 200) / screenWidth)));
+        int barEnd = 100+(int)(screenWidth * (progress * ((1.0 * screenWidth - 200) / screenWidth)));
         Rect rect = new Rect(100, screenHeight - 300, barEnd , screenHeight - 250);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-        if(time > 66)       paint.setColor(Color.GREEN); //lots of time left
-        else if (time > 33) paint.setColor(Color.YELLOW);//quite a bit of time left
-        else paint.setColor(Color.RED);   //running low on time */
 
         paint.setColor(Color.argb(255,255 - (int)(progress*255),(int) (progress *255),0)); //gradually from green to red
         canvas.drawRect(rect, paint);
 
-
         gameModel.getCurrentCard().draw(canvas);
-
-
     }
 
     @Override
@@ -108,15 +97,9 @@ public abstract class GameView extends State implements WidgetListener {
     }
 
     @Override
-    public void update(float dt) { //TODO må mest sannsynlig flyttes
+    public void update(float dt) {
         super.update(dt);
-
-        //Burde være via boardcontroller
-        counter += timer.getDelta();
-        if(counter >=1.0){
-            gameModel.getPlayer().timeTick();
-            counter = 0.0f;
-        }
+        boardController.updateGame();
         // TODO boardController.doYourThing()
     }
 }

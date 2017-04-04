@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import sheep.game.Game;
 import sheep.game.State;
 import sheep.math.Vector2;
+import sheep.util.Timer;
 
 import static android.content.ContentValues.TAG;
 
@@ -34,15 +35,27 @@ public class BoardController {
         private Game game;
         private int screenWidth, screenHeight;
         private Resources resources;
+        protected Timer timer;
+        protected float counter;
 
 
         public BoardController(Game game, Resources resources, int screenWidth, int screenHeight){
-            //pushState(new MainMenu());
             this.game = game;
             this.screenWidth = screenWidth;
             this.screenHeight = screenHeight;
             states = new ArrayList<State>();
             this.resources = resources;
+            this.timer = new Timer();
+        }
+
+        public void updateGame(){
+            counter += timer.getDelta();
+            if(counter >=0.2){
+                gameModel.getPlayer().timeTick();
+                counter = 0.0f;
+            }
+            if (!gameModel.getPlayer().timeLeft())
+            {pushState(new GameOver(this, screenWidth,screenHeight));}
         }
 
         public void pushState(State state){
@@ -105,13 +118,6 @@ public class BoardController {
             }
         }
 
-        //START THE GAME called from
-        public void startGame(){
-            //createGameModel(); //assigns boardModel to this Boardcontroller
-           // play();
-
-        }
-
         //when gameOver option retry is chosen
         public void retry(){
         if(isMultiPlayer){
@@ -134,16 +140,6 @@ public class BoardController {
             return gameModel.checkDirection(direction);
         }
 
-        public void play(){ //todo denne må gjøres på en anne måte, om update i view skal være tikkinga av tiden til denne funskjonen
-            while (gameModel.timeLeft()){
-                playCard();
-            }
-            pushState(new GameOver(this, screenWidth, screenHeight));
-        }
-        public void playCard(){
-            //gameModel.nextCard();
-            //tryDirection()
-        }
 
         private Direction decideDirection(Vector2 start, Vector2 end){
             float deltaX = end.getX() - start.getX();

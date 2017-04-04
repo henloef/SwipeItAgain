@@ -87,7 +87,10 @@ public class JoinGame extends AbstractMenuView {
             boardController.goToMainMenu();
         } else if (widgetAction.getSource() == enter){
             Log.d(TAG, "trying game key");
-            boardController.tryEnteredGameKey(Integer.parseInt(enteredGameKey));
+            //TODO fix crash
+            if(enteredGameKey.length() > 0) {
+                boardController.tryEnteredGameKey(Integer.parseInt(enteredGameKey));
+            }
         }else if(widgetAction.getSource() == backSpace){
             if(enteredGameKey.length() != 0) enteredGameKey = enteredGameKey.substring(0, enteredGameKey.length()-1);
         }else if (buttons.contains(widgetAction.getSource()) ){
@@ -95,6 +98,8 @@ public class JoinGame extends AbstractMenuView {
                 enteredGameKey = enteredGameKey + Integer.toString(buttons.indexOf(widgetAction.getSource()));
             }else{
                 Log.d(TAG, "Not room for more digit");
+
+
             }
 
         }

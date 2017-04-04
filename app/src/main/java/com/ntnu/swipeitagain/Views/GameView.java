@@ -47,27 +47,47 @@ public abstract class GameView extends State implements WidgetListener {
         this.screenHeight = screenHeight;
         this.gameModel = gameModel1;
 
-        //fungerer ikke
-        this.addTouchListener(new TouchListener() {
-            @Override
-            public boolean onTouchDown(MotionEvent motionEvent) {
-                return false;
-            }
+    }
 
-            @Override
-            public boolean onTouchUp(MotionEvent motionEvent) {
-                return false;
-            }
+    private MotionEvent startEvent;
+    private MotionEvent endEvent;
+    private boolean swiped;
+    private Direction swipeDirection;
 
-            @Override
-            public boolean onTouchMove(MotionEvent motionEvent) {
-                //if(gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())){
-                    gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
-                //}
-                return false;
-            }
-        });
+    @Override
+    public boolean onTouchDown(MotionEvent motionEvent) {
+        if (gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())) {
+            startEvent = motionEvent;
+            return true;
+        }
+        //boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
+        return false;
+    }
 
+    @Override
+    public boolean onTouchUp(MotionEvent motionEvent) {
+        if (swiped) {
+            endEvent = motionEvent;
+            //calculate direction
+            swipeDirection = boardController.decideDirection(startEvent, endEvent);
+        }
+        return false;
+    }
+
+
+    //Touch fungerer, men kortet beveger seg ikke rett.
+    @Override
+    public boolean onTouchMove(MotionEvent motionEvent) {
+        if(gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())){
+
+            gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
+            //gameModel.getCurrentCard().setScale(1,1);
+            gameModel.getCurrentCard().update(0.1f);
+            Log.d(TAG, "Swiped");
+            return true;
+
+        }
+        return false;
     }
 
     @Override

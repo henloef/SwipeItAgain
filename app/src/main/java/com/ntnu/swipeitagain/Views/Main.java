@@ -44,7 +44,7 @@ public class Main extends Activity{
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
 
-        myRef.setValue("Hello Marie");
+        myRef.setValue("Denne meldingen kommer fra main");
 
         Game game = new Game(this, null);
         this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight);

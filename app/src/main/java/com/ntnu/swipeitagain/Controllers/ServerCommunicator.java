@@ -26,10 +26,6 @@ import static android.content.ContentValues.TAG;
 
 public class ServerCommunicator {
 
-
-    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
-
-    private Socket socket = null;
     private String id;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference mDatabase;
@@ -37,11 +33,12 @@ public class ServerCommunicator {
     public void addToDatabase(String child, String id, String val){
         Log.d(TAG, "Action; addToDatabase()");
         DatabaseReference myRef = database.getReference(child);
-        //mDatabase = database.getReference();
+//        mDatabase = database.getReference();
 
-        myRef.setValue(val);
-        //mDatabase.child(child).child(id).setValue(val);
-        // Read from the database
+        myRef.setValue(id);
+//        myRef.child(id).setValue(val);
+//        mDatabase.child(child).child(id).setValue(val);
+//         Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -60,14 +57,7 @@ public class ServerCommunicator {
 
     }
 
-    public void connectSocket(){
-        try {
-            socket = IO.socket(SERVER_URL);
-            socket.connect();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }
+
     public int getGameKeyFromServer(){
         //TODO implement server connection
         return 0;
@@ -84,4 +74,24 @@ public class ServerCommunicator {
     public void sendStartSignal(){
         //TODO implement
     }
+
+//    ----------------------------------------------------------------------------
+//
+//
+// Hvis socket.io skal brukes
+
+
+//    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
+
+//    private Socket socket = null;
+
+    /*public void connectSocket(){
+        try {
+            socket = IO.socket(SERVER_URL);
+            socket.connect();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }*/
+
 }

@@ -39,8 +39,7 @@ public abstract class GameView extends State implements WidgetListener {
     protected ProgressBar progressBar;
     //protected CardModel currentCard; //View skal vel ikke ha direkte tilgang på denne?
     protected GameModel gameModel;
-
-
+    //test
     public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
         this.boardController = boardController;
         this.screenWidth = screenWidth;

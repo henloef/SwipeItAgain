@@ -67,7 +67,7 @@ public class ServerCommunicator {
         //TODO implement
     }
 
-/*    ----------------------------------------------------------------------------
+    /*    ----------------------------------------------------------------------------
 
 
 // Hvis socket.io skal brukes
@@ -88,7 +88,7 @@ import io.socket.client.Socket;
         }catch (Exception e){
             System.out.println(e);
         }
-    }/*
-
+    }*/
 
 }
+

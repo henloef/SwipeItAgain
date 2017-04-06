@@ -1,7 +1,5 @@
 package com.ntnu.swipeitagain.Controllers;
 
-
-
 import android.provider.Settings;
 
 import android.util.Log;
@@ -18,29 +16,25 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.ntnu.swipeitagain.Models.GameData;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static android.content.ContentValues.TAG;
-
 
 /**
  * Created by Henrik on 26.03.2017.
  */
 
-
 public class ServerCommunicator {
     //One initial gameKey to increment
     private int increment = 1;
-
+    private final int numberOfGames = 0;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
     final String key ="";
     //this will hold our collection of gamekeys
-    final List<GameData> gameDatas = new ArrayList<GameData>();
+    final List<GameData> gameDatas = new ArrayList<GameData>(); //det går ann å endre en final array
 
     // new eventListener er her en anonym klasse så da må vi visst kun gi inn noe som er final, her final List gamekeys
     public void getGameDataFromServer() {
@@ -65,17 +59,20 @@ public class ServerCommunicator {
         return gameDatas;
     }
 
-    public void addNewGameDataToDatabase(){
+
+
+    public void addNewGameDataToDatabase(GameData gameData){
         Log.d(TAG, "Action; addNewGameKeyToDatabase()");
-        myRef.child("gameDatas").push().setValue(new GameData(increment));
+        myRef.child("gameDatas").push().setValue(gameData);
+        Log.d(TAG, "Gamedata size" + gameDatas.size());
+    }
+    public GameData newGameData(){
+        myRef.child("gameDatas").push().setValue(newGameData());
+        return gameDatas.get(gameDatas.size()-1);
     }
 
-
-
-
     public int getGameKeyFromServer(){
-        //TODO implement server connection
-        return increment;
+      return gameDatas.size()+1;
     }
 
     //try gameKey, if true return opponent ID?
@@ -89,28 +86,6 @@ public class ServerCommunicator {
         //TODO implement
     }
 
-    /*    ----------------------------------------------------------------------------
-
-
-// Hvis socket.io skal brukes
-
-
-import io.socket.client.IO;
-import io.socket.client.Socket;
-
-
-    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
-
-    private Socket socket = null;
-
-    public void connectSocket(){
-        try {
-            socket = IO.socket(SERVER_URL);
-            socket.connect();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }*/
 
 }
 

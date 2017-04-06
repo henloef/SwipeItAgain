@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.ntnu.swipeitagain.Models.Direction;
+import com.ntnu.swipeitagain.Models.GameData;
 import com.ntnu.swipeitagain.Models.GameModel;
 import com.ntnu.swipeitagain.States.GameState;
 import com.ntnu.swipeitagain.States.MultiPlayerState;
@@ -40,7 +41,7 @@ public class BoardController {
         protected float counter;
         protected ServerCommunicator serverCommunicator;
         protected String playerId;
-
+        protected GameData gameData;
 
         public BoardController(Game game, Resources resources, int screenWidth, int screenHeight, ServerCommunicator serverCommunicator, String playerId){
             this.game = game;
@@ -51,6 +52,7 @@ public class BoardController {
             this.timer = new Timer();
             this.serverCommunicator = serverCommunicator;
             this.playerId = playerId;
+            this.gameData = new GameData();
         }
 
         public void updateGame(){

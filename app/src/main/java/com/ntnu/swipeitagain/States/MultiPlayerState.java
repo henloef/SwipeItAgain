@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
+import com.ntnu.swipeitagain.Models.GameData;
 
 import java.util.List;
 
@@ -36,15 +37,19 @@ public class MultiPlayerState extends GameState{
 
     //Ask server for random gameKey
     public void getGameKeyFromServer(){
+
         //TODO connect to server and get gameKey
-        //gameKey = serverCommunicator.getGameKeyFromServer();
-        serverCommunicator.addNewGameDataToDatabase();
+        gameKey = serverCommunicator.getGameKeyFromServer();
+        //serverCommunicator.addNewGameDataToDatabase();
+
+
     }
 
     public int showGameKey(){
+        Log.d(TAG, "gameKey vises nå  " + gameKey + " size " + serverCommunicator.getGameDatas().size());
         return gameKey;
-    }
 
+    }
 
     //try random gameKey to server
     public boolean tryGameKey(int gameKey){
@@ -64,7 +69,4 @@ public class MultiPlayerState extends GameState{
         serverCommunicator.sendStartSignal();
     }
 
-//    -------------------------------------------------------------------------
-//    Hvis socket.io skal brukes
-    //serverCommunicator.connectSocket();
 }

@@ -71,7 +71,6 @@ public class Main extends Activity{
 
 
         serverCommunicator  = new ServerCommunicator();
-        serverCommunicator.connectSocket();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
@@ -86,7 +85,7 @@ public class Main extends Activity{
                     GameData value = child.getValue(GameData.class);
                      gameDatas.add(value);
                 }
-                Log.d(TAG, "gameDatas test: " + gameDatas);
+               // Log.wtf(TAG, "gameDatas test: " + gameDatas.get(0).gameKey);
 
             }
             @Override
@@ -99,7 +98,8 @@ public class Main extends Activity{
         myRef.child("gameDatas").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG, "hmm");
+
+
             }
 
             @Override

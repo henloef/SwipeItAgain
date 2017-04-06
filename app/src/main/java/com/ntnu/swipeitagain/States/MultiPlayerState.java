@@ -37,7 +37,7 @@ public class MultiPlayerState extends GameState{
     public void getGameKeyFromServer(){
         //TODO connect to server and get gameKey
         //gameKey = serverCommunicator.getGameKeyFromServer();
-        serverCommunicator.addNewGameKeyToDatabase();
+        serverCommunicator.addNewGameDataToDatabase();
     }
 
     public int showGameKey(){

@@ -68,59 +68,7 @@ public class Main extends Activity{
         screenHeight = displayMetrics.heightPixels;
 
         serverCommunicator  = new ServerCommunicator();
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-
-        myRef.child("gameDatas").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "datachange");
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-
-                for (DataSnapshot child: children){
-                    GameData value = child.getValue(GameData.class);
-                     gameDatas.add(value);
-                }
-               // Log.wtf(TAG, "gameDatas test: " + gameDatas.get(0).gameKey);
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-
-
-        myRef.child("gameDatas").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        })
-;
-
+        serverCommunicator.listnerMethod();
         Game game = new Game(this, null);
         this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight, serverCommunicator, playerId);
         game.pushState(new MainMenu(boardController, game, game.getResources(), screenWidth, screenHeight));

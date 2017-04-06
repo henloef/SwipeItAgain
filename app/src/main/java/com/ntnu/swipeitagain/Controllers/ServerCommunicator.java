@@ -71,6 +71,7 @@ public class ServerCommunicator {
     public void listnerMethod(){
         myRef.child("gameDatas").addValueEventListener(new ValueEventListener() {
             @Override
+            //Snapshot is data fetched from the Firebase database in real time
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(zzt.TAG, "datachange");
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
@@ -96,24 +97,16 @@ public class ServerCommunicator {
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         })
         ;
     }

@@ -8,6 +8,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.ViewDebug;
 
+import com.google.android.gms.internal.zzt;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,10 +37,7 @@ public class ServerCommunicator {
     //One initial gameKey to increment
     private int increment = 1;
 
-    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
 
-    private Socket socket = null;
-    private String id;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
     final String key ="";
@@ -100,15 +99,56 @@ public class ServerCommunicator {
 
     }
 
+    public void listnerMethod(){
+        myRef.child("gameDatas").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(zzt.TAG, "datachange");
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
-    public void connectSocket(){
-        try {
-            socket = IO.socket(SERVER_URL);
-            socket.connect();
-        }catch (Exception e){
-            System.out.println(e);
-        }
+                for (DataSnapshot child: children){
+                    GameData value = child.getValue(GameData.class);
+                    gameDatas.add(value);
+                }
+                Log.d(zzt.TAG, "gameDatas test: " + gameDatas);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+
+        myRef.child("gameDatas").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.d(zzt.TAG, "hmm" + dataSnapshot.getValue(GameData.class).toString());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        })
+        ;
     }
+
     public int getGameKeyFromServer(){
         //TODO implement server connection
         increment ++;
@@ -155,4 +195,28 @@ public class ServerCommunicator {
     public void sendStartSignal(){
         //TODO implement
     }
+
+   /*
+
+   --------------------------------------------------------------
+   FOR SOCKET.IO
+
+    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
+
+    private Socket socket = null;
+    private String id;
+
+
+
+    public void connectSocket(){
+        try {
+            socket = IO.socket(SERVER_URL);
+            socket.connect();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    */
+
 }

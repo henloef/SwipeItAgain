@@ -73,56 +73,9 @@ public class Main extends Activity{
         serverCommunicator  = new ServerCommunicator();
         serverCommunicator.connectSocket();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-
-        myRef.child("gameDatas").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "datachange");
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-
-                for (DataSnapshot child: children){
-                    GameData value = child.getValue(GameData.class);
-                     gameDatas.add(value);
-                }
-                Log.d(TAG, "gameDatas test: " + gameDatas);
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        serverCommunicator.listnerMethod();
 
 
-
-        myRef.child("gameDatas").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d(TAG, "hmm");
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        })
-;
 
         Game game = new Game(this, null);
         this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight, serverCommunicator, playerId);

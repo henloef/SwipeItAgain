@@ -67,9 +67,6 @@ public class Main extends Activity{
         screenWidth = displayMetrics.widthPixels;
         screenHeight = displayMetrics.heightPixels;
 
-
-
-
         serverCommunicator  = new ServerCommunicator();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();

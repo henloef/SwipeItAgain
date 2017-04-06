@@ -68,7 +68,8 @@ public class Main extends Activity{
         screenHeight = displayMetrics.heightPixels;
 
         serverCommunicator  = new ServerCommunicator();
-        serverCommunicator.listnerMethod();
+
+
         Game game = new Game(this, null);
         this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight, serverCommunicator, playerId);
         game.pushState(new MainMenu(boardController, game, game.getResources(), screenWidth, screenHeight));

@@ -19,6 +19,7 @@ public class MultiPlayerState extends GameState{
     private String playerId;
     public MultiPlayerState(BoardController boardController, Boolean generateKey, ServerCommunicator serverCommunicator, String playerId){
         super(boardController);
+
         this.serverCommunicator = serverCommunicator;
         this.playerId = playerId;
 
@@ -62,4 +63,8 @@ public class MultiPlayerState extends GameState{
     public void startGame(){
         serverCommunicator.sendStartSignal();
     }
+
+//    -------------------------------------------------------------------------
+//    Hvis socket.io skal brukes
+    //serverCommunicator.connectSocket();
 }

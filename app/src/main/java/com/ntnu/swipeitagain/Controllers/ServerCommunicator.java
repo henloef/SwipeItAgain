@@ -1,10 +1,9 @@
 package com.ntnu.swipeitagain.Controllers;
 
 
-//import io.socket.client.IO;
-
 
 import android.provider.Settings;
+
 import android.util.Log;
 import android.view.ViewDebug;
 
@@ -22,6 +21,7 @@ import com.ntnu.swipeitagain.Models.GameData;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static android.content.ContentValues.TAG;
 
 
@@ -33,6 +33,7 @@ import static android.content.ContentValues.TAG;
 public class ServerCommunicator {
     //One initial gameKey to increment
     private int increment = 1;
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
@@ -68,48 +69,7 @@ public class ServerCommunicator {
         myRef.child("gameDatas").push().setValue(new GameData(increment));
     }
 
-    public void listnerMethod(){
-        myRef.child("gameDatas").addValueEventListener(new ValueEventListener() {
-            @Override
-            //Snapshot is data fetched from the Firebase database in real time
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(zzt.TAG, "datachange");
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
-                for (DataSnapshot child: children){
-                    GameData value = child.getValue(GameData.class);
-                    gameDatas.add(value);
-                }
-                Log.d(zzt.TAG, "gameDatas test: " + gameDatas);
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-
-
-
-        myRef.child("gameDatas").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d(zzt.TAG, "hmm" + dataSnapshot.getValue(GameData.class).toString());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {}
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        })
-        ;
-    }
 
     public int getGameKeyFromServer(){
         //TODO implement server connection
@@ -126,4 +86,29 @@ public class ServerCommunicator {
     public void sendStartSignal(){
         //TODO implement
     }
+
+    /*    ----------------------------------------------------------------------------
+
+
+// Hvis socket.io skal brukes
+
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+
+
+    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
+
+    private Socket socket = null;
+
+    public void connectSocket(){
+        try {
+            socket = IO.socket(SERVER_URL);
+            socket.connect();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }*/
+
 }
+

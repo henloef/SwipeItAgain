@@ -5,6 +5,8 @@ import android.util.Log;
 import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
 
+import java.util.List;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -13,15 +15,13 @@ import static android.content.ContentValues.TAG;
 
 public class MultiPlayerState extends GameState{
     private int gameKey;
-    private ServerCommunicator serverCommunicator ;
-
-
-    public MultiPlayerState(BoardController boardController, Boolean generateKey){
+    private ServerCommunicator serverCommunicator;
+    private String playerId;
+    public MultiPlayerState(BoardController boardController, Boolean generateKey, ServerCommunicator serverCommunicator, String playerId){
         super(boardController);
-        serverCommunicator  = new ServerCommunicator();
-        serverCommunicator.connectSocket();
-        serverCommunicator.addToDatabase("users", "user1", "Det er meg det");
-        serverCommunicator.addToDatabase("users", "user2", "Det er hans nå");
+        this.serverCommunicator = serverCommunicator;
+        this.playerId = playerId;
+
 
         if(generateKey) {
             getGameKeyFromServer();
@@ -36,7 +36,8 @@ public class MultiPlayerState extends GameState{
     //Ask server for random gameKey
     public void getGameKeyFromServer(){
         //TODO connect to server and get gameKey
-        gameKey = serverCommunicator.getGameKeyFromServer();
+        //gameKey = serverCommunicator.getGameKeyFromServer();
+        serverCommunicator.addNewGameKeyToDatabase();
     }
 
     public int showGameKey(){
@@ -46,6 +47,10 @@ public class MultiPlayerState extends GameState{
 
     //try random gameKey to server
     public boolean tryGameKey(int gameKey){
+        System.out.println("Try gamekey i state ");
+        //List<> serverCommunicator.getGameDatas();
+
+
         if(serverCommunicator.tryGameKey(gameKey) != 0){
             return true;
         }else{

@@ -37,15 +37,19 @@ public class BoardController {
         private Resources resources;
         protected Timer timer;
         protected float counter;
+        protected ServerCommunicator serverCommunicator;
+        protected String playerId;
 
 
-        public BoardController(Game game, Resources resources, int screenWidth, int screenHeight){
+        public BoardController(Game game, Resources resources, int screenWidth, int screenHeight, ServerCommunicator serverCommunicator, String playerId){
             this.game = game;
             this.screenWidth = screenWidth;
             this.screenHeight = screenHeight;
             states = new ArrayList<State>();
             this.resources = resources;
             this.timer = new Timer();
+            this.serverCommunicator = serverCommunicator;
+            this.playerId = playerId;
         }
 
         public void updateGame(){
@@ -70,7 +74,7 @@ public class BoardController {
 
         public void createGameState(Boolean isMultiPlayer, Boolean generateKey) {
             createGameModel();
-            if (isMultiPlayer){ gameState = new MultiPlayerState(this, generateKey);
+            if (isMultiPlayer){ gameState = new MultiPlayerState(this, generateKey, serverCommunicator, playerId);
                 this.isMultiPlayer = isMultiPlayer;
                 // Få fra input om man venter på motstander eller generer gamekey
             }

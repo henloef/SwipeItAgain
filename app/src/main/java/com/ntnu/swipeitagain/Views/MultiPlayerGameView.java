@@ -33,5 +33,7 @@ public class MultiPlayerGameView extends GameView implements WidgetListener {
     public void update(float dt){
         super.update(dt);
         //boardController.getOpponentScore();
+
+
     }
 }

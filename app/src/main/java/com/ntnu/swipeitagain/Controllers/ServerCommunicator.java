@@ -134,27 +134,6 @@ public class ServerCommunicator {
         //TODO implement
     }
 
-   /*
 
-   --------------------------------------------------------------
-   FOR SOCKET.IO
-
-    public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
-
-    private Socket socket = null;
-    private String id;
-
-
-
-    public void connectSocket(){
-        try {
-            socket = IO.socket(SERVER_URL);
-            socket.connect();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-    }
-
-    */
 
 }

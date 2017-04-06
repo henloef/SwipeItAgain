@@ -18,5 +18,9 @@ public class GameData {
         this.gameKey = 42;
     }
 
+    public String toString(){
+        return "Game key:" + gameKey+ "games: " +games + "beskrivelse: " + beskrivelse;
+    }
+
 
 }

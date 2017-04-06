@@ -38,7 +38,7 @@ public class Main extends Activity{
     private String playerId;
 
     //Lagret info om spill og gamePins
-    final List<GameData> gameDatas = new ArrayList<GameData>();
+    final ArrayList<GameData> gameDatas = new ArrayList<GameData>();
 
         // Generating a random String for this run called playerId
     private String aToZ="ABCD.....1234"; // 36 letter.
@@ -84,7 +84,7 @@ public class Main extends Activity{
                     GameData value = child.getValue(GameData.class);
                      gameDatas.add(value);
                 }
-                Log.d(TAG, "gameDatas test: " + gameDatas.get(0).gameKey);
+                Log.d(TAG, "gameDatas test: " + gameDatas);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

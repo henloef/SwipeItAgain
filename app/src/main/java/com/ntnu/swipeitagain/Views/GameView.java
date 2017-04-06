@@ -81,9 +81,9 @@ public abstract class GameView extends State implements WidgetListener {
         if(gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())){
 
             gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
-            //gameModel.getCurrentCard().setScale(1,1);
+            gameModel.getCurrentCard().setScale(1,1);
             gameModel.getCurrentCard().update(0.1f);
-            Log.d(TAG, "Swiped");
+            Log.d(TAG, "Swiped X: " + motionEvent.getX()+ " Y: " + motionEvent.getY());
             return true;
 
         }

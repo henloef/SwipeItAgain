@@ -19,7 +19,7 @@ public class GameData {
     }
 
     public String toString(){
-        return "Game key:" + gameKey+ "games: " +games + "beskrivelse: " + beskrivelse;
+        return "Game key:" + gameKey+ " games: " +games + " beskrivelse: " + beskrivelse;
     }
 
 

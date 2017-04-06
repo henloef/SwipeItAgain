@@ -7,9 +7,14 @@ package com.ntnu.swipeitagain.Models;
 public class GameData {
 
     public int gameKey;
+    public int games = 0;
 
     public GameData(int key){
         this.gameKey = key;
+    }
+
+    public GameData(){
+        this.gameKey = 42;
     }
 
 

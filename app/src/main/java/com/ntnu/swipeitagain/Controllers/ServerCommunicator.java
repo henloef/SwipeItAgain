@@ -41,7 +41,7 @@ public class ServerCommunicator {
     private Socket socket = null;
     private String id;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef;
+    private DatabaseReference myRef = database.getReference();
     final String key ="";
     //this will hold our collection of gamekeys
     final List<GameData> gameDatas = new ArrayList<GameData>();

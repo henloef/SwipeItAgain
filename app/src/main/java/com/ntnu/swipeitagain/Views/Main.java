@@ -84,7 +84,7 @@ public class Main extends Activity{
                     GameData value = child.getValue(GameData.class);
                      gameDatas.add(value);
                 }
-                Log.d(TAG, "gameDatas test: " + gameDatas);
+                Log.d(TAG, "gameDatas test: ");
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

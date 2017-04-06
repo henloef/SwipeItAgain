@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.WindowManager;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -78,19 +79,50 @@ public class Main extends Activity{
         myRef.child("gameDatas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "datachange");
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
                 for (DataSnapshot child: children){
                     GameData value = child.getValue(GameData.class);
                      gameDatas.add(value);
                 }
-                Log.d(TAG, "gameDatas test: ");
+                Log.d(TAG, "gameDatas test: " + gameDatas);
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
 
+
+
+        myRef.child("gameDatas").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.d(TAG, "hmm");
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        })
+;
 
         Game game = new Game(this, null);
         this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight, serverCommunicator, playerId);

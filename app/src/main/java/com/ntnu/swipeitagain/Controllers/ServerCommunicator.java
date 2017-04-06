@@ -34,7 +34,6 @@ import static android.content.ContentValues.TAG;
 public class ServerCommunicator {
     //One initial gameKey to increment
     private int increment = 1;
-    private String gameKey = "";
 
     public static final String SERVER_URL = "https://swipeitagain-4a391.firebaseio.com/";
 
@@ -94,8 +93,10 @@ public class ServerCommunicator {
         });
     }
     public void addNewGameKeyToDatabase(){
+        increment ++;
         Log.d(TAG, "Action; addNewGameKeyToDatabase()");
-        myRef.child("gameDatas").push().setValue(new GameData(2));
+        myRef.child("gameDatas").push().setValue(new GameData(increment));
+        System.out.println("halla");
 
     }
 

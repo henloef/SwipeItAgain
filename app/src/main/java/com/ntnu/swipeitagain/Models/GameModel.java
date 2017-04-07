@@ -20,7 +20,10 @@ public class GameModel {
     private ArrayList<CardModel> cards;
     private CardModel currentCard;
     private PlayerModel player;
-    private Image arrowImage;
+    private Image leftArrowImage;
+    private Image rightArrowImage;
+    private Image upArrowImage;
+    private Image downArrowImage;
 
     //Constructor
     public GameModel(){
@@ -42,10 +45,19 @@ public class GameModel {
     //Makes card for each direction
     private void createCards(){
         cards = new ArrayList<CardModel>();
-        arrowImage = new Image(R.drawable.transp_arrow);
+        leftArrowImage = new Image(R.drawable.transp_arrow_left);
+        rightArrowImage = new Image(R.drawable.transp_arrow_right);
+        upArrowImage = new Image(R.drawable.transp_arrow_up);
+        downArrowImage = new Image(R.drawable.transp_arrow_down);
 
         for(Direction dir : Direction.values()){
-            cards.add(new CardModel(arrowImage,dir)); //TODO create arrowImage
+            switch (dir){
+                case UP: cards.add(new CardModel(upArrowImage,dir));
+                case DOWN: cards.add(new CardModel(downArrowImage,dir));
+                case LEFT: cards.add(new CardModel(leftArrowImage,dir));
+                case RIGHT: cards.add(new CardModel(rightArrowImage,dir));
+            }
+             //TODO create arrowImage
         }
         Log.d(TAG, "cards stack length now: "+ cards.size());
     }

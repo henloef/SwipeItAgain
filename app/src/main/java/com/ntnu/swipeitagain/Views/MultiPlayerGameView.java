@@ -14,20 +14,11 @@ import sheep.gui.WidgetListener;
  * Created by Sigrid on 26.03.2017.
  */
 
-public class MultiPlayerGameView extends GameView implements WidgetListener {
+public class MultiPlayerGameView extends GameView {
 
     public MultiPlayerGameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel){
         super(boardController, screenWidth, screenHeight, gameModel);
 
-        Font buttonFont = new Font(255, 255, 255, 100, Typeface.SANS_SERIF, Typeface.NORMAL);
-        Paint[] buttonStyle = {buttonFont, buttonFont};
-
-        goDirectlyToGameOver = new TextButton(100, (float)screenHeight*3/7, "GoToGameOver", buttonStyle);
-
-        goDirectlyToGameOver.addWidgetListener(this);
-        goDirectlyToGameOver.addWidgetListener(this);
-
-        addTouchListener(goDirectlyToGameOver);
     }
 
     public void update(float dt){

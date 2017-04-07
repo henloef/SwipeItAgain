@@ -31,13 +31,11 @@ import static android.content.ContentValues.TAG;
  * Created by Lars on 27.03.2017.
  */
 
-public abstract class GameView extends State implements WidgetListener {
+public abstract class GameView extends State  {
 
     BoardController boardController;
     protected int screenWidth, screenHeight;
-    protected TextButton goDirectlyToGameOver;
     protected ProgressBar progressBar;
-    //protected CardModel currentCard; //View skal vel ikke ha direkte tilgang på denne?
     protected GameModel gameModel;
 
 
@@ -60,6 +58,14 @@ public abstract class GameView extends State implements WidgetListener {
             startEvent = motionEvent;
             return true;
         }
+
+        if(swiped){
+            boolean swipedCorrect = boardController.tryDirection(boardController.decideDirection(startEvent,endEvent));
+            if(swipedCorrect){
+                gameModel.nextCard();
+                gameModel.getCurrentCard().update(0.2f);
+            }
+        }
         //boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
         return false;
     }
@@ -81,9 +87,12 @@ public abstract class GameView extends State implements WidgetListener {
         if(gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())){
 
             gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
-            //gameModel.getCurrentCard().setScale(1,1);
+            gameModel.getCurrentCard().setScale(1,1);
             gameModel.getCurrentCard().update(0.1f);
-            Log.d(TAG, "Swiped");
+            Log.d(TAG, "Swiped X: " + motionEvent.getX()+ " Y: " + motionEvent.getY());
+
+
+
             return true;
 
         }
@@ -93,28 +102,28 @@ public abstract class GameView extends State implements WidgetListener {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        canvas.drawColor(Color.BLUE);
-        goDirectlyToGameOver.draw(canvas);
+        canvas.drawColor(Color.LTGRAY);
 
         int time = gameModel.getCurrentTime();
         Log.d(TAG, "current time: " + time);
         double progress = (1.0 * time)/100;
         int barEnd = 100+(int)(screenWidth * (progress * ((1.0 * screenWidth - 200) / screenWidth)));
-        Rect rect = new Rect(100, screenHeight - 300, barEnd , screenHeight - 250);
+        Rect rect = new Rect(100, screenHeight - 200, barEnd , screenHeight - 170);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
         paint.setColor(Color.argb(255,255 - (int)(progress*255),(int) (progress *255),0)); //gradually from green to red
         canvas.drawRect(rect, paint);
 
+        //positions card in the middle
+        gameModel.getCurrentCard().setScale(1,1);
+        gameModel.getCurrentCard().update(0.2f);
+        gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
         gameModel.getCurrentCard().draw(canvas);
+
+
+
     }
 
-    @Override
-    public void actionPerformed(WidgetAction widgetAction) {
-        if (widgetAction.getSource() == goDirectlyToGameOver) {
-            boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
-        }
-    }
 
     @Override
     public void update(float dt) {

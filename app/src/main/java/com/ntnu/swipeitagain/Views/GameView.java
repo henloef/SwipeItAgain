@@ -31,13 +31,11 @@ import static android.content.ContentValues.TAG;
  * Created by Lars on 27.03.2017.
  */
 
-public abstract class GameView extends State implements WidgetListener {
+public abstract class GameView extends State  {
 
     BoardController boardController;
     protected int screenWidth, screenHeight;
-    protected TextButton goDirectlyToGameOver;
     protected ProgressBar progressBar;
-    //protected CardModel currentCard; //View skal vel ikke ha direkte tilgang på denne?
     protected GameModel gameModel;
 
 
@@ -59,6 +57,14 @@ public abstract class GameView extends State implements WidgetListener {
         if (gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())) {
             startEvent = motionEvent;
             return true;
+        }
+
+        if(swiped){
+            boolean swipedCorrect = boardController.tryDirection(boardController.decideDirection(startEvent,endEvent));
+            if(swipedCorrect){
+                gameModel.nextCard();
+                gameModel.getCurrentCard().update(0.2f);
+            }
         }
         //boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
         return false;
@@ -94,7 +100,6 @@ public abstract class GameView extends State implements WidgetListener {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawColor(Color.BLUE);
-        goDirectlyToGameOver.draw(canvas);
 
         int time = gameModel.getCurrentTime();
         Log.d(TAG, "current time: " + time);
@@ -109,12 +114,6 @@ public abstract class GameView extends State implements WidgetListener {
         gameModel.getCurrentCard().draw(canvas);
     }
 
-    @Override
-    public void actionPerformed(WidgetAction widgetAction) {
-        if (widgetAction.getSource() == goDirectlyToGameOver) {
-            boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
-        }
-    }
 
     @Override
     public void update(float dt) {

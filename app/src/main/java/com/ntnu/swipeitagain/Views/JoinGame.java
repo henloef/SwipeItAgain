@@ -90,6 +90,7 @@ public class JoinGame extends AbstractMenuView {
             //TODO fix crash
             if(enteredGameKey.length() > 0) {
                 boardController.tryEnteredGameKey(Integer.parseInt(enteredGameKey));
+                //TODO Get connected to the game with the same gamepin
             }
         }else if(widgetAction.getSource() == backSpace){
             if(enteredGameKey.length() != 0) enteredGameKey = enteredGameKey.substring(0, enteredGameKey.length()-1);
@@ -98,8 +99,6 @@ public class JoinGame extends AbstractMenuView {
                 enteredGameKey = enteredGameKey + Integer.toString(buttons.indexOf(widgetAction.getSource()));
             }else{
                 Log.d(TAG, "Not room for more digit");
-
-
             }
 
         }

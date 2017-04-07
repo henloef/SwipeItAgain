@@ -20,18 +20,22 @@ public class MultiPlayerState extends GameState{
     private String playerId;
     public MultiPlayerState(BoardController boardController, Boolean generateKey, ServerCommunicator serverCommunicator, String playerId){
         super(boardController);
-
         this.serverCommunicator = serverCommunicator;
         this.playerId = playerId;
 
 
-        if(generateKey) {
+        /*if(generateKey) {
             getGameKeyFromServer();
         }else{
-
+            //if (tryGameKey(2)){
+                if (serverCommunicator.tryGameKey(2)){
+                    //TODO join game with gamekey 2
+                    serverCommunicator.sendStartSignal();
+                    startGame();
+                }
+            //}
         }
-
-        startGame();
+*/
     }
 
 
@@ -53,11 +57,10 @@ public class MultiPlayerState extends GameState{
 
     //try random gameKey to server
     public boolean tryGameKey(int gameKey){
-        System.out.println("Try gamekey i state ");
-        //List<> serverCommunicator.getGameDatas();
-
-
-        if(serverCommunicator.tryGameKey(gameKey) != 0){
+        Log.d(TAG,"Try gamekey i state ");
+        if(serverCommunicator.tryGameKey(gameKey)){
+            serverCommunicator.sendStartSignal();
+            //startGame();
             return true;
         }else{
             Log.d(TAG, "No active game with that key");
@@ -66,7 +69,7 @@ public class MultiPlayerState extends GameState{
     }
 
     public void startGame(){
-        serverCommunicator.sendStartSignal();
+
     }
 
 }

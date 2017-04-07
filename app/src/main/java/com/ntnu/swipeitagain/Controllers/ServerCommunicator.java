@@ -75,10 +75,14 @@ public class ServerCommunicator {
       return gameDatas.size()+1;
     }
 
-    //try gameKey, if true return opponent ID?
-    public int tryGameKey(int gameKey){
-        //TODO
-        return  0;
+    //try gameKey, if true return true?
+    public boolean tryGameKey(int gameKey){
+        for (GameData game:gameDatas) {
+            if (gameKey== game.gameKey){
+                return true;
+            }
+        }
+        return  false;
     }
 
     //Send message to other player that the game will start

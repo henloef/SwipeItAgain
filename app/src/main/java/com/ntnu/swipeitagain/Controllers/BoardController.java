@@ -80,6 +80,8 @@ public class BoardController {
             if (isMultiPlayer){ gameState = new MultiPlayerState(this, generateKey, serverCommunicator, playerId);
                 this.isMultiPlayer = isMultiPlayer;
                 // Få fra input om man venter på motstander eller generer gamekey
+
+                pushState(new MultiPlayerGameView(this,screenWidth,screenHeight, gameModel));
             }
             else{ gameState = new SinglePlayerState(this);
                 pushState(new SinglePlayerGameView(this, screenWidth, screenHeight, gameModel));// dette må endres, vi klarer jo ikke å kjøre en loop for å spille når denne pushes?

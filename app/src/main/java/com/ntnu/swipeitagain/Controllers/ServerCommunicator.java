@@ -38,13 +38,13 @@ public class ServerCommunicator {
 
     // new eventListener er her en anonym klasse så da må vi visst kun gi inn noe som er final, her final List gamekeys
     public void getGameDataFromServer() {
-        myRef.child("gameKeys").addValueEventListener(new ValueEventListener() {
+        myRef.child("gameDatas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
                 for (DataSnapshot child: children){
-                    String value = child.getValue(String.class);
+//                    String value = child.getValue(String.class);
                     //  gameKeys.add(value);
                 }
             }

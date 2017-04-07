@@ -18,41 +18,28 @@ public class MultiPlayerState extends GameState{
     private int gameKey;
     private ServerCommunicator serverCommunicator;
     private String playerId;
+
     public MultiPlayerState(BoardController boardController, Boolean generateKey, ServerCommunicator serverCommunicator, String playerId){
         super(boardController);
         this.serverCommunicator = serverCommunicator;
         this.playerId = playerId;
 
-
-        /*if(generateKey) {
+        if(generateKey) {
             getGameKeyFromServer();
-        }else{
-            //if (tryGameKey(2)){
-                if (serverCommunicator.tryGameKey(2)){
-                    //TODO join game with gamekey 2
-                    serverCommunicator.sendStartSignal();
-                    startGame();
-                }
-            //}
         }
-*/
+        serverCommunicator.getGameDataFromServer();
     }
 
 
-    //Ask server for random gameKey
+    //Ask server for gameKey
     public void getGameKeyFromServer(){
-
-        //TODO connect to server and get gameKey
         gameKey = serverCommunicator.getGameKeyFromServer();
         //serverCommunicator.addNewGameDataToDatabase();
-
-
     }
 
     public int showGameKey(){
         Log.d(TAG, "gameKey vises nå  " + gameKey + " size " + serverCommunicator.getGameDatas().size());
         return gameKey;
-
     }
 
     //try random gameKey to server
@@ -69,7 +56,7 @@ public class MultiPlayerState extends GameState{
     }
 
     public void startGame(){
-
+        //TODO Do we need this function, or does
     }
 
 }

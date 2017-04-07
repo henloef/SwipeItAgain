@@ -117,6 +117,7 @@ public class BoardController {
                 if(((MultiPlayerState) gameState).tryGameKey(gameKey)){
                     Log.d(TAG, "joining game");
                     pushState(new MultiPlayerGameView(this, screenWidth, screenHeight, gameModel));
+                    //TODO connect to oponent
                 }else{
                     if(states.get(0) instanceof JoinGame){
                         ((JoinGame) states.get(0)).tryNewGameKey();
@@ -129,12 +130,12 @@ public class BoardController {
 
         //when gameOver option retry is chosen
         public void retry(){
-        if(isMultiPlayer){
-
-        }else{
-            gameModel = new GameModel();
-            pushState(new SinglePlayerGameView(this, screenWidth, screenHeight, gameModel));
-        }
+            if(isMultiPlayer){
+                //TODO Should this be an option?
+            }else{
+                gameModel = new GameModel();
+                pushState(new SinglePlayerGameView(this, screenWidth, screenHeight, gameModel));
+            }
         }
 
 

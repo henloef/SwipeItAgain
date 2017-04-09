@@ -104,7 +104,17 @@ public abstract class GameView extends State  {
         super.draw(canvas);
         canvas.drawColor(Color.LTGRAY);
         drawProgressBars(canvas);
+        drawCard(canvas);
+    }
 
+    @Override
+    public void update(float dt) {
+        super.update(dt);
+        boardController.updateGame();
+        // TODO boardController.doYourThing()
+    }
+
+    private void drawCard(Canvas canvas){
         //positions card in the middle
         gameModel.getCurrentCard().setScale(1,1);
         gameModel.getCurrentCard().update(0.2f);
@@ -112,7 +122,9 @@ public abstract class GameView extends State  {
         gameModel.getCurrentCard().draw(canvas);
     }
 
-    private void drawProgressBars(Canvas canvas){
+    protected void drawProgressBars(Canvas canvas){
+        //draws player progress bar
+        //TODO text to differentiate which belongs to which player
         int yourTime = gameModel.getCurrentTime(true);
         Log.d(TAG, "current time: " + yourTime);
         double yourProgress = (1.0 * yourTime)/100;
@@ -122,24 +134,6 @@ public abstract class GameView extends State  {
 
         paint.setColor(Color.argb(255,255 - (int)(yourProgress*255),(int) (yourProgress *255),0)); //gradually from green to red
         canvas.drawRect(rect, paint);
-
-        int oppTime = gameModel.getCurrentTime(false);
-        Log.d(TAG, "current time: " + oppTime);
-        double oppProgress = (1.0 * oppTime)/100;
-        int oppBarEnd = 100+(int)(screenWidth * (oppProgress * ((1.0 * screenWidth - 200) / screenWidth)));
-        Rect oppRect = new Rect(100, screenHeight - 150, oppBarEnd , screenHeight - 120);
-        Paint oppPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-        oppPaint.setColor(Color.argb(255,255 - (int)(oppProgress*255),(int) (oppProgress *255),0)); //gradually from green to red
-        canvas.drawRect(oppRect, oppPaint);
-    }
-
-
-    @Override
-    public void update(float dt) {
-        super.update(dt);
-        boardController.updateGame();
-        // TODO boardController.doYourThing()
     }
 }
 

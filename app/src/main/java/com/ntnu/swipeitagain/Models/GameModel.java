@@ -19,7 +19,7 @@ public class GameModel {
 
     private ArrayList<CardModel> cards;
     private CardModel currentCard;
-    private PlayerModel player;
+    private PlayerModel player, opponent;
     private Image leftArrowImage;
     private Image rightArrowImage;
     private Image upArrowImage;
@@ -30,17 +30,16 @@ public class GameModel {
         Log.d(TAG, "MAke new game model");
         createCards();
         player = new PlayerModel();
+        opponent = new PlayerModel();
+        opponent.setCurrentTime(80); //TODO Remove testing variable
     }
 
     public PlayerModel getPlayer(){
         return player;
     }
-
-    //gets true if still time left
-    public boolean timeLeft(){
-        return player.timeLeft();
+    public PlayerModel getOpponent(){
+        return opponent;
     }
-
 
     //Makes card for each direction
     private void createCards(){
@@ -83,15 +82,12 @@ public class GameModel {
         //return currentCard;
     }
 
-    public void timeTick(){
-        player.timeTick();
-    }
-
     public ArrayList<CardModel> getCards(){
         return cards;
     }
 
-    public int getCurrentTime(){
-        return getPlayer().getCurrentTime();
+    public int getCurrentTime(Boolean isPlayer){
+        if(isPlayer) return player.getCurrentTime();
+        else         return opponent.getCurrentTime();
     }
 }

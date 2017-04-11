@@ -75,6 +75,7 @@ public abstract class GameView extends State  {
                 gameModel.nextCard();
                 gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
                 Log.d(TAG, "Swiped correctly");
+                gameModel.getPlayer().addTime();
                 update(0.1f);
             }else{
                 gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);

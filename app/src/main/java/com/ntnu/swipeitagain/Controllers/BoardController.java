@@ -51,9 +51,9 @@ public class BoardController {
 
         public void updateGame(){
             counter += timer.getDelta();
-            if(counter >=0.2){
+            if(counter >=0.1){
                 gameModel.getPlayer().timeTick();
-                gameModel.getOpponent().timeTick();
+                gameModel.getOpponent().timeTick();//TODO does this actually belong here??????
                 counter = 0.0f;
             }
             if (!gameModel.getPlayer().timeLeft())

@@ -78,6 +78,8 @@ public abstract class GameView extends State  {
                 update(0.1f);
             }else{
                 gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
+                Log.d(TAG, "Swiped incorrectly");
+
             }
         }
         return false;
@@ -92,7 +94,7 @@ public abstract class GameView extends State  {
             gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
             gameModel.getCurrentCard().setScale(1,1);
             gameModel.getCurrentCard().update(0.1f);
-            Log.d(TAG, "Swiped X: " + motionEvent.getX()+ " Y: " + motionEvent.getY());
+            //Log.d(TAG, "Swiped X: " + motionEvent.getX()+ " Y: " + motionEvent.getY());
             swiped = true;
 
 

@@ -24,6 +24,8 @@ public class GameModel {
     private Image rightArrowImage;
     private Image upArrowImage;
     private Image downArrowImage;
+    //private Random r;
+
 
     //Constructor
     public GameModel(){
@@ -32,6 +34,7 @@ public class GameModel {
         player = new PlayerModel();
         opponent = new PlayerModel();
         opponent.setCurrentTime(80); //TODO Remove testing variable
+
     }
 
     public PlayerModel getPlayer(){
@@ -49,12 +52,25 @@ public class GameModel {
         upArrowImage = new Image(R.drawable.transp_arrow_up);
         downArrowImage = new Image(R.drawable.transp_arrow_down);
 
+
         for(Direction dir : Direction.values()){
             switch (dir){
-                case UP: cards.add(new CardModel(upArrowImage,dir));
-                case DOWN: cards.add(new CardModel(downArrowImage,dir));
-                case LEFT: cards.add(new CardModel(leftArrowImage,dir));
-                case RIGHT: cards.add(new CardModel(rightArrowImage,dir));
+                case UP: {
+                    cards.add(new CardModel(upArrowImage,dir));
+                    break;
+                }
+                case DOWN: {
+                    cards.add(new CardModel(downArrowImage, dir));
+                    break;
+                }
+                case LEFT: {
+                    cards.add(new CardModel(leftArrowImage,dir));
+                    break;
+                }
+                case RIGHT: {
+                    cards.add(new CardModel(rightArrowImage,dir));
+                    break;
+                }
             }
              //TODO create arrowImage
         }

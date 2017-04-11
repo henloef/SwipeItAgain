@@ -78,6 +78,7 @@ public class BoardController {
             }
             else{ gameState = new SinglePlayerState(this);
                 pushState(new SinglePlayerGameView(this, screenWidth, screenHeight, gameModel));// dette må endres, vi klarer jo ikke å kjøre en loop for å spille når denne pushes?
+                Log.d(TAG, "New GameStarted");
             }
 
         }
@@ -143,8 +144,10 @@ public class BoardController {
         }
 
     public Direction decideDirection(MotionEvent start, MotionEvent end){ //Hvorfor var denne private?
-        float deltaX = end.getX() - start.getX();
-        float deltaY = end.getY() - start.getY();
+        float deltaX = end.getX() - (float)screenWidth/2;
+        float deltaY = end.getY() - (float)screenHeight/2;
+        Log.d(TAG, "Swiped: dx:" + deltaX + " dy:" + deltaY);
+
         if(Math.abs(deltaX) > Math.abs(deltaY)){
             if(deltaX > 0){
                 return Direction.RIGHT;

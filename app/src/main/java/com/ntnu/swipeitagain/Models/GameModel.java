@@ -59,6 +59,7 @@ public class GameModel {
              //TODO create arrowImage
         }
         Log.d(TAG, "cards stack length now: "+ cards.size());
+        nextCard();
     }
 
     //compares direction from user with card-direction. if same, return true and go to next card
@@ -78,7 +79,7 @@ public class GameModel {
     }
 
     public CardModel getCurrentCard(){
-        return cards.get(0);
+        return currentCard;
         //return currentCard;
     }
 

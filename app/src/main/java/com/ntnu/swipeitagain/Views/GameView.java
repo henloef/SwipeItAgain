@@ -44,6 +44,7 @@ public abstract class GameView extends State  {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.gameModel = gameModel1;
+        gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
 
     }
 
@@ -56,15 +57,8 @@ public abstract class GameView extends State  {
     public boolean onTouchDown(MotionEvent motionEvent) {
         if (gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())) {
             startEvent = motionEvent;
+            swiped = false;
             return true;
-        }
-
-        if(swiped){
-            boolean swipedCorrect = boardController.tryDirection(boardController.decideDirection(startEvent,endEvent));
-            if(swipedCorrect){
-                gameModel.nextCard();
-                gameModel.getCurrentCard().update(0.2f);
-            }
         }
         //boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
         return false;
@@ -76,6 +70,15 @@ public abstract class GameView extends State  {
             endEvent = motionEvent;
             //calculate direction
             swipeDirection = boardController.decideDirection(startEvent, endEvent);
+            boolean swipedCorrect = boardController.tryDirection(swipeDirection);
+            if(swipedCorrect){
+                gameModel.nextCard();
+                gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
+                Log.d(TAG, "Swiped correctly");
+                update(0.1f);
+            }else{
+                gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
+            }
         }
         return false;
     }
@@ -90,7 +93,7 @@ public abstract class GameView extends State  {
             gameModel.getCurrentCard().setScale(1,1);
             gameModel.getCurrentCard().update(0.1f);
             Log.d(TAG, "Swiped X: " + motionEvent.getX()+ " Y: " + motionEvent.getY());
-
+            swiped = true;
 
 
             return true;
@@ -118,7 +121,6 @@ public abstract class GameView extends State  {
         //positions card in the middle
         gameModel.getCurrentCard().setScale(1,1);
         gameModel.getCurrentCard().update(0.2f);
-        gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
         gameModel.getCurrentCard().draw(canvas);
     }
 

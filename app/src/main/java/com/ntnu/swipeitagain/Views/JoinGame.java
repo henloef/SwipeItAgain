@@ -77,6 +77,7 @@ public class JoinGame extends AbstractMenuView {
     public void tryNewGameKey(){
         instructionText = "Try new game key:";
         enteredGameKey = "";
+        boardController.createGameState(true, false);
 
     }
 

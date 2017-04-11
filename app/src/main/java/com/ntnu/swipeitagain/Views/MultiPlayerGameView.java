@@ -43,10 +43,10 @@ public class MultiPlayerGameView extends GameView {
         Log.d(TAG, "current opponent time: " + oppTime);
         double oppProgress = (1.0 * oppTime)/100;
         int oppBarEnd = 100+(int)(screenWidth * (oppProgress * ((1.0 * screenWidth - 200) / screenWidth)));
-        Rect oppRect = new Rect(100, screenHeight - 150, oppBarEnd , screenHeight - 120);
+        Rect oppRect = new Rect(100, screenHeight - 140, oppBarEnd , screenHeight - 120);
         Paint oppPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        oppPaint.setColor(Color.argb(255,255 - (int)(oppProgress*255),(int) (oppProgress *255),0)); //gradually from green to red
+        oppPaint.setColor(Color.argb(255,119, 136, 153)); //gradually from green to red
         canvas.drawRect(oppRect, oppPaint);
     }
 }

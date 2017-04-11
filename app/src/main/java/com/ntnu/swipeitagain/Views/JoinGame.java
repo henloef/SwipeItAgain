@@ -18,6 +18,7 @@ public class JoinGame extends AbstractMenuView {
     private TextButton backSpace, enter;
     private String enteredGameKey;
     private String instructionText;
+    private int offset = 25;
 
 
     public JoinGame(BoardController boardController, int screenWidth, int screenHeigth){
@@ -29,8 +30,8 @@ public class JoinGame extends AbstractMenuView {
 
 
         makeKeyButtons();
-        enter = new TextButton(screenWidth*3/4, (float)screenHeight*6/8, "Enter", buttonStyle);
-        backSpace = new TextButton(screenWidth/4, (float)screenHeight*6/8, "<-", buttonStyle);
+        enter = new TextButton(screenWidth*3/4-offset, (float)screenHeight*6/8, "Enter", buttonStyle);
+        backSpace = new TextButton(screenWidth/4-offset, (float)screenHeight*6/8, "<-", buttonStyle);
 
         enter.addWidgetListener(this);
         backSpace.addWidgetListener(this);
@@ -42,11 +43,11 @@ public class JoinGame extends AbstractMenuView {
     private void makeKeyButtons(){
         for(int i = 0; i <10; i++){
             if (i == 0){
-                float x = screenWidth*2/4;
+                float x = screenWidth*2/4-offset;
                 float y = screenHeight*6/8;
                 buttons.add(new TextButton(x,y, Integer.toString(i), buttonStyle));
             }else {
-                float x = (((i-1) % 3)+1)*screenWidth/4;
+                float x = (((i-1) % 3)+1)*screenWidth/4 -offset;
                 float y = ((float)Math.ceil(((float)i)/3) + 2)*screenHeight/8;
                 buttons.add(new TextButton(x,y, Integer.toString(i), buttonStyle));
             }

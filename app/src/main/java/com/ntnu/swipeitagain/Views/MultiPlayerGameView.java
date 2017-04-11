@@ -21,9 +21,11 @@ import static android.content.ContentValues.TAG;
  */
 
 public class MultiPlayerGameView extends GameView {
+    private Font opponentScoreFont;
 
     public MultiPlayerGameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel){
         super(boardController, screenWidth, screenHeight, gameModel);
+        opponentScoreFont = new Font(119, 136, 153, screenHeight/38, Typeface.SANS_SERIF, Typeface.NORMAL);
 
     }
 
@@ -48,5 +50,6 @@ public class MultiPlayerGameView extends GameView {
 
         oppPaint.setColor(Color.argb(255,119, 136, 153)); //gradually from green to red
         canvas.drawRect(oppRect, oppPaint);
+        canvas.drawText(Integer.toString(gameModel.getOpponent().getScore()), 42, screenHeight-110, opponentScoreFont);
     }
 }

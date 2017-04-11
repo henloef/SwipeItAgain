@@ -37,6 +37,7 @@ public abstract class GameView extends State  {
     protected int screenWidth, screenHeight;
     protected ProgressBar progressBar;
     protected GameModel gameModel;
+    protected Font scoreFont;
 
 
     public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
@@ -45,6 +46,7 @@ public abstract class GameView extends State  {
         this.screenHeight = screenHeight;
         this.gameModel = gameModel1;
         gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
+        scoreFont = new Font(100, 100, 100, screenHeight/34, Typeface.SANS_SERIF, Typeface.NORMAL);
 
     }
 
@@ -76,6 +78,7 @@ public abstract class GameView extends State  {
                 gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
                 Log.d(TAG, "Swiped correctly");
                 gameModel.getPlayer().addTime();
+                gameModel.getPlayer().newPoint();
                 update(0.1f);
             }else{
                 gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
@@ -111,6 +114,8 @@ public abstract class GameView extends State  {
         canvas.drawColor(Color.LTGRAY);
         drawProgressBars(canvas);
         drawCard(canvas);
+        canvas.drawText(Integer.toString(gameModel.getPlayer().getScore()), 40, screenHeight-170, scoreFont);
+
     }
 
     @Override

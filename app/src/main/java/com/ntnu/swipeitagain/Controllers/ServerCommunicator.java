@@ -44,9 +44,12 @@ public class ServerCommunicator {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
 
                 for (DataSnapshot child: children){
-//                    String value = child.getValue(String.class);
-                    //  gameKeys.add(value);
+                    GameData value = child.getValue(GameData.class);
+                      gameDatas.add(value);
                 }
+                Log.d(TAG, "Gamedata ser slik ut" + gameDatas);
+
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {

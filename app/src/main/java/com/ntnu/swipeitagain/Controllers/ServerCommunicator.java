@@ -48,8 +48,6 @@ public class ServerCommunicator {
                       gameDatas.add(value);
                 }
                 Log.d(TAG, "Gamedata ser slik ut" + gameDatas);
-
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -58,11 +56,9 @@ public class ServerCommunicator {
     }
 
     public List<GameData> getGameDatas(){
-        getGameKeyFromServer();
+        //getGameKeyFromServer();
         return gameDatas;
     }
-
-
 
     public void addNewGameDataToDatabase(GameData gameData){
         Log.d(TAG, "Action; addNewGameKeyToDatabase()");
@@ -75,7 +71,9 @@ public class ServerCommunicator {
     }
 
     public int getGameKeyFromServer(){
-      return gameDatas.size()+1;
+        GameData newGame = new GameData(gameDatas.size()+1);
+        addNewGameDataToDatabase(newGame);
+        return newGame.gameKey;
     }
 
     //try gameKey, if true return true?

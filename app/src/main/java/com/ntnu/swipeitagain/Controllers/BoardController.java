@@ -132,7 +132,7 @@ public class BoardController {
         //when gameOver option retry is chosen
         public void retry(){
             if(isMultiPlayer){
-                //TODO Should this be an option?
+                //TODO Ask the oponent for a rematch
             }else{
                 gameModel = new GameModel();
                 pushState(new SinglePlayerGameView(this, screenWidth, screenHeight, gameModel));

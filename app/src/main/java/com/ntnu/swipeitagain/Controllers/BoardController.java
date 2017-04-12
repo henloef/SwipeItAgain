@@ -57,8 +57,9 @@ public class BoardController {
 
         public void updateGame(){
             counter += timer.getDelta();
-            if(counter >=0.2){
+            if(counter >=0.1){
                 gameModel.getPlayer().timeTick();
+                gameModel.getOpponent().timeTick();//TODO does this actually belong here??????
                 counter = 0.0f;
             }
             if (!gameModel.getPlayer().timeLeft())
@@ -80,11 +81,11 @@ public class BoardController {
             if (isMultiPlayer){ gameState = new MultiPlayerState(this, generateKey, serverCommunicator, playerId);
                 this.isMultiPlayer = isMultiPlayer;
                 // Få fra input om man venter på motstander eller generer gamekey
-
                 pushState(new MultiPlayerGameView(this,screenWidth,screenHeight, gameModel));
             }
             else{ gameState = new SinglePlayerState(this);
                 pushState(new SinglePlayerGameView(this, screenWidth, screenHeight, gameModel));// dette må endres, vi klarer jo ikke å kjøre en loop for å spille når denne pushes?
+                Log.d(TAG, "New GameStarted");
             }
 
         }
@@ -151,8 +152,10 @@ public class BoardController {
         }
 
     public Direction decideDirection(MotionEvent start, MotionEvent end){ //Hvorfor var denne private?
-        float deltaX = end.getX() - start.getX();
-        float deltaY = end.getY() - start.getY();
+        float deltaX = end.getX() - (float)screenWidth/2;
+        float deltaY = end.getY() - (float)screenHeight/2;
+        Log.d(TAG, "Swiped: dx:" + deltaX + " dy:" + deltaY);
+
         if(Math.abs(deltaX) > Math.abs(deltaY)){
             if(deltaX > 0){
                 return Direction.RIGHT;

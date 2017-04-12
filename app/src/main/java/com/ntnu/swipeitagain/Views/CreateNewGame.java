@@ -29,7 +29,7 @@ public class CreateNewGame extends AbstractMenuView {
         super.draw(canvas);
         canvas.drawText("Game key:", 100, screenHeight*2/7, bigFont);
         canvas.drawText(Integer.toString(gameKey), screenWidth/2, screenHeight*3/7, gameKeyFont);
-        canvas.drawText("Waiting for opponent", 100, screenHeight*5/7, bigFont);
+        canvas.drawText("Waiting for opponent", 70, screenHeight*5/7, buttonFont);
     }
 
     @Override

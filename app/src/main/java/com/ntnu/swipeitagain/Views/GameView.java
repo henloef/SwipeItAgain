@@ -37,6 +37,7 @@ public abstract class GameView extends State  {
     protected int screenWidth, screenHeight;
     protected ProgressBar progressBar;
     protected GameModel gameModel;
+    protected Font scoreFont;
 
 
     public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
@@ -44,6 +45,8 @@ public abstract class GameView extends State  {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.gameModel = gameModel1;
+        gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
+        scoreFont = new Font(100, 100, 100, screenHeight/34, Typeface.SANS_SERIF, Typeface.NORMAL);
 
     }
 
@@ -56,15 +59,8 @@ public abstract class GameView extends State  {
     public boolean onTouchDown(MotionEvent motionEvent) {
         if (gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())) {
             startEvent = motionEvent;
+            swiped = false;
             return true;
-        }
-
-        if(swiped){
-            boolean swipedCorrect = boardController.tryDirection(boardController.decideDirection(startEvent,endEvent));
-            if(swipedCorrect){
-                gameModel.nextCard();
-                gameModel.getCurrentCard().update(0.2f);
-            }
         }
         //boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
         return false;
@@ -76,6 +72,19 @@ public abstract class GameView extends State  {
             endEvent = motionEvent;
             //calculate direction
             swipeDirection = boardController.decideDirection(startEvent, endEvent);
+            boolean swipedCorrect = boardController.tryDirection(swipeDirection);
+            if(swipedCorrect){
+                gameModel.nextCard();
+                gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
+                Log.d(TAG, "Swiped correctly");
+                gameModel.getPlayer().addTime();
+                gameModel.getPlayer().newPoint();
+                update(0.1f);
+            }else{
+                gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
+                Log.d(TAG, "Swiped incorrectly");
+
+            }
         }
         return false;
     }
@@ -89,8 +98,8 @@ public abstract class GameView extends State  {
             gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
             gameModel.getCurrentCard().setScale(1,1);
             gameModel.getCurrentCard().update(0.1f);
-            Log.d(TAG, "Swiped X: " + motionEvent.getX()+ " Y: " + motionEvent.getY());
-
+            //Log.d(TAG, "Swiped X: " + motionEvent.getX()+ " Y: " + motionEvent.getY());
+            swiped = true;
 
 
             return true;
@@ -103,33 +112,38 @@ public abstract class GameView extends State  {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawColor(Color.LTGRAY);
-
-        int time = gameModel.getCurrentTime();
-        Log.d(TAG, "current time: " + time);
-        double progress = (1.0 * time)/100;
-        int barEnd = 100+(int)(screenWidth * (progress * ((1.0 * screenWidth - 200) / screenWidth)));
-        Rect rect = new Rect(100, screenHeight - 200, barEnd , screenHeight - 170);
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-        paint.setColor(Color.argb(255,255 - (int)(progress*255),(int) (progress *255),0)); //gradually from green to red
-        canvas.drawRect(rect, paint);
-
-        //positions card in the middle
-        gameModel.getCurrentCard().setScale(1,1);
-        gameModel.getCurrentCard().update(0.2f);
-        gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
-        gameModel.getCurrentCard().draw(canvas);
-
-
+        drawProgressBars(canvas);
+        drawCard(canvas);
+        canvas.drawText(Integer.toString(gameModel.getPlayer().getScore()), 40, screenHeight-170, scoreFont);
 
     }
-
 
     @Override
     public void update(float dt) {
         super.update(dt);
         boardController.updateGame();
         // TODO boardController.doYourThing()
+    }
+
+    private void drawCard(Canvas canvas){
+        //positions card in the middle
+        gameModel.getCurrentCard().setScale(1,1);
+        gameModel.getCurrentCard().update(0.2f);
+        gameModel.getCurrentCard().draw(canvas);
+    }
+
+    protected void drawProgressBars(Canvas canvas){
+        //draws player progress bar
+        //TODO text to differentiate which belongs to which player
+        int yourTime = gameModel.getCurrentTime(true);
+        Log.d(TAG, "current time: " + yourTime);
+        double yourProgress = (1.0 * yourTime)/100;
+        int yourBarEnd = 100+(int)(screenWidth * (yourProgress * ((1.0 * screenWidth - 200) / screenWidth)));
+        Rect rect = new Rect(100, screenHeight - 200, yourBarEnd , screenHeight - 170);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+        paint.setColor(Color.argb(255,255 - (int)(yourProgress*255),(int) (yourProgress *255),0)); //gradually from green to red
+        canvas.drawRect(rect, paint);
     }
 }
 

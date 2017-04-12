@@ -22,32 +22,9 @@ public class CardModel extends Sprite{
         super(image);
         Log.d(TAG, "MAke new card model");
         this.direction = direction;
-        //scaleDirection();
 
     }
 
 
-
-    // Scales the image according to the direction
-    private void scaleDirection(){
-        if(direction == Direction.LEFT){
-            this.setScale(-1, 1);
-        }else if (direction == Direction.DOWN){
-            this.rotate(90);
-        }else if (direction == Direction.UP){
-            this.rotate(270);
-        }
-
-    }
-
-
-
-
-    //in case we wanted cards
-
-    /*
-    private int value;
-    private String suit;
-    */
 }
 

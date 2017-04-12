@@ -24,10 +24,10 @@ public abstract class AbstractMenuView extends State implements WidgetListener  
 
     protected int screenWidth, screenHeight;
     protected BoardController boardController;
-    protected Font buttonFont = new Font(255, 255, 255, 100, Typeface.SANS_SERIF, Typeface.NORMAL);
-    protected Font gameKeyFont = new Font(10, 10, 10, 130, Typeface.SANS_SERIF, Typeface.NORMAL);
-    protected Font bigFont = new Font(255, 255, 255, 130, Typeface.SANS_SERIF, Typeface.NORMAL);
-    protected Paint[] buttonStyle = {buttonFont, buttonFont};
+    protected Font buttonFont;
+    protected Font gameKeyFont;
+    protected Font bigFont;
+    protected Paint[] buttonStyle = new Font[2];
     protected TextButton mainMenu;
 
     public AbstractMenuView(BoardController boardController, int screenWidth, int screenHeight) {
@@ -35,6 +35,12 @@ public abstract class AbstractMenuView extends State implements WidgetListener  
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
         this.boardController = boardController;
+
+        buttonFont = new Font(255, 255, 255, (int)screenHeight/19, Typeface.SANS_SERIF, Typeface.NORMAL);
+        bigFont = new Font(255, 255, 255, screenHeight/15, Typeface.SANS_SERIF, Typeface.NORMAL);
+        gameKeyFont = new Font(10, 10, 10, screenHeight/12, Typeface.SANS_SERIF, Typeface.NORMAL);
+        buttonStyle[0] = buttonFont;
+        buttonStyle[1] = buttonFont;
 
         mainMenu = new TextButton(100, (float)screenHeight*7/8, "Main menu", buttonStyle);
         mainMenu.addWidgetListener(this);

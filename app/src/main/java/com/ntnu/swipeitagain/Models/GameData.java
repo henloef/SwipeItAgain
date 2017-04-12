@@ -8,7 +8,7 @@ public class GameData {
 
     public int gameKey;
     public int numberOfGames= 0;
-    public String beskrivelse = "Wow sykt kult spill";
+
 
     public GameData(int numberOfGames){
         this.gameKey = numberOfGames;
@@ -19,7 +19,7 @@ public class GameData {
     }
 
     public String toString(){
-        return "Game key:" + gameKey+ " games: " +numberOfGames + " beskrivelse: " + beskrivelse;
+        return "Game key:" + gameKey+ " games: " + numberOfGames;
     }
 
 

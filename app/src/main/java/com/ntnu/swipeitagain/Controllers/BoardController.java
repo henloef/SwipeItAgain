@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import com.ntnu.swipeitagain.Models.Direction;
 import com.ntnu.swipeitagain.Models.GameData;
 import com.ntnu.swipeitagain.Models.GameModel;
+import com.ntnu.swipeitagain.Models.PlayerModel;
 import com.ntnu.swipeitagain.States.GameState;
 import com.ntnu.swipeitagain.States.MultiPlayerState;
 import com.ntnu.swipeitagain.States.SinglePlayerState;
@@ -41,18 +42,21 @@ public class BoardController {
         protected float counter;
         protected ServerCommunicator serverCommunicator;
         protected String playerId;
-        protected GameData gameData;
+//        protected GameData gameData;
+        protected PlayerModel player;
 
-        public BoardController(Game game, Resources resources, int screenWidth, int screenHeight, ServerCommunicator serverCommunicator, String playerId){
+        public BoardController(Game game, Resources resources, int screenWidth, int screenHeight, String playerId, PlayerModel player){
             this.game = game;
             this.screenWidth = screenWidth;
             this.screenHeight = screenHeight;
             states = new ArrayList<State>();
             this.resources = resources;
             this.timer = new Timer();
-            this.serverCommunicator = serverCommunicator;
+//            this.serverCommunicator = serverCommunicator;
             this.playerId = playerId;
-            this.gameData = new GameData();
+//            this.gameData = new GameData();
+            serverCommunicator  = new ServerCommunicator(player);
+            this.player = player;
         }
 
         public void updateGame(){
@@ -95,7 +99,7 @@ public class BoardController {
         }
 
         public void createGameModel(){
-            gameModel = new GameModel();
+            gameModel = new GameModel(player);
         }
 
         public int getInputGameKey(){
@@ -117,6 +121,7 @@ public class BoardController {
             if(gameState instanceof MultiPlayerState){
                 if(((MultiPlayerState) gameState).tryGameKey(gameKey)){
                     Log.d(TAG, "joining game");
+                    serverCommunicator.getGameDataFromServerWithKey(gameKey).setOpponent(this.player);//TODO get changes to Firebase
                     pushState(new MultiPlayerGameView(this, screenWidth, screenHeight, gameModel));
                     //TODO connect to oponent
                 }else{
@@ -134,7 +139,7 @@ public class BoardController {
             if(isMultiPlayer){
                 //TODO Ask the oponent for a rematch
             }else{
-                gameModel = new GameModel();
+                createGameModel();
                 pushState(new SinglePlayerGameView(this, screenWidth, screenHeight, gameModel));
             }
         }

@@ -28,10 +28,11 @@ public class GameModel {
 
 
     //Constructor
-    public GameModel(){
+    public GameModel(PlayerModel player){
         Log.d(TAG, "MAke new game model");
         createCards();
-        player = new PlayerModel();
+//        player = new PlayerModel();
+        this.player = player;
         opponent = new PlayerModel();
         opponent.setCurrentTime(80); //TODO Remove testing variable
 

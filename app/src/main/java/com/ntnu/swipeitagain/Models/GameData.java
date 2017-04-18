@@ -13,19 +13,24 @@ public class GameData {
 
 //    public int numberOfGames= 0;
 
-    public GameData(int numberOfGames){
+    public GameData(int numberOfGames, PlayerModel player){
+
         this.gameKey = numberOfGames;
+        this.player = player;
     }
 
-    public GameData(){
-        this.gameKey = 42;
-    }
+    //public GameData(){
+     //   this.gameKey = 42;
+    //}
 
     public boolean hasOpponent(){
         if(opponent != null){
             return true;
         }
         return false;
+    }
+    public void setOpponent(PlayerModel opponent){
+        this.opponent = opponent;
     }
 
     public String toString(){

@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
 import com.ntnu.swipeitagain.Models.GameData;
+import com.ntnu.swipeitagain.Models.PlayerModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +36,9 @@ public class Main extends Activity{
     private BoardController boardController;
 
     public int screenWidth, screenHeight;
-    private ServerCommunicator serverCommunicator ;
+
     private String playerId;
+    public PlayerModel player;
 
     //Lagret info om spill og gamePins
     final ArrayList<GameData> gameDatas = new ArrayList<GameData>();
@@ -66,12 +68,13 @@ public class Main extends Activity{
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         screenHeight = displayMetrics.heightPixels;
+        player = new PlayerModel();
 
-        serverCommunicator  = new ServerCommunicator();
+
 
 
         Game game = new Game(this, null);
-        this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight, serverCommunicator, playerId);
+        this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight, playerId, player);
         game.pushState(new MainMenu(boardController, game, game.getResources(), screenWidth, screenHeight));
         setContentView(game);
 

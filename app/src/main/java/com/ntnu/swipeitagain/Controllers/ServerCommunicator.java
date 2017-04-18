@@ -26,27 +26,27 @@ import static android.content.ContentValues.TAG;
  */
 
 public class ServerCommunicator {
-    //One initial gameKey to increment
-    private int increment = 1;
-    private final int numberOfGames = 0;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
-    final String key ="";
+
     //this will hold our collection of gamekeys
     final List<GameData> gameDatas = new ArrayList<GameData>(); //det går ann å endre en final array
+    private static int numberOfGames =0;
 
     // new eventListener er her en anonym klasse så da må vi visst kun gi inn noe som er final, her final List gamekeys
-    public void getGameDataFromServer() {
+    public void getGameDataFromServer() { //TODO denne kalles flere ganger, derfor er gameDatas lenger enn antall faktiske gameData'er i databasen
         myRef.child("gameDatas").addValueEventListener(new ValueEventListener() { //myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                gameDatas.clear();
 
                 for (DataSnapshot child: children){
                     GameData value = child.getValue(GameData.class);
                       gameDatas.add(value);
                 }
+                numberOfGames = gameDatas.size();
                 Log.d(TAG, "Gamedata ser slik ut" + gameDatas);
             }
             @Override
@@ -71,15 +71,31 @@ public class ServerCommunicator {
     }
 
     public int getGameKeyFromServer(){
-        GameData newGame = new GameData(gameDatas.size()+1);
+        GameData newGame = new GameData(numberOfGames+1);
+        Log.d(TAG, "gameDatas.size()+1 " + gameDatas.size());
+        Log.d(TAG, "get GameKeyFrom Server(), newGame: " + newGame);
+        Log.d(TAG, "get GameKeyFrom Server(), gamedatas listen : " + newGame);
+        while(!doesKeyExistForNewGameData(newGame)){
+            newGame.gameKey++;
+        }
         addNewGameDataToDatabase(newGame);
+        Log.d(TAG, "get GameKeyFrom Server(), newGame.key: " + newGame.gameKey);
+        Log.d(TAG, "get GameKeyFrom Server(), gamedatas listen : " + gameDatas);
         return newGame.gameKey;
     }
+    public boolean doesKeyExistForNewGameData(GameData game){
+        for (GameData gd: gameDatas){
+            if (game.gameKey == gd.gameKey){
+                return false;
+            }
+        }
+        return true;
+    }
 
-    //try gameKey, if true return true?
-    public boolean tryGameKey(int gameKey){
+    //try gameKey from opponent, if a game with that key exists in the database it will return true
+    public boolean tryGameKey(int gK){
         for (GameData game:gameDatas) {
-            if (gameKey== game.gameKey){
+            if (gK== game.gameKey){
                 return true;
             }
         }
@@ -87,8 +103,8 @@ public class ServerCommunicator {
     }
 
     //Send message to other player that the game will start
-    public void sendStartSignal(){
-        //TODO implement
+    public void sendStartSignal(int gamekey){
+
     }
 
 

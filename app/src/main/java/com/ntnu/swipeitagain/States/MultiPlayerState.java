@@ -46,7 +46,7 @@ public class MultiPlayerState extends GameState{
     public boolean tryGameKey(int gameKey){
         Log.d(TAG,"Try gamekey i state ");
         if(serverCommunicator.tryGameKey(gameKey)){
-            serverCommunicator.sendStartSignal();
+            serverCommunicator.sendStartSignal(gameKey);
             //startGame();
             return true;
         }else{

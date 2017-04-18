@@ -7,8 +7,11 @@ package com.ntnu.swipeitagain.Models;
 public class GameData {
 
     public int gameKey;
-    public int numberOfGames= 0;
-    public String beskrivelse = "Wow sykt kult spill";
+    public boolean waitingForOponent = true;
+    public PlayerModel player;
+    public PlayerModel opponent;
+
+//    public int numberOfGames= 0;
 
     public GameData(int numberOfGames){
         this.gameKey = numberOfGames;
@@ -18,8 +21,15 @@ public class GameData {
         this.gameKey = 42;
     }
 
+    public boolean hasOpponent(){
+        if(opponent != null){
+            return true;
+        }
+        return false;
+    }
+
     public String toString(){
-        return "Game key:" + gameKey+ " games: " +numberOfGames + " beskrivelse: " + beskrivelse;
+        return "Game key to gameData:" + gameKey;//+ " games: " +numberOfGames;
     }
 
 

@@ -63,7 +63,7 @@ public class BoardController {
                 counter = 0.0f;
             }
             if (!gameModel.getPlayer().timeLeft())
-            {pushState(new GameOver(this, screenWidth,screenHeight));}
+            {pushState(new GameOver(this, screenWidth,screenHeight, gameModel));}
         }
 
         public void pushState(State state){
@@ -112,6 +112,9 @@ public class BoardController {
             }
         }
 
+        public GameState getGameState(){
+            return gameState;
+        }
         //Called from joinGame
         public void tryEnteredGameKey(int gameKey){
             if(gameState instanceof MultiPlayerState){

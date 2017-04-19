@@ -5,6 +5,7 @@ import android.util.Log;
 import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
 import com.ntnu.swipeitagain.Models.GameData;
+import com.ntnu.swipeitagain.Models.PlayerModel;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ public class MultiPlayerState extends GameState{
     private int gameKey;
     private ServerCommunicator serverCommunicator;
     private String playerId;
+
+    private PlayerModel playerModel;
     private GameData gameData;
 
     public MultiPlayerState(BoardController boardController, Boolean generateKey, ServerCommunicator serverCommunicator, String playerId){
@@ -37,6 +40,7 @@ public class MultiPlayerState extends GameState{
        this.gameData = serverCommunicator.getGameKeyFromServer();
         // this.gameKey = serverCommunicator.getGameKeyFromServer();
         //serverCommunicator.addNewGameDataToDatabase();
+        gameData.setPlayer(boardController.getGameModel().getPlayer());
     }
 
     public int showGameKey(){

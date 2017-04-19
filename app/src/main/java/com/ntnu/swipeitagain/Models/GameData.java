@@ -35,6 +35,10 @@ public class GameData {
         return false;
     }
 
+    public void setPlayer(PlayerModel player){
+          this.player = player;
+    }
+
     public int getGameKey(){
         return this.gameKey;
     }

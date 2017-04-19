@@ -39,9 +39,11 @@ public class BoardController {
         private Resources resources;
         protected Timer timer;
         protected float counter;
+        private float updateTime; //Difficulcy
         protected ServerCommunicator serverCommunicator;
         protected String playerId;
         protected GameData gameData;
+
 
         public BoardController(Game game, Resources resources, int screenWidth, int screenHeight, ServerCommunicator serverCommunicator, String playerId){
             this.game = game;
@@ -53,11 +55,12 @@ public class BoardController {
             this.serverCommunicator = serverCommunicator;
             this.playerId = playerId;
             this.gameData = new GameData();
+            setDifficulcy(Difficulcy.easy);
         }
 
         public void updateGame(){
             counter += timer.getDelta();
-            if(counter >=0.1){
+            if(counter >= updateTime){
                 gameModel.getPlayer().timeTick();
                 gameModel.getOpponent().timeTick();//TODO does this actually belong here??????
                 counter = 0.0f;
@@ -142,7 +145,18 @@ public class BoardController {
             }
         }
 
-
+        public void setDifficulcy(Difficulcy difficulcy){
+            if(difficulcy == Difficulcy.hard){
+                updateTime = 0.03f;
+                Log.d(TAG, "difficulcy set to hard");
+            }else if(difficulcy == Difficulcy.medium){
+                updateTime = 0.07f;
+                Log.d(TAG, "difficulcy set to medium");
+            }else if(difficulcy == Difficulcy.easy){
+                updateTime = 0.1f;
+                Log.d(TAG, "difficulcy set to easy");
+            }
+        }
 
         public void goToMainMenu(){
             //moves menu to the top of the stack

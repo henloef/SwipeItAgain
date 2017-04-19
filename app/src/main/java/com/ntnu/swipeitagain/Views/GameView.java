@@ -114,7 +114,7 @@ public abstract class GameView extends State  {
         canvas.drawColor(Color.LTGRAY);
         drawProgressBars(canvas);
         drawCard(canvas);
-        canvas.drawText(Integer.toString(gameModel.getPlayer().getScore()), 40, screenHeight-170, scoreFont);
+        canvas.drawText(Integer.toString(gameModel.getPlayer().getScore()), 30, screenHeight-170, scoreFont);
 
     }
 

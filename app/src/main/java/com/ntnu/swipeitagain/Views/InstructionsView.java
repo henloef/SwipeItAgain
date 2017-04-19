@@ -53,6 +53,8 @@ public class InstructionsView extends AbstractMenuView {
             Log.d(TAG, "actionPerformed: go back to main menu");
             boardController.goToMainMenu();
         }else if(widgetAction.getSource() == easy){
+            //Testkode ikke bra måte å gjøre det på
+            //easy = new TextButton(screenWidth/8, (float)screenHeight*9/10, "Easy", pressedButtonStyle);
             boardController.setDifficulcy(Difficulcy.easy);
         }else if(widgetAction.getSource() == medium){
             boardController.setDifficulcy(Difficulcy.medium);

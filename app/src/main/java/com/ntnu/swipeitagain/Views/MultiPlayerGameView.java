@@ -52,6 +52,6 @@ public class MultiPlayerGameView extends GameView {
 
         oppPaint.setColor(Color.argb(255,119, 136, 153)); //gradually from green to red
         canvas.drawRect(oppRect, oppPaint);
-        canvas.drawText(Integer.toString(gameModel.getOpponent().getScore()), 42, screenHeight-110, opponentScoreFont);
+        canvas.drawText(Integer.toString(gameModel.getOpponent().getScore()), 31, screenHeight-115, opponentScoreFont);
     }
 }

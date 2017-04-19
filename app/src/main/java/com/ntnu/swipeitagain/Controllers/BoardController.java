@@ -158,6 +158,16 @@ public class BoardController {
             }
         }
 
+        public Difficulcy getDifficulcy(){
+            if(updateTime == 0.03){
+                return Difficulcy.hard;
+            }else if(updateTime == 0.07){
+                return  Difficulcy.medium;
+            }else{
+                return Difficulcy.easy;
+            }
+        }
+
         public void goToMainMenu(){
             //moves menu to the top of the stack
         game.pushState(new MainMenu(this, game, resources, screenWidth,screenHeight));

@@ -43,7 +43,7 @@ public class GameOver extends AbstractMenuView {
             }else if(gameModel.getPlayer().getScore() < gameModel.getOpponent().getScore()){
                 canvas.drawText("You lost!", 100, screenHeight/7, bigFont);
             }else{
-                canvas.drawText("It's a tie!", 100, screenHeight/7, bigFont);
+                canvas.drawText("It's a draw!", 100, screenHeight/7, bigFont);
             }
         }
     }

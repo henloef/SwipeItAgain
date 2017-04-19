@@ -18,6 +18,7 @@ public class MultiPlayerState extends GameState{
     private int gameKey;
     private ServerCommunicator serverCommunicator;
     private String playerId;
+    private GameData gameData;
 
     public MultiPlayerState(BoardController boardController, Boolean generateKey, ServerCommunicator serverCommunicator, String playerId){
         super(boardController);
@@ -25,15 +26,16 @@ public class MultiPlayerState extends GameState{
         this.playerId = playerId;
 
         if(generateKey) {
-            getGameKeyFromServer();
+            getGameDataFromServer();
         }
-        serverCommunicator.getGameDataFromServer();
+        serverCommunicator.getAllGameDataFromServer();
     }
 
 
     //Ask server for gameKey
-    public void getGameKeyFromServer(){
-        gameKey = serverCommunicator.getGameKeyFromServer();
+    public void getGameDataFromServer(){
+       this.gameData = serverCommunicator.getGameKeyFromServer();
+        // this.gameKey = serverCommunicator.getGameKeyFromServer();
         //serverCommunicator.addNewGameDataToDatabase();
     }
 

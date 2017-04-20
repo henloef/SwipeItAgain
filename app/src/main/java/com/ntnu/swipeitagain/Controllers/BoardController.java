@@ -39,9 +39,11 @@ public class BoardController {
         private Resources resources;
         protected Timer timer;
         protected float counter;
+        private float updateTime; //Difficulcy
         protected ServerCommunicator serverCommunicator;
         protected String playerId;
         protected GameData gameData;
+
 
         public BoardController(Game game, Resources resources, int screenWidth, int screenHeight, ServerCommunicator serverCommunicator, String playerId){
             this.game = game;
@@ -53,17 +55,18 @@ public class BoardController {
             this.serverCommunicator = serverCommunicator;
             this.playerId = playerId;
             this.gameData = new GameData();
+            setDifficulcy(Difficulcy.easy);
         }
 
         public void updateGame(){
             counter += timer.getDelta();
-            if(counter >=0.1){
+            if(counter >= updateTime){
                 gameModel.getPlayer().timeTick();
                 gameModel.getOpponent().timeTick();//TODO does this actually belong here??????
                 counter = 0.0f;
             }
             if (!gameModel.getPlayer().timeLeft())
-            {pushState(new GameOver(this, screenWidth,screenHeight));}
+            {pushState(new GameOver(this, screenWidth,screenHeight, gameModel));}
         }
 
         public void pushState(State state){
@@ -112,6 +115,9 @@ public class BoardController {
             }
         }
 
+        public GameState getGameState(){
+            return gameState;
+        }
         //Called from joinGame
         public void tryEnteredGameKey(int gameKey){
             if(gameState instanceof MultiPlayerState){
@@ -139,7 +145,28 @@ public class BoardController {
             }
         }
 
+        public void setDifficulcy(Difficulcy difficulcy){
+            if(difficulcy == Difficulcy.hard){
+                updateTime = 0.03f;
+                Log.d(TAG, "difficulcy set to hard");
+            }else if(difficulcy == Difficulcy.medium){
+                updateTime = 0.07f;
+                Log.d(TAG, "difficulcy set to medium");
+            }else if(difficulcy == Difficulcy.easy){
+                updateTime = 0.1f;
+                Log.d(TAG, "difficulcy set to easy");
+            }
+        }
 
+        public Difficulcy getDifficulcy(){
+            if(updateTime == 0.03){
+                return Difficulcy.hard;
+            }else if(updateTime == 0.07){
+                return  Difficulcy.medium;
+            }else{
+                return Difficulcy.easy;
+            }
+        }
 
         public void goToMainMenu(){
             //moves menu to the top of the stack

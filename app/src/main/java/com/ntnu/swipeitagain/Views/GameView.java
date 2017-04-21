@@ -65,7 +65,6 @@ public abstract class GameView extends State  {
             swiped = false;
             return true;
         }
-        //boardController.pushState(new GameOver(boardController, screenWidth, screenHeight));
         return false;
     }
 
@@ -86,14 +85,12 @@ public abstract class GameView extends State  {
             }else{
                 gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
                 Log.d(TAG, "Swiped incorrectly");
-
             }
         }
         return false;
     }
 
 
-    //Touch fungerer, men kortet beveger seg ikke rett.
     @Override
     public boolean onTouchMove(MotionEvent motionEvent) {
         if(gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())){
@@ -137,12 +134,11 @@ public abstract class GameView extends State  {
 
     protected void drawProgressBars(Canvas canvas){
         //draws player progress bar
-        //TODO text to differentiate which belongs to which player
         int yourTime = gameModel.getCurrentTime(true);
         Log.d(TAG, "current time: " + yourTime);
         double yourProgress = (1.0 * yourTime)/100;
-        int yourBarEnd = 100+(int)(screenWidth * (yourProgress * ((1.0 * screenWidth - 200) / screenWidth)));
-        Rect rect = new Rect(100, screenHeight - 200, yourBarEnd , screenHeight - 170);
+        int yourBarEnd = screenWidth/8+(int)(screenWidth * (yourProgress * ((1.0 * screenWidth - screenWidth/4) / screenWidth)));
+        Rect rect = new Rect(screenWidth/8, screenHeight - 200, yourBarEnd , screenHeight - 170);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
         paint.setColor(Color.argb(255,255 - (int)(yourProgress*255),(int) (yourProgress *255),0)); //gradually from green to red

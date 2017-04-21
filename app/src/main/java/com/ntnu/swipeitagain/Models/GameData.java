@@ -38,6 +38,9 @@ public class GameData {
     public void setPlayer(PlayerModel player){
           this.player = player;
     }
+    public void setOpponent(PlayerModel player){
+        this.opponent = player;
+    }
 
     public int getGameKey(){
         return this.gameKey;

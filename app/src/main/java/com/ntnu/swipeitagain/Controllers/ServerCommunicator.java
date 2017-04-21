@@ -33,10 +33,11 @@ public class ServerCommunicator {
     private Callback mCallback;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef = database.getReference();
+    public DatabaseReference myRef = database.getReference();
 
     //this will hold our collection of gamekeys
     final List<GameData> gameDatas = new ArrayList<GameData>(); //det går ann å endre en final array
+
     private int numberOfGames;
 
     public ServerCommunicator(){
@@ -47,8 +48,10 @@ public class ServerCommunicator {
     // Denne metoden skal hente all ned data fra server, men det går ikke.
     // new eventListener er her en anonym klasse så da må vi visst kun gi inn noe som er final, her final List gamekeys
     public void getAllGameDataFromServer() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+         DatabaseReference ref = database.getReference();
 
-        myRef.child("gameDatas").addValueEventListener(new ValueEventListener() { //myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("gameDatas").addValueEventListener(new ValueEventListener() { //myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //final long childrenCount = dataSnapshot.getChildrenCount();
@@ -88,7 +91,7 @@ public class ServerCommunicator {
     }
 
     public void remove(GameData gameData){
-        myRef.child("gameDatas").child(gameData.getKey()).removeValue();
+        myRef.child(gameData.getKey()).removeValue();
     }
 
     public void add(GameData gameData){
@@ -100,13 +103,10 @@ public class ServerCommunicator {
         return gameDatas.get(gameDatas.size()-1);
     }
 
-    public GameData getGameKeyFromServer(){
+    public GameData getGameDataFromServer(){
        // Fredag
-        getAllGameDataFromServer();
-        addNewGameDataToDatabase(new GameData());
-        remove(gameDatas.get(0));
-        //
 
+        //
         //Ny data legges til i server, så gir onChildAdded den nye data fraserver i arrayet.
         //getGameDataFromServer();//hente ned alle
         addNewGameDataToDatabase(new GameData()); // Uploads game data to server. Listener for new child added adds gameData to local array before actually uploading to server with near no latency
@@ -125,13 +125,34 @@ public class ServerCommunicator {
 
     //try gameKey from opponent, if a game with that key exists in the database it will return true
     public boolean tryGameKey(int gK){
-       // getAllGameDataFromServer();
-        for (GameData game:gameDatas) {
-            if (gK== game.gameKey){
+        //getAllGameDataFromServer();
+        GameData temp = new GameData();
+        addNewGameDataToDatabase(temp);
+        myRef.addChildEventListener(new GameDatasChildEventListener());
+        remove(gameDatas.get(0));
+        for (GameData game : gameDatas) {
+            if (gK== game.getGameKey()){
                 return true;
             }
         }
         return  false;
+    }
+
+    public GameData GameDataFromKey(int key){
+        for (GameData gameData:gameDatas) {
+            if (key == gameData.gameKey){
+                return gameData;
+            }
+        }
+        return null;
+    }
+
+    public void opponentReady(GameData gameData){
+        myRef.child("gameDatas").child(gameData.getKey()).setValue(gameData);
+        Start(gameData, true);
+    }
+    public void updateGameData(GameData gameData){
+        myRef.child(gameData.getKey()).setValue(gameData);
     }
 
     //Send message to other player that the game will start
@@ -152,17 +173,37 @@ public class ServerCommunicator {
 
         @Override // Is called when creating new GameData
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            //Takes GameData from server
-            GameData data = dataSnapshot.getValue(GameData.class);
-            //Counting gamedatas
-            data.setChildrenCount(dataSnapshot.getChildrenCount());
-            Long temp = data.getChildrenCount();
-            //Gamekey for joining games set to the new data count
-            data.setGameKey(Integer.valueOf(temp.intValue()));
-            //Database storage key saved locally for finding, and editing, and sending start signal
-            data.setKey(dataSnapshot.getKey()); //TODO proper index not 0
-            //add GameData from server to local array
-            gameDatas.add(0, data);
+           // Either fill local storage with data or update local storage with latest data.
+            Long temp1 = dataSnapshot.getChildrenCount();
+            if (gameDatas.size()<=1){
+               Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+               //Empties gameDatas before adding all datas from server
+               gameDatas.clear();
+
+               for (DataSnapshot child: children){
+                   GameData data = child.getValue(GameData.class);
+                   data.setChildrenCount(Integer.valueOf(temp1.intValue()));
+                   data.setGameKey(Integer.valueOf(temp1.intValue()));
+                   data.setKey(dataSnapshot.getKey());
+                   gameDatas.add(0, data);
+                   //upload gameKey
+                   updateGameData(data);
+               }
+           } else {
+
+               //Takes GameData from server
+               GameData data = dataSnapshot.getValue(GameData.class);
+               //Counting gamedatas
+               data.setChildrenCount(dataSnapshot.getChildrenCount());
+               Long temp = data.getChildrenCount();
+               //Gamekey for joining games set to the new data count
+               data.setGameKey(Integer.valueOf(temp.intValue()));
+               //Database storage key saved locally for finding, and editing, and sending start signal
+               data.setKey(dataSnapshot.getKey()); //TODO proper index not 0
+               //add GameData from server to local array
+               gameDatas.add(0, data);
+
+           }
         }
 
         @Override // when we change a GameData this listener adds the changes in the local array

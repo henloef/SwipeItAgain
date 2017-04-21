@@ -37,7 +37,7 @@ public class MultiPlayerState extends GameState{
 
     //Ask server for gameKey
     public void getGameDataFromServer(){
-       this.gameData = serverCommunicator.getGameKeyFromServer();
+       this.gameData = serverCommunicator.getGameDataFromServer();
         // this.gameKey = serverCommunicator.getGameKeyFromServer();
         //serverCommunicator.addNewGameDataToDatabase();
         gameData.setPlayer(boardController.getGameModel().getPlayer());
@@ -53,7 +53,9 @@ public class MultiPlayerState extends GameState{
     public boolean tryGameKey(int gameKey){
         Log.d(TAG,"Try gamekey i state ");
         if(serverCommunicator.tryGameKey(gameKey)){
-            serverCommunicator.sendStartSignal(gameKey);
+            this.gameData = serverCommunicator.GameDataFromKey(gameKey);
+            this.gameData.setOpponent(boardController.getGameModel().getPlayer());
+            serverCommunicator.opponentReady(this.gameData);
             //startGame();
             return true;
         }else{

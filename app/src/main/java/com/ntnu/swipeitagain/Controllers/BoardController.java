@@ -120,9 +120,7 @@ public class BoardController {
                    // pushState(new MultiPlayerGameView(this, screenWidth, screenHeight, gameModel));
                     //TODO connect to oponent
 
-                    serverCommunicator.addNewGameDataToDatabase(new GameData(gameKey));
-
-                    serverCommunicator.getAllGameDataFromServer(gameState);
+                    serverCommunicator.tryGameKey(gameKey);
 
                 }else{
                     if(states.get(0) instanceof JoinGame){

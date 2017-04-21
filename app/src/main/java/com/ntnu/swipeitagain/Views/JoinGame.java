@@ -89,7 +89,6 @@ public class JoinGame extends AbstractMenuView {
             boardController.goToMainMenu();
         } else if (widgetAction.getSource() == enter){
             Log.d(TAG, "trying game key");
-            //TODO fix crash
             if(enteredGameKey.length() > 0) {
                 boardController.tryEnteredGameKey(Integer.parseInt(enteredGameKey));
                 //TODO Get connected to the game with the same gamepin

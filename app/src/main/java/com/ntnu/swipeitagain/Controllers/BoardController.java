@@ -119,6 +119,8 @@ public class BoardController {
             return gameState;
         }
         //Called from joinGame
+
+
         public void tryEnteredGameKey(int gameKey){
             if(gameState instanceof MultiPlayerState){
                 if(((MultiPlayerState) gameState).tryGameKey(gameKey)){
@@ -159,13 +161,14 @@ public class BoardController {
         }
 
         public Difficulcy getDifficulcy(){
-            if(updateTime == 0.03){
+            if(updateTime == 0.03f){
                 return Difficulcy.hard;
-            }else if(updateTime == 0.07){
+            }else if(updateTime == 0.07f){
                 return  Difficulcy.medium;
-            }else{
+            }else if(updateTime ==0.1f){
                 return Difficulcy.easy;
             }
+            return null;
         }
 
         public void goToMainMenu(){

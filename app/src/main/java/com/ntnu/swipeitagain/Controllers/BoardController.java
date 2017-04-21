@@ -117,8 +117,13 @@ public class BoardController {
             if(gameState instanceof MultiPlayerState){
                 if(((MultiPlayerState) gameState).tryGameKey(gameKey)){
                     Log.d(TAG, "joining game");
-                    pushState(new MultiPlayerGameView(this, screenWidth, screenHeight, gameModel));
+                   // pushState(new MultiPlayerGameView(this, screenWidth, screenHeight, gameModel));
                     //TODO connect to oponent
+
+                    serverCommunicator.addNewGameDataToDatabase(new GameData(gameKey));
+
+                    serverCommunicator.getAllGameDataFromServer(gameState);
+
                 }else{
                     if(states.get(0) instanceof JoinGame){
                         ((JoinGame) states.get(0)).tryNewGameKey();

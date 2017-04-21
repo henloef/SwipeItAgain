@@ -44,23 +44,24 @@ public class ServerCommunicator {
     }
 
 
-
+    // Denne metoden skal hente all ned data fra server, men det går ikke.
     // new eventListener er her en anonym klasse så da må vi visst kun gi inn noe som er final, her final List gamekeys
     public void getAllGameDataFromServer() {
+
         myRef.child("gameDatas").addValueEventListener(new ValueEventListener() { //myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                final long childrenCount = dataSnapshot.getChildrenCount();
+                //final long childrenCount = dataSnapshot.getChildrenCount();
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                //Empties gameDatas before adding all datas from server
                 gameDatas.clear();
-
                 for (DataSnapshot child: children){
                     GameData data = child.getValue(GameData.class);
-                    data.setChildrenCount(childrenCount);
-                      gameDatas.add(data);
+                    data.setChildrenCount(dataSnapshot.getChildrenCount());
+                    Long temp = data.getChildrenCount();
+                    data.setGameKey(Integer.valueOf(temp.intValue()));
+                    gameDatas.add(data);
                 }
-
-                Log.d(TAG, "Gamedata ser slik ut" + gameDatas);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -87,8 +88,6 @@ public class ServerCommunicator {
     }
 
     public void remove(GameData gameData){
-
-       //TODO sletting av data  myRef.child(gameData.getKey)
         myRef.child("gameDatas").child(gameData.getKey()).removeValue();
     }
 
@@ -102,10 +101,15 @@ public class ServerCommunicator {
     }
 
     public GameData getGameKeyFromServer(){
-        //addNewGameDataToDatabase(new GameData());
+       // Fredag
+        getAllGameDataFromServer();
+        addNewGameDataToDatabase(new GameData());
+        remove(gameDatas.get(0));
+        //
+
         //Ny data legges til i server, så gir onChildAdded den nye data fraserver i arrayet.
         //getGameDataFromServer();//hente ned alle
-        addNewGameDataToDatabase(new GameData()); // last opp data slik at eventlisteners i getGameData slår inn
+        addNewGameDataToDatabase(new GameData()); // Uploads game data to server. Listener for new child added adds gameData to local array before actually uploading to server with near no latency
         GameData newGame = gameDatas.get(0);
         return newGame;// newGame.getGameKey();
     }
@@ -121,6 +125,7 @@ public class ServerCommunicator {
 
     //try gameKey from opponent, if a game with that key exists in the database it will return true
     public boolean tryGameKey(int gK){
+       // getAllGameDataFromServer();
         for (GameData game:gameDatas) {
             if (gK== game.gameKey){
                 return true;
@@ -131,7 +136,11 @@ public class ServerCommunicator {
 
     //Send message to other player that the game will start
     public void sendStartSignal(int gamekey){
-
+        for (GameData gameData : gameDatas) {
+            if (gameData.getGameKey() == gamekey) {
+                Start(gameData, true);
+            }
+        }
     }
 
     public void Start(GameData gameData, boolean start){
@@ -141,19 +150,22 @@ public class ServerCommunicator {
 
     class GameDatasChildEventListener implements ChildEventListener{
 
-        @Override
+        @Override // Is called when creating new GameData
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            //Takes GameData from server
             GameData data = dataSnapshot.getValue(GameData.class);
+            //Counting gamedatas
             data.setChildrenCount(dataSnapshot.getChildrenCount());
             Long temp = data.getChildrenCount();
+            //Gamekey for joining games set to the new data count
             data.setGameKey(Integer.valueOf(temp.intValue()));
+            //Database storage key saved locally for finding, and editing, and sending start signal
             data.setKey(dataSnapshot.getKey()); //TODO proper index not 0
+            //add GameData from server to local array
             gameDatas.add(0, data);
-            //notifyDatasetChanged();
-
         }
 
-        @Override
+        @Override // when we change a GameData this listener adds the changes in the local array
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
             String key = dataSnapshot.getKey();
             for (GameData data: gameDatas){
@@ -164,7 +176,7 @@ public class ServerCommunicator {
         }
 
         @Override
-        // removing gameData from backend
+        // removing gameData from local array
         public void onChildRemoved(DataSnapshot dataSnapshot) {
             String key = dataSnapshot.getKey();
             for (GameData gameData: gameDatas){
@@ -172,15 +184,15 @@ public class ServerCommunicator {
                     gameDatas.remove(gameData);
                     break;
                 }
-            } //notifyDataSetChanged();
+            }
         }
 
-        @Override
+        @Override //Not needed
         public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
         }
 
-        @Override
+        @Override //not Needed
         public void onCancelled(DatabaseError databaseError) {
 
         }

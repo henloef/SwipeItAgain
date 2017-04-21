@@ -25,14 +25,12 @@ public class MultiPlayerGameView extends GameView {
 
     public MultiPlayerGameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel){
         super(boardController, screenWidth, screenHeight, gameModel);
-        opponentScoreFont = new Font(119, 136, 153, screenHeight/38, Typeface.SANS_SERIF, Typeface.NORMAL);
+        opponentScoreFont = new Font(119, 136, 153, screenHeight/40, Typeface.SANS_SERIF, Typeface.NORMAL);
 
     }
 
     public void update(float dt){
         super.update(dt);
-        //boardController.getOpponentScore();
-
 
     }
 
@@ -46,8 +44,8 @@ public class MultiPlayerGameView extends GameView {
         int oppTime = gameModel.getCurrentTime(false);
         Log.d(TAG, "current opponent time: " + oppTime);
         double oppProgress = (1.0 * oppTime)/100;
-        int oppBarEnd = 100+(int)(screenWidth * (oppProgress * ((1.0 * screenWidth - 200) / screenWidth)));
-        Rect oppRect = new Rect(100, screenHeight - 140, oppBarEnd , screenHeight - 120);
+        int oppBarEnd = screenWidth/8+(int)(screenWidth * (oppProgress * ((1.0 * screenWidth - screenWidth/4) / screenWidth)));
+        Rect oppRect = new Rect(screenWidth/8, screenHeight - 140, oppBarEnd , screenHeight - 120);
         Paint oppPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
         oppPaint.setColor(Color.argb(255,119, 136, 153)); //gradually from green to red

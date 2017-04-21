@@ -35,23 +35,11 @@ public class PlayerModel {
         if(currentTime > maxTime) currentTime = maxTime;
     }
 
-    public int getMaxTime() {
-        return maxTime;
-    }
 
     public int getCurrentTime() {
         return currentTime;
     }
 
-    public void setCurrentTime(int currentTime) {
-        if (currentTime > maxTime){
-            this.currentTime = maxTime;
-        } else if (currentTime < 0){
-            this.currentTime = 0;
-        } else{
-            this.currentTime = currentTime;
-        }
-    }
 
     public void newPoint(){
         this.score ++;

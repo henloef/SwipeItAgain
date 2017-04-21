@@ -26,10 +26,8 @@ public class InstructionsView extends AbstractMenuView {
     private TextButton easy, medium, hard;
     private Font instructionsFont;
 
-    private Resources resources;
     public InstructionsView(BoardController boardController, int screenWidth, int screenHeight, Resources resources){
         super(boardController, screenWidth, screenHeight);
-        this.resources = resources;
         instructionsFont = new Font(10, 10, 10, screenHeight/22, Typeface.SANS_SERIF, Typeface.NORMAL);
 
         mainMenu =  new TextButton(screenWidth/12, (float)screenHeight*9/10, "Go back to main menu", buttonStyle);
@@ -53,10 +51,6 @@ public class InstructionsView extends AbstractMenuView {
         hard.draw(canvas);
         drawDifficulcyBox(canvas);
         drawInstructions(canvas);
-    }
-
-    public void update(int dt){
-        super.update(dt);
     }
 
     private void drawInstructions(Canvas canvas){

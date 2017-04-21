@@ -33,8 +33,6 @@ public class GameModel {
         createCards();
         player = new PlayerModel();
         opponent = new PlayerModel();
-        opponent.setCurrentTime(80); //TODO Remove testing variable
-
     }
 
     public PlayerModel getPlayer(){
@@ -72,7 +70,6 @@ public class GameModel {
                     break;
                 }
             }
-             //TODO create arrowImage
         }
         Log.d(TAG, "cards stack length now: "+ cards.size());
         nextCard();

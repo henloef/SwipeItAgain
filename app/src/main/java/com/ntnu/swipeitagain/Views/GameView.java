@@ -15,6 +15,7 @@ import com.ntnu.swipeitagain.Models.Direction;
 import com.ntnu.swipeitagain.Models.GameModel;
 import com.ntnu.swipeitagain.R;
 
+import sheep.audio.Audio;
 import sheep.collision.Rectangle;
 import sheep.game.State;
 import sheep.graphics.Font;
@@ -38,6 +39,7 @@ public abstract class GameView extends State  {
     protected ProgressBar progressBar;
     protected GameModel gameModel;
     protected Font scoreFont;
+    protected Audio audio;
 
 
     public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
@@ -47,6 +49,7 @@ public abstract class GameView extends State  {
         this.gameModel = gameModel1;
         gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
         scoreFont = new Font(100, 100, 100, screenHeight/34, Typeface.SANS_SERIF, Typeface.NORMAL);
+        //audio.load(ADDSOUNDFILEHERE R.raw.sound);
 
     }
 

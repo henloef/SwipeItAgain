@@ -40,7 +40,7 @@ public abstract class AbstractMenuView extends State implements WidgetListener  
         buttonStyle[0] = buttonFont;
         buttonStyle[1] = buttonFont;
 
-        mainMenu = new TextButton(100, (float)screenHeight*7/8, "Main menu", buttonStyle);
+        mainMenu = new TextButton(screenWidth/12, (float)screenHeight*7/8, "Go back to main menu", buttonStyle);
         mainMenu.addWidgetListener(this);
         addTouchListener(mainMenu);
 

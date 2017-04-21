@@ -41,14 +41,14 @@ public final class MainMenu extends AbstractMenuView {
         addTouchListener(instructions);
     }
 
-    //draws main menu. Overrides because it is the only one without main menu-button
+    //draws main menu. Overrides because it is the only class without main menu-button
     @Override
     public void draw(Canvas canvas) {
         canvas.drawColor(Color.CYAN);
         singleplayer.draw(canvas);
         multiplayer.draw(canvas);
         instructions.draw(canvas);
-        canvas.drawText("Main menu", 100, 230, bigFont);
+        canvas.drawText("SwipeItAgain", 100, 230, bigFont);
     }
 
 

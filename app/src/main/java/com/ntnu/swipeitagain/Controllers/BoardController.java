@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import sheep.game.Game;
 import sheep.game.State;
-import sheep.math.Vector2;
 import sheep.util.Timer;
 
 import static android.content.ContentValues.TAG;
@@ -39,7 +38,7 @@ public class BoardController {
         private Resources resources;
         protected Timer timer;
         protected float counter;
-        private float updateTime; //Difficulcy
+        private float updateTime; //Difficulty
         protected ServerCommunicator serverCommunicator;
         protected String playerId;
         protected GameData gameData;
@@ -55,7 +54,7 @@ public class BoardController {
             this.serverCommunicator = serverCommunicator;
             this.playerId = playerId;
             this.gameData = new GameData();
-            setDifficulcy(Difficulcy.easy);
+            setDifficulty(Difficulty.easy);
         }
 
         public void updateGame(){
@@ -119,6 +118,8 @@ public class BoardController {
             return gameState;
         }
         //Called from joinGame
+
+
         public void tryEnteredGameKey(int gameKey){
             if(gameState instanceof MultiPlayerState){
                 if(((MultiPlayerState) gameState).tryGameKey(gameKey)){
@@ -145,27 +146,28 @@ public class BoardController {
             }
         }
 
-        public void setDifficulcy(Difficulcy difficulcy){
-            if(difficulcy == Difficulcy.hard){
+        public void setDifficulty(Difficulty difficulty){
+            if(difficulty == Difficulty.hard){
                 updateTime = 0.03f;
-                Log.d(TAG, "difficulcy set to hard");
-            }else if(difficulcy == Difficulcy.medium){
+                Log.d(TAG, "difficulty set to hard");
+            }else if(difficulty == Difficulty.medium){
                 updateTime = 0.07f;
-                Log.d(TAG, "difficulcy set to medium");
-            }else if(difficulcy == Difficulcy.easy){
+                Log.d(TAG, "difficulty set to medium");
+            }else if(difficulty == Difficulty.easy){
                 updateTime = 0.1f;
-                Log.d(TAG, "difficulcy set to easy");
+                Log.d(TAG, "difficulty set to easy");
             }
         }
 
-        public Difficulcy getDifficulcy(){
-            if(updateTime == 0.03){
-                return Difficulcy.hard;
-            }else if(updateTime == 0.07){
-                return  Difficulcy.medium;
-            }else{
-                return Difficulcy.easy;
+        public Difficulty getDifficulty(){
+            if(updateTime == 0.03f){
+                return Difficulty.hard;
+            }else if(updateTime == 0.07f){
+                return  Difficulty.medium;
+            }else if(updateTime ==0.1f){
+                return Difficulty.easy;
             }
+            return null;
         }
 
         public void goToMainMenu(){

@@ -1,7 +1,7 @@
 package com.ntnu.swipeitagain.Views;
 import com.google.firebase.*;
 /**
- * Created by Henrik on 26.03.2017.
+ * Created by Group 22 on 26.03.2017.
  */
 
 import android.app.Activity;
@@ -11,21 +11,12 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
 import com.ntnu.swipeitagain.Models.GameData;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import sheep.game.Game;
 

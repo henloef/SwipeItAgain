@@ -4,8 +4,6 @@ import android.graphics.Canvas;
 import android.util.Log;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
-
-import sheep.gui.TextButton;
 import sheep.gui.WidgetAction;
 
 import static android.content.ContentValues.TAG;

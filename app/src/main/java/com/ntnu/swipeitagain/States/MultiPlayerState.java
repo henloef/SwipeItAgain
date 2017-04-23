@@ -4,10 +4,6 @@ import android.util.Log;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
-import com.ntnu.swipeitagain.Models.GameData;
-
-import java.util.List;
-
 import static android.content.ContentValues.TAG;
 
 /**

@@ -1,14 +1,10 @@
 package com.ntnu.swipeitagain.Models;
 
 import android.util.Log;
-
 import com.ntnu.swipeitagain.R;
-
 import java.util.ArrayList;
 import java.util.Random;
-
 import sheep.graphics.Image;
-
 import static android.content.ContentValues.TAG;
 
 /**

@@ -11,9 +11,6 @@ import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Models.GameModel;
 
 import sheep.graphics.Font;
-import sheep.gui.TextButton;
-import sheep.gui.WidgetListener;
-
 import static android.content.ContentValues.TAG;
 
 /**

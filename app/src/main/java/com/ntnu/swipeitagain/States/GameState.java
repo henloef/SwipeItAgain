@@ -2,11 +2,6 @@ package com.ntnu.swipeitagain.States;
 
 import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
-import com.ntnu.swipeitagain.Models.GameData;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Group 22 on 26.03.2017.

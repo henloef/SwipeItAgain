@@ -5,9 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.Log;
-
 import com.ntnu.swipeitagain.Controllers.BoardController;
-
 import sheep.game.State;
 import sheep.graphics.Font;
 import sheep.gui.TextButton;

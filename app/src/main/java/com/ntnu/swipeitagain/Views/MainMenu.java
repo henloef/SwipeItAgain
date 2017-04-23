@@ -1,20 +1,15 @@
 package com.ntnu.swipeitagain.Views;
 
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.Log;
-
-
 import com.ntnu.swipeitagain.Controllers.BoardController;
-
 import sheep.gui.TextButton;
 import sheep.gui.WidgetAction;
-
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by Henrik on 26.03.2017.
+ * Created by Group 22 on 26.03.2017.
  */
 
 public final class MainMenu extends AbstractMenuView {

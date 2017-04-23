@@ -7,24 +7,11 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.widget.ProgressBar;
-
 import com.ntnu.swipeitagain.Controllers.BoardController;
-import com.ntnu.swipeitagain.Models.CardModel;
 import com.ntnu.swipeitagain.Models.Direction;
 import com.ntnu.swipeitagain.Models.GameModel;
-import com.ntnu.swipeitagain.R;
-
-import sheep.audio.Audio;
-import sheep.collision.Rectangle;
 import sheep.game.State;
 import sheep.graphics.Font;
-import sheep.graphics.Image;
-import sheep.gui.TextButton;
-import sheep.gui.WidgetAction;
-import sheep.gui.WidgetListener;
-import sheep.input.TouchListener;
-import sheep.util.Timer;
 
 import static android.content.ContentValues.TAG;
 

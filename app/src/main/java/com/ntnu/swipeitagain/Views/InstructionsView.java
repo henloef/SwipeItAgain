@@ -59,7 +59,7 @@ public class InstructionsView extends AbstractMenuView {
         canvas.drawText("to regain time.", 30, screenHeight*7/20, instructionsFont);
         canvas.drawText("The game is finished when", 30, screenHeight*9/20, instructionsFont);
         canvas.drawText("you have no time left.", 30, screenHeight*10/20, instructionsFont);
-        canvas.drawText("Made by: Hans, Henrik, Lars, Marie, Sigrid og Synne.", 30, screenHeight*12/20, new Font(10,10,10,screenHeight/45,Typeface.SANS_SERIF, Typeface.NORMAL));
+        canvas.drawText("Made by: Group 22", 30, screenHeight*12/20, new Font(10,10,10,screenHeight/45,Typeface.SANS_SERIF, Typeface.NORMAL));
     }
     private void drawDifficultyBox(Canvas canvas){
         canvas.drawText("Difficulty:", screenWidth/12, screenHeight*7/10, buttonFont);

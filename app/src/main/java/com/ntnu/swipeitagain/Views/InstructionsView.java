@@ -57,7 +57,7 @@ public class InstructionsView extends AbstractMenuView {
         canvas.drawText("When the game is started", 30, screenHeight*2/20, instructionsFont);
         canvas.drawText("the time ticks down.", 30, screenHeight*3/20, instructionsFont);
         canvas.drawText("Swipe cards in the ", 30, screenHeight*5/20, instructionsFont);
-        canvas.drawText("direction of the arrow.", 30, screenHeight*6/20, instructionsFont);
+        canvas.drawText("direction of the arrow", 30, screenHeight*6/20, instructionsFont);
         canvas.drawText("to regain time.", 30, screenHeight*7/20, instructionsFont);
         canvas.drawText("The game is finished when", 30, screenHeight*9/20, instructionsFont);
         canvas.drawText("you have no time left.", 30, screenHeight*10/20, instructionsFont);

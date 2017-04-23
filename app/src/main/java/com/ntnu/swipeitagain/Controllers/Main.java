@@ -1,4 +1,4 @@
-package com.ntnu.swipeitagain.Views;
+package com.ntnu.swipeitagain.Controllers;
 import com.google.firebase.*;
 /**
  * Created by Group 22 on 26.03.2017.
@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import com.ntnu.swipeitagain.Controllers.BoardController;
 import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
 import com.ntnu.swipeitagain.Models.GameData;
+import com.ntnu.swipeitagain.Views.MainMenu;
 
 import java.util.ArrayList;
 import java.util.Random;

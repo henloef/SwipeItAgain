@@ -21,6 +21,8 @@ import static android.content.ContentValues.TAG;
 
 public class InstructionsView extends AbstractMenuView {
 
+    /*View accessed from MainMenu and contains instructions and possibility to change the difficulty of the game.*/
+
     private TextButton easy, medium, hard;
     private Font instructionsFont;
 

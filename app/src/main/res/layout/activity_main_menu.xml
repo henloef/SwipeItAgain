@@ -8,7 +8,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context="com.ntnu.swipeitagain.Views.Main">
+    tools:context="com.ntnu.swipeitagain.Controllers.Main">
 
     <TextView
         android:layout_width="wrap_content"

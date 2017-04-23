@@ -9,6 +9,7 @@ import static android.content.ContentValues.TAG;
 
 /**
  * Created by Group 22 on 26.03.2017.
+ * Class accessed from Main menu. Contains possibility to chose between creating a new game or join an existing game.
  */
 
 public class CreateMultiPlayer extends AbstractMenuView{

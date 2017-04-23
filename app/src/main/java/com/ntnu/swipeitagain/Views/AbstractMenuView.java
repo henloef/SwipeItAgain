@@ -16,6 +16,7 @@ import static android.content.ContentValues.TAG;
 
 /**
  * Created by Group 22 on 27.03.2017.
+ * Abstract class extended by all the views used for navigating from the menu and game over.
  */
 
 public abstract class AbstractMenuView extends State implements WidgetListener  {

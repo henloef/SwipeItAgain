@@ -17,7 +17,7 @@ import sheep.gui.WidgetListener;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by Sigrid on 27.03.2017.
+ * Created by Group 22 on 27.03.2017.
  */
 
 public abstract class AbstractMenuView extends State implements WidgetListener  {
@@ -34,7 +34,7 @@ public abstract class AbstractMenuView extends State implements WidgetListener  
         this.screenHeight = screenHeight;
         this.boardController = boardController;
 
-        buttonFont = new Font(255, 255, 255, (int)screenHeight/19, Typeface.SANS_SERIF, Typeface.NORMAL);
+        buttonFont = new Font(255, 255, 255, screenHeight/19, Typeface.SANS_SERIF, Typeface.NORMAL);
         bigFont = new Font(255, 255, 255, screenHeight/15, Typeface.SANS_SERIF, Typeface.NORMAL);
         gameKeyFont = new Font(10, 10, 10, screenHeight/12, Typeface.SANS_SERIF, Typeface.NORMAL);
         buttonStyle[0] = buttonFont;
@@ -49,7 +49,6 @@ public abstract class AbstractMenuView extends State implements WidgetListener  
     public void draw(Canvas canvas){
         canvas.drawColor(Color.CYAN);
         mainMenu.draw(canvas);
-
     }
 
     public abstract void actionPerformed(WidgetAction widgetAction);

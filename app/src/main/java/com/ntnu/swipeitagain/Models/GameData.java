@@ -1,7 +1,7 @@
 package com.ntnu.swipeitagain.Models;
 
 /**
- * Created by hafskolt on 06/04/17.
+ * Created by Group 22 on 06/04/17.
  */
 
 public class GameData {

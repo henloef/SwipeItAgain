@@ -8,7 +8,7 @@ import sheep.gui.WidgetAction;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by Sigrid on 26.03.2017.
+ * Created by Group 22 on 26.03.2017.
  */
 
 public class CreateMultiPlayer extends AbstractMenuView{
@@ -49,6 +49,5 @@ public class CreateMultiPlayer extends AbstractMenuView{
             boardController.createGameState(true, false);
             boardController.pushState(new JoinGame(boardController, screenWidth, screenHeight));
         }
-
     }
 }

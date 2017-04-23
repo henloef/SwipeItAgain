@@ -9,7 +9,7 @@ import sheep.gui.WidgetAction;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by Sigrid on 26.03.2017.
+ * Created by Group 22 on 26.03.2017.
  */
 
 public class JoinGame extends AbstractMenuView {
@@ -55,7 +55,6 @@ public class JoinGame extends AbstractMenuView {
         for (TextButton button: buttons){
             button.addWidgetListener(this);
             addTouchListener(button);
-
         }
 
     }
@@ -75,6 +74,7 @@ public class JoinGame extends AbstractMenuView {
         }
     }
 
+    //is called from BoardController
     public void tryNewGameKey(){
         instructionText = "Try new game key:";
         enteredGameKey = "";

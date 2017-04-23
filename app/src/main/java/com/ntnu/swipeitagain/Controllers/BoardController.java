@@ -35,21 +35,19 @@ public class BoardController {
         private ArrayList<State> states;
         private Game game;
         private int screenWidth, screenHeight;
-        private Resources resources;
-        protected Timer timer;
-        protected float counter;
+        private Timer timer;
+        private float counter;
         private float updateTime; //Difficulty
-        protected ServerCommunicator serverCommunicator;
-        protected String playerId;
-        protected GameData gameData;
+        private ServerCommunicator serverCommunicator;
+        private String playerId;
+        private GameData gameData;
 
 
-        public BoardController(Game game, Resources resources, int screenWidth, int screenHeight, ServerCommunicator serverCommunicator, String playerId){
+        public BoardController(Game game, int screenWidth, int screenHeight, ServerCommunicator serverCommunicator, String playerId){
             this.game = game;
             this.screenWidth = screenWidth;
             this.screenHeight = screenHeight;
             states = new ArrayList<State>();
-            this.resources = resources;
             this.timer = new Timer();
             this.serverCommunicator = serverCommunicator;
             this.playerId = playerId;
@@ -61,7 +59,7 @@ public class BoardController {
             counter += timer.getDelta();
             if(counter >= updateTime){
                 gameModel.getPlayer().timeTick();
-                gameModel.getOpponent().timeTick();//TODO does this actually belong here??????
+                gameModel.getOpponent().timeTick();
                 counter = 0.0f;
             }
             if (!gameModel.getPlayer().timeLeft())
@@ -69,14 +67,10 @@ public class BoardController {
         }
 
         public void pushState(State state){
-            states.add(0,state);
             game.pushState(state);
             Log.d(TAG, "pushed state. length now: "+ states.size());
         }
 
-        public State popState(){
-            return states.remove(0);
-        }
 
         public void createGameState(Boolean isMultiPlayer, Boolean generateKey) {
             createGameModel();
@@ -100,10 +94,6 @@ public class BoardController {
             gameModel = new GameModel();
         }
 
-        public int getInputGameKey(){
-            //Get input from screen
-            return 0;
-        }
         public int getGeneratedGameKey(){
             if(gameState instanceof MultiPlayerState){
                 int gameKey = ((MultiPlayerState) gameState).showGameKey();
@@ -125,7 +115,7 @@ public class BoardController {
                 if(((MultiPlayerState) gameState).tryGameKey(gameKey)){
                     Log.d(TAG, "joining game");
                     pushState(new MultiPlayerGameView(this, screenWidth, screenHeight, gameModel));
-                    //TODO connect to oponent
+                    //TODO connect to opponent
                 }else{
                     if(states.get(0) instanceof JoinGame){
                         ((JoinGame) states.get(0)).tryNewGameKey();
@@ -171,20 +161,16 @@ public class BoardController {
         }
 
         public void goToMainMenu(){
-            //moves menu to the top of the stack
-        game.pushState(new MainMenu(this, game, resources, screenWidth,screenHeight));
-        Log.d(TAG, "States left: "+ states.size());
-    }
+        game.pushState(new MainMenu(this, game, screenWidth,screenHeight));
+        }
 
         public boolean tryDirection(Direction direction){
             return gameModel.checkDirection(direction);
         }
 
-    public Direction decideDirection(MotionEvent start, MotionEvent end){ //Hvorfor var denne private?
+    public Direction decideDirection(MotionEvent end){
         float deltaX = end.getX() - (float)screenWidth/2;
         float deltaY = end.getY() - (float)screenHeight/2;
-        Log.d(TAG, "Swiped: dx:" + deltaX + " dy:" + deltaY);
-
         if(Math.abs(deltaX) > Math.abs(deltaY)){
             if(deltaX > 0){
                 return Direction.RIGHT;

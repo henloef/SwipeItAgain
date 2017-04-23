@@ -18,7 +18,7 @@ import sheep.gui.WidgetAction;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by Sigrid on 27.03.2017.
+ * Created by Group 22 on 27.03.2017.
  */
 
 public class InstructionsView extends AbstractMenuView {
@@ -26,7 +26,7 @@ public class InstructionsView extends AbstractMenuView {
     private TextButton easy, medium, hard;
     private Font instructionsFont;
 
-    public InstructionsView(BoardController boardController, int screenWidth, int screenHeight, Resources resources){
+    public InstructionsView(BoardController boardController, int screenWidth, int screenHeight){
         super(boardController, screenWidth, screenHeight);
         instructionsFont = new Font(10, 10, 10, screenHeight/22, Typeface.SANS_SERIF, Typeface.NORMAL);
 
@@ -49,7 +49,7 @@ public class InstructionsView extends AbstractMenuView {
         easy.draw(canvas);
         medium.draw(canvas);
         hard.draw(canvas);
-        drawDifficulcyBox(canvas);
+        drawDifficultyBox(canvas);
         drawInstructions(canvas);
     }
 
@@ -63,7 +63,7 @@ public class InstructionsView extends AbstractMenuView {
         canvas.drawText("you have no time left.", 30, screenHeight*10/20, instructionsFont);
         canvas.drawText("Made by: Hans, Henrik, Lars, Marie, Sigrid og Synne.", 30, screenHeight*12/20, new Font(10,10,10,screenHeight/45,Typeface.SANS_SERIF, Typeface.NORMAL));
     }
-    private void drawDifficulcyBox(Canvas canvas){
+    private void drawDifficultyBox(Canvas canvas){
         canvas.drawText("Difficulty:", screenWidth/12, screenHeight*7/10, buttonFont);
         int x1 = 0, x2=0;
         if(boardController.getDifficulty() == Difficulty.easy){

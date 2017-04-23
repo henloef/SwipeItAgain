@@ -29,18 +29,15 @@ import sheep.util.Timer;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by Lars on 27.03.2017.
+ * Created by Group 22 on 27.03.2017.
  */
 
 public abstract class GameView extends State  {
 
     BoardController boardController;
     protected int screenWidth, screenHeight;
-    protected ProgressBar progressBar;
     protected GameModel gameModel;
     protected Font scoreFont;
-    protected Audio audio;
-
 
     public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
         this.boardController = boardController;
@@ -49,11 +46,8 @@ public abstract class GameView extends State  {
         this.gameModel = gameModel1;
         gameModel.getCurrentCard().setPosition((float)screenWidth/2, (float)screenHeight/2);
         scoreFont = new Font(100, 100, 100, screenHeight/34, Typeface.SANS_SERIF, Typeface.NORMAL);
-        //audio.load(ADDSOUNDFILEHERE R.raw.sound);
-
     }
 
-    private MotionEvent startEvent;
     private MotionEvent endEvent;
     private boolean swiped;
     private Direction swipeDirection;
@@ -61,7 +55,6 @@ public abstract class GameView extends State  {
     @Override
     public boolean onTouchDown(MotionEvent motionEvent) {
         if (gameModel.getCurrentCard().getBoundingBox().contains(motionEvent.getX(),  motionEvent.getY())) {
-            startEvent = motionEvent;
             swiped = false;
             return true;
         }
@@ -72,8 +65,8 @@ public abstract class GameView extends State  {
     public boolean onTouchUp(MotionEvent motionEvent) {
         if (swiped) {
             endEvent = motionEvent;
-            //calculate direction
-            swipeDirection = boardController.decideDirection(startEvent, endEvent);
+            //lets boardController decide direction
+            swipeDirection = boardController.decideDirection(endEvent);
             boolean swipedCorrect = boardController.tryDirection(swipeDirection);
             if(swipedCorrect){
                 gameModel.nextCard();
@@ -98,10 +91,7 @@ public abstract class GameView extends State  {
             gameModel.getCurrentCard().setPosition(motionEvent.getX(), motionEvent.getY());
             gameModel.getCurrentCard().setScale(1,1);
             gameModel.getCurrentCard().update(0.1f);
-            //Log.d(TAG, "Swiped X: " + motionEvent.getX()+ " Y: " + motionEvent.getY());
             swiped = true;
-
-
             return true;
 
         }

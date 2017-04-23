@@ -12,7 +12,7 @@ import sheep.graphics.Image;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by Lars on 26.03.2017.
+ * Created by Group 22 on 26.03.2017.
  */
 
 public class GameModel {
@@ -24,8 +24,6 @@ public class GameModel {
     private Image rightArrowImage;
     private Image upArrowImage;
     private Image downArrowImage;
-    //private Random r;
-
 
     //Constructor
     public GameModel(){

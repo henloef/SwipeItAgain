@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Henrik on 26.03.2017.
+ * Created by Group 22 on 26.03.2017.
  */
 
 public abstract class GameState {
@@ -26,6 +26,4 @@ public abstract class GameState {
         this.boardController=boardController;
     }
 
-
-    public abstract void startGame();
 }

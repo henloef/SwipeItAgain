@@ -5,7 +5,7 @@ import com.ntnu.swipeitagain.Models.GameModel;
 
 
 /**
- * Created by Henrik on 26.03.2017.
+ * Created by Group 22 on 26.03.2017.
  */
 
 public class SinglePlayerGameView extends GameView {

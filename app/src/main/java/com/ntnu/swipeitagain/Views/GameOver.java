@@ -11,7 +11,7 @@ import sheep.gui.WidgetAction;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by Sigrid on 26.03.2017.
+ * Created by Group 22 on 26.03.2017.
  */
 
 public class GameOver extends AbstractMenuView {

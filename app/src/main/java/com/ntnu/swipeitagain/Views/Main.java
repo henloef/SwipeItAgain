@@ -71,7 +71,7 @@ public class Main extends Activity{
 
 
         Game game = new Game(this, null);
-        this.boardController = new BoardController(game, game.getResources(),screenWidth, screenHeight, serverCommunicator, playerId);
+        this.boardController = new BoardController(game,screenWidth, screenHeight, serverCommunicator, playerId);
         game.pushState(new MainMenu(boardController, game,  screenWidth, screenHeight));
         setContentView(game);
 

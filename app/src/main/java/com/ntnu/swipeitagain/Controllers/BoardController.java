@@ -5,7 +5,7 @@ import android.view.MotionEvent;
 import com.ntnu.swipeitagain.Models.Direction;
 import com.ntnu.swipeitagain.Models.GameData;
 import com.ntnu.swipeitagain.Models.GameModel;
-import com.ntnu.swipeitagain.States.GameState;
+import com.ntnu.swipeitagain.States.AbstractGameState;
 import com.ntnu.swipeitagain.States.MultiPlayerState;
 import com.ntnu.swipeitagain.States.SinglePlayerState;
 import com.ntnu.swipeitagain.Views.GameOver;
@@ -29,7 +29,7 @@ import static android.content.ContentValues.TAG;
 
 public class BoardController {
         private GameModel gameModel;
-        private GameState gameState;
+        private AbstractGameState gameState;
         private boolean isMultiPlayer;
         private ArrayList<State> states;
         private Game game;
@@ -103,7 +103,7 @@ public class BoardController {
             }
         }
 
-        public GameState getGameState(){
+        public AbstractGameState getGameState(){
             return gameState;
         }
         //Called from joinGame

@@ -17,7 +17,7 @@ import static android.content.ContentValues.TAG;
  * Created by Group 22 on 26.03.2017.
  */
 
-public class MultiPlayerGameView extends GameView {
+public class MultiPlayerGameView extends AbstractGameView {
     private Font opponentScoreFont;
 
     public MultiPlayerGameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel){

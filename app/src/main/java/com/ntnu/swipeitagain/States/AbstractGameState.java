@@ -7,7 +7,7 @@ import com.ntnu.swipeitagain.Controllers.ServerCommunicator;
  * Created by Group 22 on 26.03.2017.
  */
 
-public abstract class GameState {
+public abstract class AbstractGameState {
     protected ServerCommunicator serverCommunicator;
     protected BoardController boardController;
 
@@ -17,7 +17,7 @@ public abstract class GameState {
 
 
 
-    public GameState(BoardController boardController){
+    public AbstractGameState(BoardController boardController){
         this.boardController=boardController;
     }
 

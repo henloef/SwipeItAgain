@@ -10,9 +10,8 @@ import static android.content.ContentValues.TAG;
  * Created by Group 22 on 26.03.2017.
  */
 
-public class MultiPlayerState extends GameState{
+public class MultiPlayerState extends AbstractGameState {
     private int gameKey;
-    private ServerCommunicator serverCommunicator;
     private String playerId;
 
     public MultiPlayerState(BoardController boardController, Boolean generateKey, ServerCommunicator serverCommunicator, String playerId){

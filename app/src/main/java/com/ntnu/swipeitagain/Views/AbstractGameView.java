@@ -19,14 +19,14 @@ import static android.content.ContentValues.TAG;
  * Created by Group 22 on 27.03.2017.
  */
 
-public abstract class GameView extends State  {
+public abstract class AbstractGameView extends State  {
 
     BoardController boardController;
     protected int screenWidth, screenHeight;
     protected GameModel gameModel;
     protected Font scoreFont;
 
-    public GameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
+    public AbstractGameView(BoardController boardController, int screenWidth, int screenHeight, GameModel gameModel1) {
         this.boardController = boardController;
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
